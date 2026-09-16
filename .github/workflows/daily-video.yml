@@ -1,0 +1,57 @@
+name: Daily mystery video
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '7 16 * * *'
+      timezone: America/New_York
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-mystery-video
+  cancel-in-progress: false
+
+jobs:
+  create-video:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: python -m pip install -r requirements.txt
+      - id: select
+        run: node select.mjs
+      - if: steps.select.outputs.skip == 'false'
+        run: node render.mjs selected.json renders/${{ steps.select.outputs.date }}
+      - if: steps.select.outputs.skip == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VIDEO_DATE: ${{ steps.select.outputs.date }}
+        run: |
+          gh release create "daily-${VIDEO_DATE}" \
+            "renders/${VIDEO_DATE}/mystery-player.mp4#Download video" \
+            "renders/${VIDEO_DATE}/post.txt#Title and hashtags" \
+            "renders/${VIDEO_DATE}/slide-1.png#Cover image" \
+            --title "Daily mystery player — ${VIDEO_DATE}" \
+            --notes "Silent vertical video. Add music and post it when ready. The player reveal is inside the video."
+      - if: steps.select.outputs.skip == 'false'
+        run: |
+          node save-history.mjs
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add history.json
+          git commit -m "Record mystery player for ${{ steps.select.outputs.date }}"
+          git push

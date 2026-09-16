@@ -1,0 +1,4 @@
+node_modules/
+renders/
+selected.json
+.env

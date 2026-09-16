@@ -1,0 +1,8 @@
+{
+  "name": "facts-over-feelings-mystery-video-maker",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {"render": "node render.mjs"},
+  "dependencies": {"playwright": "^1.55.0"}
+}
