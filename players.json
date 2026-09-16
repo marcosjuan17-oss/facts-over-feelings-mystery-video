@@ -3,83 +3,97 @@
     "player": "Allen Iverson",
     "slug": "allen-iverson",
     "clues": [
-      "I was drafted first overall in 1996",
-      "I won the 2000-01 NBA MVP",
-      "My nickname was The Answer"
+      "I crossed over Michael Jordan as a rookie",
+      "I stepped over Tyronn Lue in a Finals win",
+      "I made 'practice' a famous press conference"
     ],
     "sources": [
-      "https://www.nba.com/news/archive-75-allen-iverson"
+      "https://www.nba.com/news/archive-75-allen-iverson",
+      "https://www.nba.com/news/history-finals-moments-allen-iverson-crossover-2001",
+      "https://www.nba.com/news/philadelphia-76ers-unveil-allen-iverson-sculpture"
     ]
   },
   {
     "player": "Michael Jordan",
     "slug": "michael-jordan",
     "clues": [
-      "I was the third pick in the 1984 draft",
-      "I won five regular-season MVP awards",
-      "I won six Finals MVP awards with Chicago"
+      "I announced my comeback with 'I'm back'",
+      "I scored 38 while sick in the 1997 Finals",
+      "My last Bulls shot sealed title number six"
     ],
     "sources": [
-      "https://www.nba.com/news/archive-75-michael-jordan"
+      "https://www.nba.com/news/legendary-moments-michael-jordan-returns-nba-1995",
+      "https://www.nba.com/news/history-finals-moments-jordan-flu-game-1997",
+      "https://www.nba.com/news/history-top-moments-michael-jordan-final-shot-1998"
     ]
   },
   {
     "player": "Magic Johnson",
     "slug": "magic-johnson",
     "clues": [
-      "I faced Larry Bird in the 1979 NCAA final",
-      "I won Finals MVP as a rookie",
-      "I led the Showtime Lakers"
+      "I beat Larry Bird in the 1979 NCAA final",
+      "As a rookie, I started at center in the Finals",
+      "I scored 42 to clinch the 1980 NBA title"
     ],
     "sources": [
-      "https://www.nba.com/news/archive-75-magic-johnson"
+      "https://www.nba.com/news/history-nba-legend-magic-johnson",
+      "https://www.nba.com/news/history-finals-moments-magic-johnson-steps-in-at-center-in-1980",
+      "https://www.nba.com/news/history-finals-moments-magic-johnson-steps-in-at-center-in-1980"
     ]
   },
   {
     "player": "Larry Bird",
     "slug": "larry-bird",
     "clues": [
-      "I played college ball at Indiana State",
-      "I won three straight NBA MVP awards",
-      "I wore number 33 for Boston"
+      "I hit 10 left-handed shots in a 47-point game",
+      "I asked rivals who was playing for second",
+      "I won a 3-point contest in a warm-up jacket"
     ],
     "sources": [
-      "https://www.nba.com/news/archive-75-larry-bird"
+      "https://www.nba.com/news/week-history-larry-bird-left-handed-triple-double",
+      "https://www.nba.com/pacers/news/larry-bird-reggie-miller-reunite-dan-patrick-show",
+      "https://www.nba.com/watch/video/larry-bird-wins-the-1988-3-point-shooting-contest"
     ]
   },
   {
     "player": "Kobe Bryant",
     "slug": "kobe-bryant",
     "clues": [
-      "I entered the NBA straight from high school",
-      "I scored 81 points in one game",
-      "I wore 8 and 24 for the Lakers"
+      "Charlotte drafted me, then traded me to L.A.",
+      "I scored 60 in my final NBA game",
+      "I dropped 81 points on Toronto"
     ],
     "sources": [
-      "https://www.nba.com/news/archive-75-kobe-bryant"
+      "https://www.nba.com/news/kobe-bryant-10-things-to-know",
+      "https://www.nba.com/news/kobe-bryant-10-things-to-know",
+      "https://www.nba.com/news/kobe-bryant-10-things-to-know"
     ]
   },
   {
     "player": "Shaquille O'Neal",
     "slug": "shaquille-oneal",
     "clues": [
-      "Orlando drafted me first overall in 1992",
-      "I won three straight Finals MVP awards",
-      "My nickname was Shaq"
+      "I brought down two hoops as a rookie",
+      "Teams fouled me on purpose at the foul line",
+      "They called that tactic Hack-a-Shaq"
     ],
     "sources": [
-      "https://www.nba.com/news/archive-75-shaquille-oneal"
+      "https://www.nba.com/news/nba-things-have-been-ghosted",
+      "https://www.nba.com/lakers/news/150901shaqtopmoments-regularseason",
+      "https://www.nba.com/lakers/news/150901shaqtopmoments-regularseason"
     ]
   },
   {
     "player": "Tim Duncan",
     "slug": "tim-duncan",
     "clues": [
-      "I played college ball at Wake Forest",
-      "I won five championships in San Antonio",
-      "My nickname was The Big Fundamental"
+      "A hurricane ended my Olympic swimming dream",
+      "A referee ejected me for laughing on the bench",
+      "They called me The Big Fundamental"
     ],
     "sources": [
+      "https://www.nba.com/news/archive-75-tim-duncan",
+      "https://www.nba.com/news/hall-of-fame-class-of-2026-joey-crawford",
       "https://www.nba.com/news/archive-75-tim-duncan"
     ]
   },
@@ -87,35 +101,41 @@
     "player": "Kevin Garnett",
     "slug": "kevin-garnett",
     "clues": [
-      "I entered the NBA straight from high school",
-      "I won the 2003-04 MVP award",
-      "I shouted Anything is possible after 2008"
+      "I was the first high-school pick in 20 years",
+      "I helped end Boston's 22-year title drought",
+      "I yelled 'Anything is possible!' after it"
     ],
     "sources": [
-      "https://www.nba.com/news/archive-75-kevin-garnett"
+      "https://www.nba.com/news/players-only-kevin-garnett-tnt",
+      "https://www.nba.com/news/the-history-of-celtics-18th-championship-banner-hunt",
+      "https://www.nba.com/watch/video/kevin-garnett-postgame-interview-anything-is-possible-in-2008"
     ]
   },
   {
     "player": "Dirk Nowitzki",
     "slug": "dirk-nowitzki",
     "clues": [
-      "I was born in Wurzburg, Germany",
-      "I won the 2006-07 NBA MVP award",
-      "I led Dallas to the 2011 NBA title"
+      "My 67-win team lost to an 8-seed",
+      "I beat Miami in the 2011 Finals",
+      "My signature fadeaway used one leg"
     ],
     "sources": [
-      "https://www.nba.com/news/archive-75-dirk-nowitzki"
+      "https://www.nba.com/news/blogtable-what-will-you-remember-most-about-dirk-nowitzkis-career",
+      "https://www.nba.com/news/history-season-review-2010-11",
+      "https://www.nba.com/news/blogtable-what-will-you-remember-most-about-dirk-nowitzkis-career"
     ]
   },
   {
     "player": "Dwyane Wade",
     "slug": "dwyane-wade",
     "clues": [
-      "I was the fifth pick of the 2003 draft",
-      "I won Finals MVP in 2006",
+      "A triple-double sent Marquette to the Final Four",
+      "Down 0-2, I sparked a 2006 Finals comeback",
       "Miami fans called me Flash"
     ],
     "sources": [
+      "https://www.nba.com/heat/news/heat_signs_wade_030819.html",
+      "https://www.nba.com/news/archive-75-dwyane-wade",
       "https://www.nba.com/news/archive-75-dwyane-wade"
     ]
   },
@@ -123,95 +143,111 @@
     "player": "Stephen Curry",
     "slug": "stephen-curry",
     "clues": [
-      "I played college ball at Davidson",
-      "I won back-to-back NBA MVP awards",
-      "I was the first unanimous NBA MVP"
+      "Big college programs passed me by",
+      "I led Davidson on a Cinderella NCAA run",
+      "I became the NBA's first unanimous MVP"
     ],
     "sources": [
-      "https://www.nba.com/news/archive-75-stephen-curry"
+      "https://www.nba.com/news/stephen-curry-changed-game-long-before-3-point-milestone",
+      "https://www.nba.com/news/nba-players-ncaa-tournament-moments",
+      "https://pr.nba.com/stephen-curry-2015-16-kia-nba-mvp-award-warriors/"
     ]
   },
   {
     "player": "Wilt Chamberlain",
     "slug": "wilt-chamberlain",
     "clues": [
-      "I won four NBA MVP awards",
-      "I once grabbed 55 rebounds in a game",
-      "I scored 100 points in one NBA game"
+      "I averaged 48.5 minutes per game one season",
+      "I never fouled out of an NBA game",
+      "I scored 100 points in one game"
     ],
     "sources": [
-      "https://www.nba.com/news/archive-75-wilt-chamberlain"
+      "https://www.nba.com/news/history-season-review-1961-62",
+      "https://www.nba.com/sixers/76ers-alumni/wilt-chamberlain",
+      "https://www.nba.com/news/history-season-review-1961-62"
     ]
   },
   {
     "player": "Kareem Abdul-Jabbar",
     "slug": "kareem-abdul-jabbar",
     "clues": [
-      "I won three NCAA titles at UCLA",
+      "I played a co-pilot in the film Airplane!",
       "I won six NBA MVP awards",
       "My signature shot was the skyhook"
     ],
     "sources": [
-      "https://www.nba.com/news/archive-75-kareem-abdul-jabbar"
+      "https://www.nba.com/bucks/features/bucks-legend-kareem-abdul-jabbar-making-splash",
+      "https://www.nba.com/news/history-nba-legend-kareem-abdul-jabbar",
+      "https://www.nba.com/news/kareem-abdul-jabbar-skyhook-absent-modern-nba"
     ]
   },
   {
     "player": "Hakeem Olajuwon",
     "slug": "hakeem-olajuwon",
     "clues": [
-      "Houston picked me first in the 1984 draft",
-      "I won two Defensive Player awards",
+      "Houston drafted me ahead of Michael Jordan",
+      "I recorded a quadruple-double in 1990",
       "My signature move was the Dream Shake"
     ],
     "sources": [
-      "https://www.nba.com/news/archive-75-hakeem-olajuwon"
+      "https://www.nba.com/news/history-nba-legend-hakeem-olajuwon",
+      "https://www.nba.com/news/archive-75-hakeem-olajuwon",
+      "https://www.nba.com/news/history-nba-legend-hakeem-olajuwon"
     ]
   },
   {
     "player": "Charles Barkley",
     "slug": "charles-barkley",
     "clues": [
-      "I played college ball at Auburn",
-      "I won the 1992-93 NBA MVP award",
-      "I was called the Round Mound of Rebound"
+      "I gave a rookie teammate a place to stay",
+      "I declared 'I am not a role model'",
+      "They called me Round Mound of Rebound"
     ],
     "sources": [
-      "https://www.nba.com/news/archive-75-charles-barkley"
+      "https://www.nba.com/news/history-nba-legend-charles-barkley",
+      "https://www.nba.com/news/history-nba-legend-charles-barkley",
+      "https://www.nba.com/news/history-nba-legend-charles-barkley"
     ]
   },
   {
     "player": "Dennis Rodman",
     "slug": "dennis-rodman",
     "clues": [
-      "I won two Defensive Player awards",
-      "I led the NBA in rebounds seven straight times",
-      "I won five titles with Detroit and Chicago"
+      "I wore a wedding dress to promote a book",
+      "I left the 1998 Finals for a wrestling event",
+      "My nickname was The Worm"
     ],
     "sources": [
-      "https://www.nba.com/news/archive-75-dennis-rodman"
+      "https://www.nba.com/bulls/history/rodman-was-different-in-a-good-way",
+      "https://www.nba.com/bulls/history/rodman-was-different-in-a-good-way",
+      "https://www.nba.com/bulls/news/the-worm-is-back-dennis-rodman-returns-to-united-center-for-the-first-time-in-13-years-for-aew-appearance"
     ]
   },
   {
     "player": "Steve Nash",
     "slug": "steve-nash",
     "clues": [
-      "I was born in South Africa",
-      "I won back-to-back NBA MVP awards",
-      "I ran the seven-seconds-or-less Suns"
+      "I was born in South Africa, raised in Canada",
+      "I left Dallas, then won two MVPs in Phoenix",
+      "I ran the Seven Seconds or Less Suns"
     ],
     "sources": [
-      "https://www.nba.com/news/archive-75-steve-nash"
+      "https://www.nba.com/news/international-players-to-win-nba-mvp-award",
+      "https://www.nba.com/nets/news/breaking/2020/09/03/steve-nash-to-brooklyn-from-british-columbia-an-unexpected-journey",
+      "https://www.nba.com/nets/news/breaking/2020/09/03/steve-nash-to-brooklyn-from-british-columbia-an-unexpected-journey"
     ]
   },
   {
     "player": "Tracy McGrady",
     "slug": "tracy-mcgrady",
     "clues": [
-      "Toronto drafted me in 1997",
-      "I won two NBA scoring titles",
-      "I scored 13 points in 35 seconds"
+      "I was teammates with my cousin Vince Carter",
+      "I scored 62 in one night for Orlando",
+      "I scored 13 points in just 35 seconds"
     ],
     "sources": [
+      "https://www.nba.com/magic/news/catching-tracy-mcgrady",
+      "https://www.nba.com/news/legendary-moments-history-tracy-mcgrady-62-points-orlando-magic-2004",
       "https://www.nba.com/news/2017-hall-of-fame-tracy-mcgrady-profile"
     ]
   },
@@ -219,24 +255,28 @@
     "player": "Reggie Miller",
     "slug": "reggie-miller",
     "clues": [
-      "I spent my whole NBA career in Indiana",
-      "I made five NBA All-Star teams",
-      "I scored eight points in nine seconds"
+      "I gave Spike Lee the choke sign in New York",
+      "I scored 8 points in 9 seconds vs the Knicks",
+      "I spent my entire NBA career in Indiana"
     ],
     "sources": [
-      "https://www.nba.com/news/archive-75-reggie-miller"
+      "https://www.nba.com/pacers/news/a-pacers-knicks-playoff-history-primer",
+      "https://www.nba.com/news/archive-75-reggie-miller",
+      "https://www.nba.com/news/history-nba-legend-reggie-miller"
     ]
   },
   {
     "player": "John Stockton",
     "slug": "john-stockton",
     "clues": [
-      "I played all 19 seasons with Utah",
-      "I led the NBA in assists nine straight years",
-      "I retired as NBA assists and steals leader"
+      "I kept short shorts in the baggy-shorts era",
+      "My buzzer-beater sent Utah to its first Finals",
+      "I retired atop NBA assists and steals lists"
     ],
     "sources": [
-      "https://www.nba.com/news/archive-75-john-stockton"
+      "https://www.nba.com/news/history-nba-legend-john-stockton",
+      "https://www.nba.com/news/history-top-moments-west-buzzer-beaters-1997",
+      "https://www.nba.com/news/history-nba-legend-john-stockton"
     ]
   }
 ]
