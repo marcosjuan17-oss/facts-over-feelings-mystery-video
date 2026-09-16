@@ -1,12 +1,12 @@
 # Facts Over Feelings: daily mystery video
 
-This project makes the five-slide, silent 1080 × 1920 mystery-player video. GitHub runs it at approximately 4:07 p.m. Eastern every day, including when your computer is off. The video, cover image, and ready-to-copy title and hashtags appear on the [latest release](../../releases/latest) page. Add music and post manually.
+This project makes the five-slide, silent 1080 × 1920 mystery-player video. GitHub runs it at approximately 4:07 p.m. Eastern every day, including when your computer is off. The video and ready-to-copy title and hashtags appear on the [latest release](../../releases/latest) page. Add music and post manually.
 
 ## How the daily run works
 
 1. `select.mjs` picks a player from `players.json` who has not appeared yet. After everyone has appeared, it starts with the least recently used player.
 2. `render.mjs` fills the original arena design using the arcade fonts, then `encode.py` creates a silent 23-second MP4. The opening frame lasts 3 seconds; the other four last 5 seconds each.
-3. GitHub publishes the MP4, cover image, and `post.txt` as a release.
+3. GitHub publishes the MP4 and `post.txt` as a release.
 4. The selected player and date go into `history.json` so the next run avoids repeats. Running the workflow twice on the same day does not create a second video.
 
 The first clue pool contains 20 hand-written, source-linked NBA legends. It does not use website stat rows or make paid AI calls. Add more entries to `players.json` over time to expand the pool. Each record needs `player`, `slug`, three clues of at most 56 characters, and a source URL. Keep the player name out of the clues.

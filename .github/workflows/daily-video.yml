@@ -44,7 +44,6 @@ jobs:
           gh release create "daily-${VIDEO_DATE}" \
             "renders/${VIDEO_DATE}/mystery-player.mp4#Download video" \
             "renders/${VIDEO_DATE}/post.txt#Title and hashtags" \
-            "renders/${VIDEO_DATE}/slide-1.png#Cover image" \
             --title "Daily mystery player — ${VIDEO_DATE}" \
             --notes "Silent vertical video. Add music and post it when ready. The player reveal is inside the video."
       - if: steps.select.outputs.skip == 'false'
