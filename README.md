@@ -13,7 +13,7 @@ The first clue pool contains 20 hand-written, source-linked NBA legends. It does
 
 ## Download on a phone
 
-Open the repository's **Releases → Latest** page while signed in to GitHub, tap `mystery-player.mp4`, and save it. Open `post.txt` for the title, caption, and hashtags. A private repository requires your GitHub login.
+Open the repository's **Releases → Latest** page, tap `mystery-player.mp4`, and save it. Open `post.txt` for the title, caption, and hashtags. The release is public, so no GitHub login is required.
 
 ## Run manually
 
@@ -31,3 +31,5 @@ node render.mjs player.json
 ```
 
 For a daily selection, run `node select.mjs` and then `node render.mjs selected.json`. The images, MP4, caption, and source URLs are written to `renders/`.
+
+The included Press Start 2P and Silkscreen font files are distributed under their respective licenses in `licenses/`. The background image was created for this project.
