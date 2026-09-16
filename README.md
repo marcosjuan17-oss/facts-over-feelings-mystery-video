@@ -5,7 +5,7 @@ This project makes the five-slide, silent 1080 × 1920 mystery-player video. Git
 ## How the daily run works
 
 1. `select.mjs` picks a player from `players.json` who has not appeared yet. After everyone has appeared, it starts with the least recently used player.
-2. `render.mjs` fills the original arena design using the arcade fonts, then `encode.py` creates a silent 25-second MP4.
+2. `render.mjs` fills the original arena design using the arcade fonts, then `encode.py` creates a silent 23-second MP4. The opening frame lasts 3 seconds; the other four last 5 seconds each.
 3. GitHub publishes the MP4, cover image, and `post.txt` as a release.
 4. The selected player and date go into `history.json` so the next run avoids repeats. Running the workflow twice on the same day does not create a second video.
 
