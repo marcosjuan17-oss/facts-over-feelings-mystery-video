@@ -48,8 +48,7 @@ jobs:
               --notes "Finished vertical arcade video with mascot animation and sound design. The player reveal is inside the video."
           fi
           for asset in \
-            "renders/${VIDEO_DATE}/mystery-player.mp4#Download video" \
-            "renders/${VIDEO_DATE}/post.txt#Title and hashtags"; do
+            "renders/${VIDEO_DATE}/mystery-player.mp4#Download video"; do
             uploaded=false
             for attempt in 1 2 3; do
               if gh release upload "$tag" "$asset" --clobber; then

@@ -4,13 +4,13 @@ This project makes the animated 23-second, 1080 × 1920 Mystery Player video. Gi
 
 ## Official production template
 
-V11 is the approved production baseline for every daily video moving forward. It includes the centered `GUESS THE NBA PLAYER?` opening, exactly three clues, left-aligned decoding dots, synchronized typing ticks, enlarged animated mascot reactions, orange final-two-second shot-clock warnings, the lock-in sequence, player reveal, and PlayFactsOverFeelings.com call to action. Free Edge TTS narration reads each clue after it finishes typing and announces the answer on the reveal. The scheduled workflow calls this template directly from `render.mjs`.
+V14 is the approved production baseline for every daily video moving forward. It includes the centered `GUESS THE NBA PLAYER?` opening, exactly three clues, left-aligned decoding dots, synchronized typing ticks, enlarged animated mascot reactions, orange final-two-second shot-clock warnings, the lock-in sequence, player reveal, and PlayFactsOverFeelings.com call to action. Free Edge TTS narration reads each clue after it finishes typing and announces the answer on the reveal. The scheduled workflow calls this template directly from `render.mjs`.
 
 ## How the daily run works
 
 1. `select.mjs` picks a player from `players.json` who has not appeared yet. After everyone has appeared, it starts with the least recently used player.
 2. `render.mjs` creates the complete arcade-game sequence: fast NBA hook, exactly three accumulated clues, decoding dots, typed reveals, animated mascot reactions, shot clocks, lock-in countdown and player reveal. `encode.py` adds timed arcade/basketball sound effects without a looping background pulse.
-3. GitHub publishes the MP4 and `post.txt` as a release.
+3. GitHub publishes one clearly labeled MP4 as a release.
 4. The selected player and date go into `history.json` so the next run avoids repeats. Running the workflow twice on the same day does not create a second video.
 
 The player pool contains hand-written, source-linked NBA legends. The renderer makes no paid AI calls and does not depend on PixelLab or another external service. The approved mascot animation frames, fonts and sound effects are packaged in the repository. Add more entries to `players.json` over time to expand the pool. Each record needs `player`, `slug`, exactly three clues of at most 56 characters, and source URLs. Keep the player name out of the clues.
@@ -21,7 +21,7 @@ The player pool contains hand-written, source-linked NBA legends. The renderer m
 
 ## Download on a phone
 
-Open the repository's **Releases → Latest** page, tap `mystery-player.mp4`, and save it. Open `post.txt` for the title, caption, and hashtags. The release is public, so no GitHub login is required.
+Open the repository's **Releases → Latest** page, tap **Download video**, and save it. The release is public, so no GitHub login is required.
 
 ## Run manually
 
