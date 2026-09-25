@@ -17,7 +17,7 @@ The player pool contains hand-written, source-linked NBA legends. The renderer m
 
 ### Voiceover
 
-`voiceover.py` generates four narration clips through the free `edge-tts` package: one for each clue and one for the answer reveal. The default is the energetic `en-US-GuyNeural` voice at `+18%` speed. Set `EDGE_TTS_VOICE` or `EDGE_TTS_RATE` in the workflow environment to change those choices later. Generation retries three times; if the online service is temporarily unavailable, the daily video still completes with its normal arcade sound effects.
+`voiceover.py` generates short challenge-style narration through the free `edge-tts` package: an opening challenge, one read for each clue, quick pressure lines between clues, and a punchy answer reveal. The default is the energetic `en-US-GuyNeural` voice at `+22%` speed. Set `EDGE_TTS_VOICE` or `EDGE_TTS_RATE` in the workflow environment to change those choices later. Generation retries three times; if the online service is temporarily unavailable, the daily video still completes with its normal arcade sound effects.
 
 ## Download on a phone
 
