@@ -2,3 +2,4 @@ node_modules/
 renders/
 selected.json
 .env
+__pycache__/

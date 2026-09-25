@@ -45,7 +45,7 @@ jobs:
           if ! gh release view "$tag" >/dev/null 2>&1; then
             gh release create "$tag" \
               --title "Daily mystery player — ${VIDEO_DATE}" \
-              --notes "Silent vertical video. Add music and post it when ready. The player reveal is inside the video."
+              --notes "Finished vertical arcade video with mascot animation and sound design. The player reveal is inside the video."
           fi
           for asset in \
             "renders/${VIDEO_DATE}/mystery-player.mp4#Download video" \
