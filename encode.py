@@ -17,12 +17,11 @@ cues = [
     ('impact.wav', 18000, 0.90), ('victory.wav', 18100, 0.82),
 ]
 cmd = [ffmpeg, '-y', '-framerate', '15', '-i', str(out / 'frames' / 'frame-%04d.png')]
-cmd += ['-stream_loop', '-1', '-i', str(project / 'assets' / 'beat.wav')]
 for filename, _, _ in cues:
     cmd += ['-i', str(project / 'assets' / filename)]
-filters = ['[1:a]volume=0.10[beat]']
-mixes = ['[beat]']
-for index, (_, delay, volume) in enumerate(cues, start=2):
+filters = []
+mixes = []
+for index, (_, delay, volume) in enumerate(cues, start=1):
     label = f's{index}'
     filters.append(f'[{index}:a]adelay={delay}|{delay},volume={volume}[{label}]')
     mixes.append(f'[{label}]')

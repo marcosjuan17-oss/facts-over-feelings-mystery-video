@@ -5,7 +5,7 @@ This project makes the animated 23-second, 1080 × 1920 Mystery Player video. Gi
 ## How the daily run works
 
 1. `select.mjs` picks a player from `players.json` who has not appeared yet. After everyone has appeared, it starts with the least recently used player.
-2. `render.mjs` creates the complete arcade-game sequence: fast NBA hook, exactly three accumulated clues, decoding dots, typed reveals, animated mascot reactions, shot clocks, lock-in countdown and player reveal. `encode.py` adds the background pulse and timed arcade/basketball sound effects.
+2. `render.mjs` creates the complete arcade-game sequence: fast NBA hook, exactly three accumulated clues, decoding dots, typed reveals, animated mascot reactions, shot clocks, lock-in countdown and player reveal. `encode.py` adds timed arcade/basketball sound effects without a looping background pulse.
 3. GitHub publishes the MP4 and `post.txt` as a release.
 4. The selected player and date go into `history.json` so the next run avoids repeats. Running the workflow twice on the same day does not create a second video.
 
