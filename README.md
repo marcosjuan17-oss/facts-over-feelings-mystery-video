@@ -4,7 +4,7 @@ This project makes the animated 23-second, 1080 × 1920 Mystery Player video. Gi
 
 ## Official production template
 
-V11 is the approved production baseline for every daily video moving forward. It includes the centered `GUESS THE NBA PLAYER?` opening, exactly three clues, left-aligned decoding dots, synchronized typing ticks, enlarged animated mascot reactions, orange final-two-second shot-clock warnings, the lock-in sequence, player reveal, and PlayFactsOverFeelings.com call to action. The scheduled workflow calls this template directly from `render.mjs`.
+V11 is the approved production baseline for every daily video moving forward. It includes the centered `GUESS THE NBA PLAYER?` opening, exactly three clues, left-aligned decoding dots, synchronized typing ticks, enlarged animated mascot reactions, orange final-two-second shot-clock warnings, the lock-in sequence, player reveal, and PlayFactsOverFeelings.com call to action. Free Edge TTS narration reads each clue after it finishes typing and announces the answer on the reveal. The scheduled workflow calls this template directly from `render.mjs`.
 
 ## How the daily run works
 
@@ -14,6 +14,10 @@ V11 is the approved production baseline for every daily video moving forward. It
 4. The selected player and date go into `history.json` so the next run avoids repeats. Running the workflow twice on the same day does not create a second video.
 
 The player pool contains hand-written, source-linked NBA legends. The renderer makes no paid AI calls and does not depend on PixelLab or another external service. The approved mascot animation frames, fonts and sound effects are packaged in the repository. Add more entries to `players.json` over time to expand the pool. Each record needs `player`, `slug`, exactly three clues of at most 56 characters, and source URLs. Keep the player name out of the clues.
+
+### Voiceover
+
+`voiceover.py` generates four narration clips through the free `edge-tts` package: one for each clue and one for the answer reveal. The default is the energetic `en-US-GuyNeural` voice at `+18%` speed. Set `EDGE_TTS_VOICE` or `EDGE_TTS_RATE` in the workflow environment to change those choices later. Generation retries three times; if the online service is temporarily unavailable, the daily video still completes with its normal arcade sound effects.
 
 ## Download on a phone
 

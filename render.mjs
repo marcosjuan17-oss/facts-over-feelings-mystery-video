@@ -57,7 +57,7 @@ try {
 }
 
 const py = process.env.PYTHON_EXE ?? 'python';
-const enc = spawnSync(py, [path.join(project, 'encode.py'), out], {encoding: 'utf8', stdio: 'inherit'});
+const enc = spawnSync(py, [path.join(project, 'encode.py'), out, input], {encoding: 'utf8', stdio: 'inherit'});
 if (enc.status !== 0) throw Error('Video encoding failed');
 const edition = data.date ? ` — ${data.date}` : '';
 const caption = `How many clues did you need? Drop your guess before the reveal.\n\nPlay the daily mystery at PlayFactsOverFeelings.com\n\n#NBATrivia #BasketballTrivia #GuessThePlayer #NBAHistory #FactsOverFeelings`;
