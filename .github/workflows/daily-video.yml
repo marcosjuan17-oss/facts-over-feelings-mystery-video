@@ -3,8 +3,8 @@ name: Daily mystery video
 on:
   workflow_dispatch:
   schedule:
-    - cron: '7 16 * * *'
-      timezone: America/New_York
+    - cron: '7 20 * * *'
+    - cron: '7 21 * * *'
 
 permissions:
   contents: write
@@ -21,18 +21,32 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: true
+      - id: clock
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" != "schedule" ] || [ "$(TZ=America/New_York date +%H)" = "16" ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          fi
       - uses: actions/setup-node@v4
+        if: steps.clock.outputs.run == 'true'
         with:
           node-version: '22'
           cache: npm
       - uses: actions/setup-python@v5
+        if: steps.clock.outputs.run == 'true'
         with:
           python-version: '3.12'
           cache: pip
-      - run: npm ci
-      - run: npx playwright install --with-deps chromium
-      - run: python -m pip install -r requirements.txt
+      - if: steps.clock.outputs.run == 'true'
+        run: npm ci
+      - if: steps.clock.outputs.run == 'true'
+        run: npx playwright install --with-deps chromium
+      - if: steps.clock.outputs.run == 'true'
+        run: python -m pip install -r requirements.txt
       - id: select
+        if: steps.clock.outputs.run == 'true'
         run: node select.mjs
       - if: steps.select.outputs.skip == 'false'
         run: node render.mjs selected.json renders/${{ steps.select.outputs.date }}
