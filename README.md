@@ -2,6 +2,10 @@
 
 This project makes the animated 23-second, 1080 × 1920 Mystery Player video. GitHub runs it at approximately 4:07 p.m. Eastern every day, including when your computer is off. The finished video and ready-to-copy title and hashtags appear on the [latest release](../../releases/latest) page.
 
+## Official production template
+
+V11 is the approved production baseline for every daily video moving forward. It includes the centered `GUESS THE NBA PLAYER?` opening, exactly three clues, left-aligned decoding dots, synchronized typing ticks, enlarged animated mascot reactions, orange final-two-second shot-clock warnings, the lock-in sequence, player reveal, and PlayFactsOverFeelings.com call to action. The scheduled workflow calls this template directly from `render.mjs`.
+
 ## How the daily run works
 
 1. `select.mjs` picks a player from `players.json` who has not appeared yet. After everyone has appeared, it starts with the least recently used player.
