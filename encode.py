@@ -9,9 +9,9 @@ project = Path(__file__).resolve().parent
 ffmpeg = imageio_ffmpeg.get_ffmpeg_exe()
 cues = [
     ('boot.wav', 0, 0.78),
-    ('typing.wav', 1200, 0.55), ('unlock.wav', 2650, 0.72),
-    ('typing.wav', 6250, 0.55), ('unlock.wav', 7700, 0.72),
-    ('typing.wav', 11300, 0.55), ('unlock.wav', 12750, 0.72),
+    ('typing.wav', 1920, 0.62), ('unlock.wav', 2750, 0.72),
+    ('typing.wav', 6970, 0.62), ('unlock.wav', 7800, 0.72),
+    ('typing.wav', 12020, 0.62), ('unlock.wav', 12850, 0.72),
     ('beep.wav', 16300, 0.72), ('beep.wav', 16800, 0.78), ('beep.wav', 17300, 0.88),
     ('shot.wav', 17750, 0.72), ('swish.wav', 17900, 0.86),
     ('impact.wav', 18000, 0.90), ('victory.wav', 18100, 0.82),
@@ -21,9 +21,10 @@ for filename, _, _ in cues:
     cmd += ['-i', str(project / 'assets' / filename)]
 filters = []
 mixes = []
-for index, (_, delay, volume) in enumerate(cues, start=1):
+for index, (filename, delay, volume) in enumerate(cues, start=1):
     label = f's{index}'
-    filters.append(f'[{index}:a]adelay={delay}|{delay},volume={volume}[{label}]')
+    repeat = 'aloop=loop=-1:size=3360,atrim=duration=0.78,' if filename == 'typing.wav' else ''
+    filters.append(f'[{index}:a]{repeat}adelay={delay}|{delay},volume={volume}[{label}]')
     mixes.append(f'[{label}]')
 filters.append(''.join(mixes) + f'amix=inputs={len(mixes)}:duration=longest:normalize=0,alimiter=limit=0.92[aout]')
 cmd += [
