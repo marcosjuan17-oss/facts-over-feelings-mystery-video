@@ -23,27 +23,34 @@ async def _save_with_retries(text: str, destination: Path) -> None:
     raise RuntimeError(f'Edge TTS failed after three attempts: {last_error}')
 
 
-async def _generate(data: dict, output: Path):
-    lines = [
-        ('You know ball? Prove it.', 80, 1.08),
-        (data['clues'][0], 2820, 1.12),
-        ('Got him yet?', 5350, 1.08),
-        (data['clues'][1], 7870, 1.12),
-        ('Last chance.', 10950, 1.08),
-        (data['clues'][2], 12920, 1.12),
-        (f"It's {data['player']}!", 18250, 1.16),
+def script(speech: dict, timeline: dict):
+    """(text, planned start in seconds, gain, required). The answer is never spoken.
+    Optional lines are dropped by encode.py when they would crowd a required line."""
+    starts = timeline['clueStarts']
+    return [
+        (speech['hook'], 0.0, 1.08, True),
+        (speech['clues'][0], starts[0] + 0.45, 1.12, True),
+        ('Got him yet?', starts[1] - 0.8, 1.08, False),
+        (speech['clues'][1], starts[1] + 0.45, 1.12, True),
+        ('Last chance.', starts[2] - 0.8, 1.08, False),
+        (speech['clues'][2], starts[2] + 0.45, 1.12, True),
+        ('Lock it in!', timeline['lockStart'] + 0.05, 1.12, False),
+        ("Answer's at Play Facts Over Feelings dot com!", timeline['ctaStart'] + 0.15, 1.12, True),
     ]
+
+
+async def _generate(speech: dict, timeline: dict, output: Path):
     voice_dir = output / 'voiceover'
     voice_dir.mkdir(parents=True, exist_ok=True)
     result = []
-    for index, (text, delay, volume) in enumerate(lines, start=1):
+    for index, (text, start, volume, required) in enumerate(script(speech, timeline), start=1):
         destination = voice_dir / f'line-{index}.mp3'
         await _save_with_retries(text, destination)
-        result.append((destination, delay, volume))
+        result.append((destination, start, volume, required))
     return result
 
 
-def generate_voiceover(data: dict, output: Path):
-    if not data.get('player') or len(data.get('clues', [])) != 3:
-        raise ValueError('Voiceover requires one player and exactly three clues')
-    return asyncio.run(_generate(data, output))
+def generate_voiceover(speech: dict, timeline: dict, output: Path):
+    if len(speech.get('clues', [])) != 3:
+        raise ValueError('Voiceover requires exactly three clues')
+    return asyncio.run(_generate(speech, timeline, output))

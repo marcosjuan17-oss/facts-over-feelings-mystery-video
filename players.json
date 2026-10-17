@@ -1,11 +1,102 @@
 [
   {
-    "player": "Allen Iverson",
-    "slug": "allen-iverson",
+    "slug": "aaron-gordon",
+    "player": "Aaron Gordon",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PF",
+    "jersey": "32",
+    "color": "#FF4655",
+    "era": "2014–present",
+    "themes": [
+      "2010s",
+      "big-man",
+      "active"
+    ],
+    "clue_style": "data",
     "clues": [
-      "I crossed over Michael Jordan as a rookie",
-      "I stepped over Tyronn Lue in a Finals win",
-      "I made 'practice' a famous press conference"
+      {
+        "text": "A power forward in the NBA since 2014",
+        "difficulty": "hard"
+      },
+      {
+        "text": "Never an All-Star across 12 seasons",
+        "difficulty": "medium"
+      },
+      {
+        "text": "1 ring, 0 MVPs",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#aaron-gordon"
+    ]
+  },
+  {
+    "slug": "al-horford",
+    "player": "Al Horford",
+    "aliases": [],
+    "nicknames": [],
+    "position": "C",
+    "jersey": "20",
+    "color": "#00D9FF",
+    "era": "2007–present",
+    "themes": [
+      "2000s",
+      "big-man",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A center in the NBA since 2007",
+        "difficulty": "hard"
+      },
+      {
+        "text": "5x All-Star, 1x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "1 ring, 0 MVPs",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#al-horford"
+    ]
+  },
+  {
+    "slug": "allen-iverson",
+    "player": "Allen Iverson",
+    "aliases": [],
+    "nicknames": [
+      "The Answer",
+      "AI",
+      "Bubba Chuck"
+    ],
+    "position": "SG",
+    "jersey": "3",
+    "color": "#FFB627",
+    "era": "1996–2010",
+    "themes": [
+      "90s",
+      "guard",
+      "legend"
+    ],
+    "clue_style": "story",
+    "clues": [
+      {
+        "text": "I stepped over Tyronn Lue in a Finals win",
+        "difficulty": "hard"
+      },
+      {
+        "text": "I crossed over Michael Jordan as a rookie",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I made 'practice' a famous press conference",
+        "difficulty": "easy"
+      }
     ],
     "sources": [
       "https://www.nba.com/news/archive-75-allen-iverson",
@@ -14,166 +105,2096 @@
     ]
   },
   {
-    "player": "Michael Jordan",
-    "slug": "michael-jordan",
+    "slug": "alperen-sengun",
+    "player": "Alperen Sengun",
+    "aliases": [],
+    "nicknames": [],
+    "position": "C",
+    "jersey": "28",
+    "color": "#39FF88",
+    "era": "2021–present",
+    "themes": [
+      "2020s",
+      "big-man",
+      "active"
+    ],
+    "clue_style": "data",
     "clues": [
-      "I announced my comeback with 'I'm back'",
-      "I scored 38 while sick in the 1997 Finals",
-      "My last Bulls shot sealed title number six"
+      {
+        "text": "A center in the NBA since 2021",
+        "difficulty": "hard"
+      },
+      {
+        "text": "2x All-Star, never All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2024-25, still no ring",
+        "difficulty": "easy"
+      }
     ],
     "sources": [
-      "https://www.nba.com/news/legendary-moments-michael-jordan-returns-nba-1995",
-      "https://www.nba.com/news/history-finals-moments-jordan-flu-game-1997",
-      "https://www.nba.com/news/history-top-moments-michael-jordan-final-shot-1998"
+      "https://playfactsoverfeelings.com/api/comparison-data#alperen-sengun"
     ]
   },
   {
-    "player": "Magic Johnson",
-    "slug": "magic-johnson",
+    "slug": "amar-e-stoudemire",
+    "player": "Amar'e Stoudemire",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PF",
+    "jersey": "5",
+    "color": "#C9A6FF",
+    "era": "2002–2016",
+    "themes": [
+      "2000s",
+      "big-man"
+    ],
+    "clue_style": "data",
     "clues": [
-      "I beat Larry Bird in the 1979 NCAA final",
-      "As a rookie, I started at center in the Finals",
-      "I scored 42 to clinch the 1980 NBA title"
+      {
+        "text": "A power forward who played 2002-2016",
+        "difficulty": "hard"
+      },
+      {
+        "text": "6x All-Star, 5x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2010-11, still no ring",
+        "difficulty": "easy"
+      }
     ],
     "sources": [
-      "https://www.nba.com/news/history-nba-legend-magic-johnson",
-      "https://www.nba.com/news/history-finals-moments-magic-johnson-steps-in-at-center-in-1980",
-      "https://www.nba.com/news/history-finals-moments-magic-johnson-steps-in-at-center-in-1980"
+      "https://playfactsoverfeelings.com/api/comparison-data#amar-e-stoudemire"
     ]
   },
   {
-    "player": "Larry Bird",
-    "slug": "larry-bird",
+    "slug": "andre-drummond",
+    "player": "Andre Drummond",
+    "aliases": [],
+    "nicknames": [],
+    "position": "C",
+    "jersey": "0",
+    "color": "#FB7185",
+    "era": "2012–present",
+    "themes": [
+      "2010s",
+      "big-man",
+      "active"
+    ],
+    "clue_style": "data",
     "clues": [
-      "I hit 10 left-handed shots in a 47-point game",
-      "I stole Isiah Thomas's inbound pass in 1987",
-      "I won a 3-point contest in a warm-up jacket"
+      {
+        "text": "A center in the NBA since 2012",
+        "difficulty": "hard"
+      },
+      {
+        "text": "2x All-Star, 1x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2018-19, still no ring",
+        "difficulty": "easy"
+      }
     ],
     "sources": [
-      "https://www.nba.com/news/week-history-larry-bird-left-handed-triple-double",
-      "https://www.nba.com/news/history-top-moments-bird-steal-pistons",
-      "https://www.nba.com/watch/video/larry-bird-wins-the-1988-3-point-shooting-contest"
+      "https://playfactsoverfeelings.com/api/comparison-data#andre-drummond"
     ]
   },
   {
-    "player": "Kobe Bryant",
-    "slug": "kobe-bryant",
+    "slug": "andre-iguodala",
+    "player": "Andre Iguodala",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SF",
+    "jersey": "9",
+    "color": "#38BDF8",
+    "era": "2004–2023",
+    "themes": [
+      "2000s",
+      "wing"
+    ],
+    "clue_style": "data",
     "clues": [
-      "Charlotte drafted me, then traded me to L.A.",
-      "I scored 60 in my final NBA game",
-      "I dropped 81 points on Toronto"
+      {
+        "text": "A small forward who played 2004-2023",
+        "difficulty": "hard"
+      },
+      {
+        "text": "1x All-Star, never All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "4 rings, 0 MVPs, 1 Finals MVP",
+        "difficulty": "easy"
+      }
     ],
     "sources": [
-      "https://www.nba.com/news/kobe-bryant-10-things-to-know",
-      "https://www.nba.com/news/kobe-bryant-10-things-to-know",
-      "https://www.nba.com/news/kobe-bryant-10-things-to-know"
+      "https://playfactsoverfeelings.com/api/comparison-data#andre-iguodala"
     ]
   },
   {
-    "player": "Shaquille O'Neal",
-    "slug": "shaquille-oneal",
+    "slug": "anthony-davis",
+    "player": "Anthony Davis",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PF",
+    "jersey": "23",
+    "color": "#A78BFA",
+    "era": "2012–present",
+    "themes": [
+      "2010s",
+      "big-man",
+      "active"
+    ],
+    "clue_style": "data",
     "clues": [
-      "I brought down two hoops as a rookie",
-      "Teams fouled me on purpose at the foul line",
-      "They called that tactic Hack-a-Shaq"
+      {
+        "text": "A power forward in the NBA since 2012",
+        "difficulty": "hard"
+      },
+      {
+        "text": "10x All-Star, 5x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "1 ring, 0 MVPs",
+        "difficulty": "easy"
+      }
     ],
     "sources": [
-      "https://www.nba.com/news/nba-things-have-been-ghosted",
-      "https://www.nba.com/lakers/news/150901shaqtopmoments-regularseason",
-      "https://www.nba.com/lakers/news/150901shaqtopmoments-regularseason"
+      "https://playfactsoverfeelings.com/api/comparison-data#anthony-davis"
     ]
   },
   {
-    "player": "Tim Duncan",
-    "slug": "tim-duncan",
+    "slug": "anthony-edwards",
+    "player": "Anthony Edwards",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SG",
+    "jersey": "5",
+    "color": "#FF4655",
+    "era": "2020–present",
+    "themes": [
+      "2020s",
+      "guard",
+      "active"
+    ],
+    "clue_style": "data",
     "clues": [
-      "A hurricane ended my Olympic swimming dream",
-      "A referee ejected me for laughing on the bench",
-      "They called me The Big Fundamental"
+      {
+        "text": "A shooting guard in the NBA since 2020",
+        "difficulty": "hard"
+      },
+      {
+        "text": "4x All-Star, 2x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2024-25, still no ring",
+        "difficulty": "easy"
+      }
     ],
     "sources": [
-      "https://www.nba.com/news/archive-75-tim-duncan",
-      "https://www.nba.com/news/hall-of-fame-class-of-2026-joey-crawford",
-      "https://www.nba.com/news/archive-75-tim-duncan"
+      "https://playfactsoverfeelings.com/api/comparison-data#anthony-edwards"
     ]
   },
   {
-    "player": "Kevin Garnett",
-    "slug": "kevin-garnett",
+    "slug": "bam-adebayo",
+    "player": "Bam Adebayo",
+    "aliases": [],
+    "nicknames": [],
+    "position": "C",
+    "jersey": "13",
+    "color": "#00D9FF",
+    "era": "2017–present",
+    "themes": [
+      "2010s",
+      "big-man",
+      "active"
+    ],
+    "clue_style": "data",
     "clues": [
-      "I was the first high-school pick in 20 years",
-      "I helped end Boston's 22-year title drought",
-      "I yelled 'Anything is possible!' after it"
+      {
+        "text": "A center in the NBA since 2017",
+        "difficulty": "hard"
+      },
+      {
+        "text": "3x All-Star, never All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2021-22, still no ring",
+        "difficulty": "easy"
+      }
     ],
     "sources": [
-      "https://www.nba.com/news/players-only-kevin-garnett-tnt",
-      "https://www.nba.com/news/the-history-of-celtics-18th-championship-banner-hunt",
-      "https://www.nba.com/watch/video/kevin-garnett-postgame-interview-anything-is-possible-in-2008"
+      "https://playfactsoverfeelings.com/api/comparison-data#bam-adebayo"
     ]
   },
   {
-    "player": "Dirk Nowitzki",
+    "slug": "ben-simmons",
+    "player": "Ben Simmons",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PG",
+    "jersey": "25",
+    "color": "#FFB627",
+    "era": "2017–2025",
+    "themes": [
+      "2010s",
+      "guard"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A point guard who played 2017-2025",
+        "difficulty": "hard"
+      },
+      {
+        "text": "3x All-Star, 1x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2018-19, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#ben-simmons"
+    ]
+  },
+  {
+    "slug": "blake-griffin",
+    "player": "Blake Griffin",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PF",
+    "jersey": "91",
+    "color": "#39FF88",
+    "era": "2010–2023",
+    "themes": [
+      "2010s",
+      "big-man"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A power forward who played 2010-2023",
+        "difficulty": "hard"
+      },
+      {
+        "text": "6x All-Star, 5x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2010-11, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#blake-griffin"
+    ]
+  },
+  {
+    "slug": "bradley-beal",
+    "player": "Bradley Beal",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SG",
+    "jersey": "0",
+    "color": "#C9A6FF",
+    "era": "2012–present",
+    "themes": [
+      "2010s",
+      "guard",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A shooting guard in the NBA since 2012",
+        "difficulty": "hard"
+      },
+      {
+        "text": "3x All-Star, 1x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2019-20, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#bradley-beal"
+    ]
+  },
+  {
+    "slug": "brandon-ingram",
+    "player": "Brandon Ingram",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SF",
+    "jersey": "3",
+    "color": "#FB7185",
+    "era": "2016–present",
+    "themes": [
+      "2010s",
+      "wing",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A small forward in the NBA since 2016",
+        "difficulty": "hard"
+      },
+      {
+        "text": "2x All-Star, never All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2020-21, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#brandon-ingram"
+    ]
+  },
+  {
+    "slug": "brandon-roy",
+    "player": "Brandon Roy",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SG",
+    "jersey": "7",
+    "color": "#38BDF8",
+    "era": "2006–2013",
+    "themes": [
+      "2000s",
+      "guard"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A shooting guard who played 2006-2013",
+        "difficulty": "hard"
+      },
+      {
+        "text": "3x All-Star, 2x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2008-09, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#brandon-roy"
+    ]
+  },
+  {
+    "slug": "brook-lopez",
+    "player": "Brook Lopez",
+    "aliases": [],
+    "nicknames": [],
+    "position": "C",
+    "jersey": "11",
+    "color": "#A78BFA",
+    "era": "2008–present",
+    "themes": [
+      "2000s",
+      "big-man",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A center in the NBA since 2008",
+        "difficulty": "hard"
+      },
+      {
+        "text": "1x All-Star, never All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "1 ring, 0 MVPs",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#brook-lopez"
+    ]
+  },
+  {
+    "slug": "cade-cunningham",
+    "player": "Cade Cunningham",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PG",
+    "jersey": "2",
+    "color": "#FF4655",
+    "era": "2021–present",
+    "themes": [
+      "2020s",
+      "guard",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A point guard in the NBA since 2021",
+        "difficulty": "hard"
+      },
+      {
+        "text": "2x All-Star, 2x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2024-25, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#cade-cunningham"
+    ]
+  },
+  {
+    "slug": "carmelo-anthony",
+    "player": "Carmelo Anthony",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SF",
+    "jersey": "7",
+    "color": "#00D9FF",
+    "era": "2003–2022",
+    "themes": [
+      "2000s",
+      "wing",
+      "legend"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A small forward who played 2003-2022",
+        "difficulty": "hard"
+      },
+      {
+        "text": "10x All-Star, 6x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2009-10, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#carmelo-anthony"
+    ]
+  },
+  {
+    "slug": "charles-barkley",
+    "player": "Charles Barkley",
+    "aliases": [],
+    "nicknames": [
+      "Sir Charles",
+      "Chuck",
+      "The Round Mound of Rebound"
+    ],
+    "position": "PF",
+    "jersey": "34",
+    "color": "#FFB627",
+    "era": "1984–2000",
+    "themes": [
+      "80s",
+      "big-man",
+      "legend"
+    ],
+    "clue_style": "story",
+    "clues": [
+      {
+        "text": "I gave a rookie teammate a place to stay",
+        "difficulty": "hard"
+      },
+      {
+        "text": "I won MVP with Phoenix in 1993",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I declared 'I am not a role model'",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/news/history-nba-legend-charles-barkley"
+    ]
+  },
+  {
+    "slug": "chet-holmgren",
+    "player": "Chet Holmgren",
+    "aliases": [],
+    "nicknames": [],
+    "position": "C",
+    "jersey": "7",
+    "color": "#39FF88",
+    "era": "2022–present",
+    "themes": [
+      "2020s",
+      "big-man",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A center in the NBA since 2022",
+        "difficulty": "hard"
+      },
+      {
+        "text": "1x All-Star, 1x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "1 ring, 0 MVPs",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#chet-holmgren"
+    ]
+  },
+  {
+    "slug": "chris-bosh",
+    "player": "Chris Bosh",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PF",
+    "jersey": "1",
+    "color": "#C9A6FF",
+    "era": "2003–2016",
+    "themes": [
+      "2000s",
+      "big-man",
+      "legend"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A power forward who played 2003-2016",
+        "difficulty": "hard"
+      },
+      {
+        "text": "11x All-Star, 1x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "2 rings, 0 MVPs",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#chris-bosh"
+    ]
+  },
+  {
+    "slug": "chris-paul",
+    "player": "Chris Paul",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PG",
+    "jersey": "3",
+    "color": "#FB7185",
+    "era": "2005–present",
+    "themes": [
+      "2000s",
+      "guard",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A point guard in the NBA since 2005",
+        "difficulty": "hard"
+      },
+      {
+        "text": "12x All-Star, 11x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2008-09, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#chris-paul"
+    ]
+  },
+  {
+    "slug": "chris-webber",
+    "player": "Chris Webber",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PF",
+    "jersey": "4",
+    "color": "#38BDF8",
+    "era": "1993–2008",
+    "themes": [
+      "90s",
+      "big-man"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A power forward who played 1993-2008",
+        "difficulty": "hard"
+      },
+      {
+        "text": "5x All-Star, 5x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 1999-00, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#chris-webber"
+    ]
+  },
+  {
+    "slug": "cj-mccollum",
+    "player": "CJ McCollum",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SG",
+    "jersey": "3",
+    "color": "#A78BFA",
+    "era": "2013–present",
+    "themes": [
+      "2010s",
+      "guard",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A shooting guard in the NBA since 2013",
+        "difficulty": "hard"
+      },
+      {
+        "text": "Never an All-Star across 13 seasons",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2021-22, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#cj-mccollum"
+    ]
+  },
+  {
+    "slug": "damian-lillard",
+    "player": "Damian Lillard",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PG",
+    "jersey": "0",
+    "color": "#FF4655",
+    "era": "2012–present",
+    "themes": [
+      "2010s",
+      "guard",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A point guard in the NBA since 2012",
+        "difficulty": "hard"
+      },
+      {
+        "text": "9x All-Star, 7x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2019-20, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#damian-lillard"
+    ]
+  },
+  {
+    "slug": "david-robinson",
+    "player": "David Robinson",
+    "aliases": [],
+    "nicknames": [],
+    "position": "C",
+    "jersey": "50",
+    "color": "#00D9FF",
+    "era": "1989–2003",
+    "themes": [
+      "80s",
+      "big-man",
+      "legend"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A center who played 1989-2003",
+        "difficulty": "hard"
+      },
+      {
+        "text": "10x All-Star, 10x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "2 rings, 1 MVP",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#david-robinson"
+    ]
+  },
+  {
+    "slug": "de-aaron-fox",
+    "player": "De'Aaron Fox",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PG",
+    "jersey": "4",
+    "color": "#FFB627",
+    "era": "2017–present",
+    "themes": [
+      "2010s",
+      "guard",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A point guard in the NBA since 2017",
+        "difficulty": "hard"
+      },
+      {
+        "text": "2x All-Star, 1x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2020-21, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#de-aaron-fox"
+    ]
+  },
+  {
+    "slug": "deandre-jordan",
+    "player": "DeAndre Jordan",
+    "aliases": [],
+    "nicknames": [],
+    "position": "C",
+    "jersey": "6",
+    "color": "#39FF88",
+    "era": "2008–present",
+    "themes": [
+      "2000s",
+      "big-man",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A center in the NBA since 2008",
+        "difficulty": "hard"
+      },
+      {
+        "text": "1x All-Star, 3x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "1 ring, 0 MVPs",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#deandre-jordan"
+    ]
+  },
+  {
+    "slug": "demar-derozan",
+    "player": "DeMar DeRozan",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SG",
+    "jersey": "10",
+    "color": "#C9A6FF",
+    "era": "2009–present",
+    "themes": [
+      "2000s",
+      "guard",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A shooting guard in the NBA since 2009",
+        "difficulty": "hard"
+      },
+      {
+        "text": "6x All-Star, 3x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2021-22, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#demar-derozan"
+    ]
+  },
+  {
+    "slug": "demarcus-cousins",
+    "player": "DeMarcus Cousins",
+    "aliases": [],
+    "nicknames": [],
+    "position": "C",
+    "jersey": "4",
+    "color": "#FB7185",
+    "era": "2010–2022",
+    "themes": [
+      "2010s",
+      "big-man"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A center who played 2010-2022",
+        "difficulty": "hard"
+      },
+      {
+        "text": "4x All-Star, 2x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "1 ring, 0 MVPs",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#demarcus-cousins"
+    ]
+  },
+  {
+    "slug": "dennis-rodman",
+    "player": "Dennis Rodman",
+    "aliases": [],
+    "nicknames": [
+      "The Worm",
+      "Worm"
+    ],
+    "position": "PF",
+    "jersey": "91",
+    "color": "#EF4444",
+    "era": "1986–2000",
+    "themes": [
+      "80s",
+      "big-man"
+    ],
+    "clue_style": "story",
+    "clues": [
+      {
+        "text": "I wore a wedding dress to promote a book",
+        "difficulty": "hard"
+      },
+      {
+        "text": "I left the 1998 Finals for a wrestling event",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I led the NBA in rebounding 7 straight years",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/bulls/history/rodman-was-different-in-a-good-way",
+      "https://www.nba.com/bulls/news/the-worm-is-back-dennis-rodman-returns-to-united-center-for-the-first-time-in-13-years-for-aew-appearance",
+      "https://www.nba.com/news/history-nba-legend-dennis-rodman"
+    ]
+  },
+  {
+    "slug": "deron-williams",
+    "player": "Deron Williams",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PG",
+    "jersey": "31",
+    "color": "#38BDF8",
+    "era": "2005–2017",
+    "themes": [
+      "2000s",
+      "guard"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A point guard who played 2005-2017",
+        "difficulty": "hard"
+      },
+      {
+        "text": "3x All-Star, 2x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2010-11, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#deron-williams"
+    ]
+  },
+  {
+    "slug": "derrick-rose",
+    "player": "Derrick Rose",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PG",
+    "jersey": "23",
+    "color": "#A78BFA",
+    "era": "2008–2024",
+    "themes": [
+      "2000s",
+      "guard",
+      "legend"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A point guard who played 2008-2024",
+        "difficulty": "hard"
+      },
+      {
+        "text": "3x All-Star, 1x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "0 rings, 1 MVP",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#derrick-rose"
+    ]
+  },
+  {
+    "slug": "derrick-white",
+    "player": "Derrick White",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SG",
+    "jersey": "9",
+    "color": "#FF4655",
+    "era": "2017–present",
+    "themes": [
+      "2010s",
+      "guard",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A shooting guard in the NBA since 2017",
+        "difficulty": "hard"
+      },
+      {
+        "text": "Never an All-Star, but 3x All-Defense",
+        "difficulty": "medium"
+      },
+      {
+        "text": "1 ring, 0 MVPs",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#derrick-white"
+    ]
+  },
+  {
+    "slug": "devin-booker",
+    "player": "Devin Booker",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SG",
+    "jersey": "15",
+    "color": "#00D9FF",
+    "era": "2015–present",
+    "themes": [
+      "2010s",
+      "guard",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A shooting guard in the NBA since 2015",
+        "difficulty": "hard"
+      },
+      {
+        "text": "5x All-Star, 2x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2019-20, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#devin-booker"
+    ]
+  },
+  {
     "slug": "dirk-nowitzki",
+    "player": "Dirk Nowitzki",
+    "aliases": [],
+    "nicknames": [
+      "Dirk",
+      "The Germanator"
+    ],
+    "position": "PF",
+    "jersey": "41",
+    "color": "#FFB627",
+    "era": "1998–2019",
+    "themes": [
+      "90s",
+      "big-man",
+      "legend"
+    ],
+    "clue_style": "story",
     "clues": [
-      "My 67-win team lost to an 8-seed",
-      "I beat Miami in the 2011 Finals",
-      "My signature fadeaway used one leg"
+      {
+        "text": "My 67-win team lost to an 8-seed",
+        "difficulty": "hard"
+      },
+      {
+        "text": "My signature fadeaway used one leg",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I beat Miami in the 2011 Finals",
+        "difficulty": "easy"
+      }
     ],
     "sources": [
       "https://www.nba.com/news/blogtable-what-will-you-remember-most-about-dirk-nowitzkis-career",
-      "https://www.nba.com/news/history-season-review-2010-11",
-      "https://www.nba.com/news/blogtable-what-will-you-remember-most-about-dirk-nowitzkis-career"
+      "https://www.nba.com/news/history-season-review-2010-11"
     ]
   },
   {
-    "player": "Dwyane Wade",
-    "slug": "dwyane-wade",
+    "slug": "domantas-sabonis",
+    "player": "Domantas Sabonis",
+    "aliases": [],
+    "nicknames": [],
+    "position": "C",
+    "jersey": "11",
+    "color": "#39FF88",
+    "era": "2016–present",
+    "themes": [
+      "2010s",
+      "big-man",
+      "active"
+    ],
+    "clue_style": "data",
     "clues": [
-      "A triple-double sent Marquette to the Final Four",
-      "Down 0-2, I sparked a 2006 Finals comeback",
-      "Miami fans called me Flash"
+      {
+        "text": "A center in the NBA since 2016",
+        "difficulty": "hard"
+      },
+      {
+        "text": "3x All-Star, 2x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2023-24, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#domantas-sabonis"
+    ]
+  },
+  {
+    "slug": "dominique-wilkins",
+    "player": "Dominique Wilkins",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SF",
+    "jersey": "21",
+    "color": "#C9A6FF",
+    "era": "1982–1999",
+    "themes": [
+      "80s",
+      "wing",
+      "legend"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A small forward who played 1982-1999",
+        "difficulty": "hard"
+      },
+      {
+        "text": "9x All-Star, 7x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 1985-86, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#dominique-wilkins"
+    ]
+  },
+  {
+    "slug": "donovan-mitchell",
+    "player": "Donovan Mitchell",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SG",
+    "jersey": "45",
+    "color": "#FB7185",
+    "era": "2017–present",
+    "themes": [
+      "2010s",
+      "guard",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A shooting guard in the NBA since 2017",
+        "difficulty": "hard"
+      },
+      {
+        "text": "7x All-Star, 3x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2020-21, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#donovan-mitchell"
+    ]
+  },
+  {
+    "slug": "draymond-green",
+    "player": "Draymond Green",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PF",
+    "jersey": "23",
+    "color": "#38BDF8",
+    "era": "2012–present",
+    "themes": [
+      "2010s",
+      "big-man",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A power forward in the NBA since 2012",
+        "difficulty": "hard"
+      },
+      {
+        "text": "4x All-Star, 2x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "4 rings, 0 MVPs",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#draymond-green"
+    ]
+  },
+  {
+    "slug": "dwight-howard",
+    "player": "Dwight Howard",
+    "aliases": [],
+    "nicknames": [],
+    "position": "C",
+    "jersey": "39",
+    "color": "#A78BFA",
+    "era": "2004–2022",
+    "themes": [
+      "2000s",
+      "big-man",
+      "legend"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A center who played 2004-2022",
+        "difficulty": "hard"
+      },
+      {
+        "text": "8x All-Star, 8x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "1 ring, 0 MVPs",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#dwight-howard"
+    ]
+  },
+  {
+    "slug": "dwyane-wade",
+    "player": "Dwyane Wade",
+    "aliases": [],
+    "nicknames": [
+      "Flash",
+      "D-Wade",
+      "D Wade"
+    ],
+    "position": "SG",
+    "jersey": "3",
+    "color": "#FF4655",
+    "era": "2003–2019",
+    "themes": [
+      "2000s",
+      "guard",
+      "legend"
+    ],
+    "clue_style": "story",
+    "clues": [
+      {
+        "text": "A triple-double sent Marquette to the Final Four",
+        "difficulty": "hard"
+      },
+      {
+        "text": "Down 0-2, I sparked a 2006 Finals comeback",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I won Miami's first title as Finals MVP",
+        "difficulty": "easy"
+      }
     ],
     "sources": [
       "https://www.nba.com/heat/news/heat_signs_wade_030819.html",
       "https://www.nba.com/news/archive-75-dwyane-wade",
-      "https://www.nba.com/news/archive-75-dwyane-wade"
+      "https://www.nba.com/news/history-finals-moments-dwyane-wade-2006"
     ]
   },
   {
-    "player": "Stephen Curry",
-    "slug": "stephen-curry",
+    "slug": "evan-mobley",
+    "player": "Evan Mobley",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PF",
+    "jersey": "4",
+    "color": "#00D9FF",
+    "era": "2021–present",
+    "themes": [
+      "2020s",
+      "big-man",
+      "active"
+    ],
+    "clue_style": "data",
     "clues": [
-      "Big college programs passed me by",
-      "I led Davidson on a Cinderella NCAA run",
-      "I became the NBA's first unanimous MVP"
+      {
+        "text": "A power forward in the NBA since 2021",
+        "difficulty": "hard"
+      },
+      {
+        "text": "1x All-Star, 1x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2022-23, still no ring",
+        "difficulty": "easy"
+      }
     ],
     "sources": [
-      "https://www.nba.com/news/stephen-curry-changed-game-long-before-3-point-milestone",
-      "https://www.nba.com/news/nba-players-ncaa-tournament-moments",
-      "https://pr.nba.com/stephen-curry-2015-16-kia-nba-mvp-award-warriors/"
+      "https://playfactsoverfeelings.com/api/comparison-data#evan-mobley"
     ]
   },
   {
-    "player": "Wilt Chamberlain",
-    "slug": "wilt-chamberlain",
+    "slug": "giannis-antetokounmpo",
+    "player": "Giannis Antetokounmpo",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PF",
+    "jersey": "7",
+    "color": "#FFB627",
+    "era": "2013–present",
+    "themes": [
+      "2010s",
+      "big-man",
+      "active"
+    ],
+    "clue_style": "data",
     "clues": [
-      "I averaged 48.5 minutes per game one season",
-      "I never fouled out of an NBA game",
-      "I scored 100 points in one game"
+      {
+        "text": "A power forward in the NBA since 2013",
+        "difficulty": "hard"
+      },
+      {
+        "text": "10x All-Star, 9x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "1 ring, 2 MVPs, 1 Finals MVP",
+        "difficulty": "easy"
+      }
     ],
     "sources": [
-      "https://www.nba.com/news/history-season-review-1961-62",
-      "https://www.nba.com/sixers/76ers-alumni/wilt-chamberlain",
-      "https://www.nba.com/news/history-season-review-1961-62"
+      "https://playfactsoverfeelings.com/api/comparison-data#giannis-antetokounmpo"
     ]
   },
   {
-    "player": "Kareem Abdul-Jabbar",
+    "slug": "gilbert-arenas",
+    "player": "Gilbert Arenas",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PG",
+    "jersey": "10",
+    "color": "#39FF88",
+    "era": "2001–2012",
+    "themes": [
+      "2000s",
+      "guard"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A point guard who played 2001-2012",
+        "difficulty": "hard"
+      },
+      {
+        "text": "3x All-Star, 3x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2006-07, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#gilbert-arenas"
+    ]
+  },
+  {
+    "slug": "gordon-hayward",
+    "player": "Gordon Hayward",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SF",
+    "jersey": "33",
+    "color": "#C9A6FF",
+    "era": "2010–2024",
+    "themes": [
+      "2010s",
+      "wing"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A small forward who played 2010-2024",
+        "difficulty": "hard"
+      },
+      {
+        "text": "1x All-Star, never All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2016-17, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#gordon-hayward"
+    ]
+  },
+  {
+    "slug": "grant-hill",
+    "player": "Grant Hill",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SF",
+    "jersey": "33",
+    "color": "#FB7185",
+    "era": "1994–2013",
+    "themes": [
+      "90s",
+      "wing"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A small forward who played 1994-2013",
+        "difficulty": "hard"
+      },
+      {
+        "text": "7x All-Star, 5x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 1995-96, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#grant-hill"
+    ]
+  },
+  {
+    "slug": "hakeem-olajuwon",
+    "player": "Hakeem Olajuwon",
+    "aliases": [],
+    "nicknames": [
+      "The Dream",
+      "Hakeem the Dream",
+      "Akeem"
+    ],
+    "position": "C",
+    "jersey": "34",
+    "color": "#38BDF8",
+    "era": "1984–2002",
+    "themes": [
+      "80s",
+      "big-man",
+      "legend"
+    ],
+    "clue_style": "story",
+    "clues": [
+      {
+        "text": "I recorded a quadruple-double in 1990",
+        "difficulty": "hard"
+      },
+      {
+        "text": "I won back-to-back titles in 1994 and 1995",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Houston drafted me ahead of Michael Jordan",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/news/history-nba-legend-hakeem-olajuwon",
+      "https://www.nba.com/news/archive-75-hakeem-olajuwon"
+    ]
+  },
+  {
+    "slug": "isiah-thomas",
+    "player": "Isiah Thomas",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PG",
+    "jersey": "11",
+    "color": "#A78BFA",
+    "era": "1981–1994",
+    "themes": [
+      "80s",
+      "guard",
+      "legend"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A point guard who played 1981-1994",
+        "difficulty": "hard"
+      },
+      {
+        "text": "12x All-Star, 5x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "2 rings, 0 MVPs, 1 Finals MVP",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#isiah-thomas"
+    ]
+  },
+  {
+    "slug": "ja-morant",
+    "player": "Ja Morant",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PG",
+    "jersey": "12",
+    "color": "#FF4655",
+    "era": "2019–present",
+    "themes": [
+      "2010s",
+      "guard",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A point guard in the NBA since 2019",
+        "difficulty": "hard"
+      },
+      {
+        "text": "2x All-Star, 1x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2021-22, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#ja-morant"
+    ]
+  },
+  {
+    "slug": "jalen-brunson",
+    "player": "Jalen Brunson",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PG",
+    "jersey": "11",
+    "color": "#00D9FF",
+    "era": "2018–present",
+    "themes": [
+      "2010s",
+      "guard",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A point guard in the NBA since 2018",
+        "difficulty": "hard"
+      },
+      {
+        "text": "3x All-Star, 3x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "1 ring, 0 MVPs, 1 Finals MVP",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#jalen-brunson"
+    ]
+  },
+  {
+    "slug": "jalen-williams",
+    "player": "Jalen Williams",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SF",
+    "jersey": "8",
+    "color": "#FFB627",
+    "era": "2022–present",
+    "themes": [
+      "2020s",
+      "wing",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A small forward in the NBA since 2022",
+        "difficulty": "hard"
+      },
+      {
+        "text": "1x All-Star, 1x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "1 ring, 0 MVPs",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#jalen-williams"
+    ]
+  },
+  {
+    "slug": "jamal-murray",
+    "player": "Jamal Murray",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PG",
+    "jersey": "27",
+    "color": "#39FF88",
+    "era": "2016–present",
+    "themes": [
+      "2010s",
+      "guard",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A point guard in the NBA since 2016",
+        "difficulty": "hard"
+      },
+      {
+        "text": "1x All-Star, 1x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "1 ring, 0 MVPs",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#jamal-murray"
+    ]
+  },
+  {
+    "slug": "james-harden",
+    "player": "James Harden",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SG",
+    "jersey": "1",
+    "color": "#C9A6FF",
+    "era": "2009–present",
+    "themes": [
+      "2000s",
+      "guard",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A shooting guard in the NBA since 2009",
+        "difficulty": "hard"
+      },
+      {
+        "text": "11x All-Star, 8x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "0 rings, 1 MVP",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#james-harden"
+    ]
+  },
+  {
+    "slug": "jason-kidd",
+    "player": "Jason Kidd",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PG",
+    "jersey": "5",
+    "color": "#FB7185",
+    "era": "1994–2013",
+    "themes": [
+      "90s",
+      "guard",
+      "legend"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A point guard who played 1994-2013",
+        "difficulty": "hard"
+      },
+      {
+        "text": "10x All-Star, 6x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "1 ring, 0 MVPs",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#jason-kidd"
+    ]
+  },
+  {
+    "slug": "jaylen-brown",
+    "player": "Jaylen Brown",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SG",
+    "jersey": "7",
+    "color": "#38BDF8",
+    "era": "2016–present",
+    "themes": [
+      "2010s",
+      "guard",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A shooting guard in the NBA since 2016",
+        "difficulty": "hard"
+      },
+      {
+        "text": "5x All-Star, 2x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "1 ring, 0 MVPs, 1 Finals MVP",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#jaylen-brown"
+    ]
+  },
+  {
+    "slug": "jayson-tatum",
+    "player": "Jayson Tatum",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SF",
+    "jersey": "0",
+    "color": "#A78BFA",
+    "era": "2017–present",
+    "themes": [
+      "2010s",
+      "wing",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A small forward in the NBA since 2017",
+        "difficulty": "hard"
+      },
+      {
+        "text": "6x All-Star, 5x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "1 ring, 0 MVPs",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#jayson-tatum"
+    ]
+  },
+  {
+    "slug": "jimmy-butler",
+    "player": "Jimmy Butler",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SF",
+    "jersey": "10",
+    "color": "#FF4655",
+    "era": "2011–present",
+    "themes": [
+      "2010s",
+      "wing",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A small forward in the NBA since 2011",
+        "difficulty": "hard"
+      },
+      {
+        "text": "6x All-Star, 5x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2016-17, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#jimmy-butler"
+    ]
+  },
+  {
+    "slug": "joakim-noah",
+    "player": "Joakim Noah",
+    "aliases": [],
+    "nicknames": [],
+    "position": "C",
+    "jersey": "55",
+    "color": "#00D9FF",
+    "era": "2007–2020",
+    "themes": [
+      "2000s",
+      "big-man"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A center who played 2007-2020",
+        "difficulty": "hard"
+      },
+      {
+        "text": "2x All-Star, 1x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2013-14, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#joakim-noah"
+    ]
+  },
+  {
+    "slug": "joe-johnson",
+    "player": "Joe Johnson",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SG",
+    "jersey": "7",
+    "color": "#FFB627",
+    "era": "2001–2022",
+    "themes": [
+      "2000s",
+      "guard"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A shooting guard who played 2001-2022",
+        "difficulty": "hard"
+      },
+      {
+        "text": "7x All-Star, 1x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2006-07, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#joe-johnson"
+    ]
+  },
+  {
+    "slug": "joel-embiid",
+    "player": "Joel Embiid",
+    "aliases": [],
+    "nicknames": [],
+    "position": "C",
+    "jersey": "21",
+    "color": "#39FF88",
+    "era": "2016–present",
+    "themes": [
+      "2010s",
+      "big-man",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A center in the NBA since 2016",
+        "difficulty": "hard"
+      },
+      {
+        "text": "7x All-Star, 5x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "0 rings, 1 MVP",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#joel-embiid"
+    ]
+  },
+  {
+    "slug": "john-stockton",
+    "player": "John Stockton",
+    "aliases": [],
+    "nicknames": [
+      "Stock"
+    ],
+    "position": "PG",
+    "jersey": "12",
+    "color": "#C9A6FF",
+    "era": "1984–2003",
+    "themes": [
+      "80s",
+      "guard",
+      "legend"
+    ],
+    "clue_style": "story",
+    "clues": [
+      {
+        "text": "I kept short shorts in the baggy-shorts era",
+        "difficulty": "hard"
+      },
+      {
+        "text": "My buzzer-beater sent Utah to its first Finals",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I retired atop NBA assists and steals lists",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/news/history-nba-legend-john-stockton",
+      "https://www.nba.com/news/history-top-moments-west-buzzer-beaters-1997"
+    ]
+  },
+  {
+    "slug": "john-wall",
+    "player": "John Wall",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PG",
+    "jersey": "1",
+    "color": "#FB7185",
+    "era": "2010–2023",
+    "themes": [
+      "2010s",
+      "guard"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A point guard who played 2010-2023",
+        "difficulty": "hard"
+      },
+      {
+        "text": "5x All-Star, 1x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2016-17, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#john-wall"
+    ]
+  },
+  {
+    "slug": "jrue-holiday",
+    "player": "Jrue Holiday",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PG",
+    "jersey": "5",
+    "color": "#38BDF8",
+    "era": "2009–present",
+    "themes": [
+      "2000s",
+      "guard",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A point guard in the NBA since 2009",
+        "difficulty": "hard"
+      },
+      {
+        "text": "2x All-Star, never All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "2 rings, 0 MVPs",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#jrue-holiday"
+    ]
+  },
+  {
+    "slug": "julius-randle",
+    "player": "Julius Randle",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PF",
+    "jersey": "30",
+    "color": "#A78BFA",
+    "era": "2014–present",
+    "themes": [
+      "2010s",
+      "big-man",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A power forward in the NBA since 2014",
+        "difficulty": "hard"
+      },
+      {
+        "text": "3x All-Star, 2x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2020-21, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#julius-randle"
+    ]
+  },
+  {
     "slug": "kareem-abdul-jabbar",
+    "player": "Kareem Abdul-Jabbar",
+    "aliases": [],
+    "nicknames": [
+      "Kareem",
+      "Cap",
+      "Lew Alcindor",
+      "Alcindor"
+    ],
+    "position": "C",
+    "jersey": "33",
+    "color": "#FACC15",
+    "era": "1969–1989",
+    "themes": [
+      "80s",
+      "big-man",
+      "legend"
+    ],
+    "clue_style": "story",
     "clues": [
-      "I played a co-pilot in the film Airplane!",
-      "I won six NBA MVP awards",
-      "My signature shot was the skyhook"
+      {
+        "text": "I played a co-pilot in the film Airplane!",
+        "difficulty": "hard"
+      },
+      {
+        "text": "I won six NBA MVP awards",
+        "difficulty": "medium"
+      },
+      {
+        "text": "My signature shot was the skyhook",
+        "difficulty": "easy"
+      }
     ],
     "sources": [
       "https://www.nba.com/bucks/features/bucks-legend-kareem-abdul-jabbar-making-splash",
@@ -182,82 +2203,1043 @@
     ]
   },
   {
-    "player": "Hakeem Olajuwon",
-    "slug": "hakeem-olajuwon",
+    "slug": "karl-anthony-towns",
+    "player": "Karl-Anthony Towns",
+    "aliases": [],
+    "nicknames": [],
+    "position": "C",
+    "jersey": "32",
+    "color": "#00D9FF",
+    "era": "2015–present",
+    "themes": [
+      "2010s",
+      "big-man",
+      "active"
+    ],
+    "clue_style": "data",
     "clues": [
-      "Houston drafted me ahead of Michael Jordan",
-      "I recorded a quadruple-double in 1990",
-      "My signature move was the Dream Shake"
+      {
+        "text": "A center in the NBA since 2015",
+        "difficulty": "hard"
+      },
+      {
+        "text": "6x All-Star, 3x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "1 ring, 0 MVPs",
+        "difficulty": "easy"
+      }
     ],
     "sources": [
-      "https://www.nba.com/news/history-nba-legend-hakeem-olajuwon",
-      "https://www.nba.com/news/archive-75-hakeem-olajuwon",
-      "https://www.nba.com/news/history-nba-legend-hakeem-olajuwon"
+      "https://playfactsoverfeelings.com/api/comparison-data#karl-anthony-towns"
     ]
   },
   {
-    "player": "Charles Barkley",
-    "slug": "charles-barkley",
+    "slug": "karl-malone",
+    "player": "Karl Malone",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PF",
+    "jersey": "32",
+    "color": "#FF4655",
+    "era": "1985–2004",
+    "themes": [
+      "80s",
+      "big-man",
+      "legend"
+    ],
+    "clue_style": "data",
     "clues": [
-      "I gave a rookie teammate a place to stay",
-      "I declared 'I am not a role model'",
-      "They called me Round Mound of Rebound"
+      {
+        "text": "A power forward who played 1985-2004",
+        "difficulty": "hard"
+      },
+      {
+        "text": "14x All-Star, 14x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "0 rings, 2 MVPs",
+        "difficulty": "easy"
+      }
     ],
     "sources": [
-      "https://www.nba.com/news/history-nba-legend-charles-barkley",
-      "https://www.nba.com/news/history-nba-legend-charles-barkley",
-      "https://www.nba.com/news/history-nba-legend-charles-barkley"
+      "https://playfactsoverfeelings.com/api/comparison-data#karl-malone"
     ]
   },
   {
-    "player": "Dennis Rodman",
-    "slug": "dennis-rodman",
+    "slug": "kawhi-leonard",
+    "player": "Kawhi Leonard",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SF",
+    "jersey": "2",
+    "color": "#FFB627",
+    "era": "2011–present",
+    "themes": [
+      "2010s",
+      "wing",
+      "active"
+    ],
+    "clue_style": "data",
     "clues": [
-      "I wore a wedding dress to promote a book",
-      "I left the 1998 Finals for a wrestling event",
-      "My nickname was The Worm"
+      {
+        "text": "A small forward in the NBA since 2011",
+        "difficulty": "hard"
+      },
+      {
+        "text": "7x All-Star, 7x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "2 rings, 0 MVPs, 2 Finals MVPs",
+        "difficulty": "easy"
+      }
     ],
     "sources": [
-      "https://www.nba.com/bulls/history/rodman-was-different-in-a-good-way",
-      "https://www.nba.com/bulls/history/rodman-was-different-in-a-good-way",
-      "https://www.nba.com/bulls/news/the-worm-is-back-dennis-rodman-returns-to-united-center-for-the-first-time-in-13-years-for-aew-appearance"
+      "https://playfactsoverfeelings.com/api/comparison-data#kawhi-leonard"
     ]
   },
   {
-    "player": "Steve Nash",
-    "slug": "steve-nash",
+    "slug": "kemba-walker",
+    "player": "Kemba Walker",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PG",
+    "jersey": "8",
+    "color": "#39FF88",
+    "era": "2011–2023",
+    "themes": [
+      "2010s",
+      "guard"
+    ],
+    "clue_style": "data",
     "clues": [
-      "I was born in South Africa, raised in Canada",
-      "I left Dallas, then won two MVPs in Phoenix",
-      "I ran the Seven Seconds or Less Suns"
+      {
+        "text": "A point guard who played 2011-2023",
+        "difficulty": "hard"
+      },
+      {
+        "text": "4x All-Star, 1x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2018-19, still no ring",
+        "difficulty": "easy"
+      }
     ],
     "sources": [
-      "https://www.nba.com/news/international-players-to-win-nba-mvp-award",
-      "https://www.nba.com/nets/news/breaking/2020/09/03/steve-nash-to-brooklyn-from-british-columbia-an-unexpected-journey",
-      "https://www.nba.com/nets/news/breaking/2020/09/03/steve-nash-to-brooklyn-from-british-columbia-an-unexpected-journey"
+      "https://playfactsoverfeelings.com/api/comparison-data#kemba-walker"
     ]
   },
   {
-    "player": "Tracy McGrady",
-    "slug": "tracy-mcgrady",
+    "slug": "kevin-durant",
+    "player": "Kevin Durant",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SF",
+    "jersey": "7",
+    "color": "#C9A6FF",
+    "era": "2007–present",
+    "themes": [
+      "2000s",
+      "wing",
+      "active"
+    ],
+    "clue_style": "data",
     "clues": [
-      "I was teammates with my cousin Vince Carter",
-      "I scored 62 in one night for Orlando",
-      "I scored 13 points in just 35 seconds"
+      {
+        "text": "A small forward in the NBA since 2007",
+        "difficulty": "hard"
+      },
+      {
+        "text": "16x All-Star, 12x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "2 rings, 1 MVP, 2 Finals MVPs",
+        "difficulty": "easy"
+      }
     ],
     "sources": [
-      "https://www.nba.com/magic/news/catching-tracy-mcgrady",
-      "https://www.nba.com/news/legendary-moments-history-tracy-mcgrady-62-points-orlando-magic-2004",
-      "https://www.nba.com/news/2017-hall-of-fame-tracy-mcgrady-profile"
+      "https://playfactsoverfeelings.com/api/comparison-data#kevin-durant"
     ]
   },
   {
-    "player": "Reggie Miller",
+    "slug": "kevin-garnett",
+    "player": "Kevin Garnett",
+    "aliases": [],
+    "nicknames": [
+      "KG",
+      "The Big Ticket"
+    ],
+    "position": "PF",
+    "jersey": "21",
+    "color": "#FB7185",
+    "era": "1995–2016",
+    "themes": [
+      "90s",
+      "big-man",
+      "legend"
+    ],
+    "clue_style": "story",
+    "clues": [
+      {
+        "text": "I was the first high-school pick in 20 years",
+        "difficulty": "hard"
+      },
+      {
+        "text": "I helped end Boston's 22-year title drought",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I yelled 'Anything is possible!' after it",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/news/players-only-kevin-garnett-tnt",
+      "https://www.nba.com/news/the-history-of-celtics-18th-championship-banner-hunt",
+      "https://www.nba.com/watch/video/kevin-garnett-postgame-interview-anything-is-possible-in-2008"
+    ]
+  },
+  {
+    "slug": "kevin-love",
+    "player": "Kevin Love",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PF",
+    "jersey": "42",
+    "color": "#38BDF8",
+    "era": "2008–present",
+    "themes": [
+      "2000s",
+      "big-man",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A power forward in the NBA since 2008",
+        "difficulty": "hard"
+      },
+      {
+        "text": "5x All-Star, 2x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "1 ring, 0 MVPs",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#kevin-love"
+    ]
+  },
+  {
+    "slug": "khris-middleton",
+    "player": "Khris Middleton",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SF",
+    "jersey": "20",
+    "color": "#A78BFA",
+    "era": "2012–present",
+    "themes": [
+      "2010s",
+      "wing",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A small forward in the NBA since 2012",
+        "difficulty": "hard"
+      },
+      {
+        "text": "3x All-Star, never All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "1 ring, 0 MVPs",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#khris-middleton"
+    ]
+  },
+  {
+    "slug": "klay-thompson",
+    "player": "Klay Thompson",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SG",
+    "jersey": "31",
+    "color": "#FF4655",
+    "era": "2011–present",
+    "themes": [
+      "2010s",
+      "guard",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A shooting guard in the NBA since 2011",
+        "difficulty": "hard"
+      },
+      {
+        "text": "5x All-Star, 2x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "4 rings, 0 MVPs",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#klay-thompson"
+    ]
+  },
+  {
+    "slug": "kobe-bryant",
+    "player": "Kobe Bryant",
+    "aliases": [],
+    "nicknames": [
+      "Black Mamba",
+      "Mamba",
+      "Kobe"
+    ],
+    "position": "SG",
+    "jersey": "24",
+    "color": "#00D9FF",
+    "era": "1996–2016",
+    "themes": [
+      "90s",
+      "guard",
+      "legend"
+    ],
+    "clue_style": "story",
+    "clues": [
+      {
+        "text": "I jumped from high school to the 1996 NBA draft",
+        "difficulty": "hard"
+      },
+      {
+        "text": "I scored 60 in my final NBA game",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I dropped 81 points on Toronto",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/news/kobe-bryant-10-things-to-know",
+      "https://www.nba.com/news/history-top-moments-kobe-bryant-81-points"
+    ]
+  },
+  {
+    "slug": "kyle-lowry",
+    "player": "Kyle Lowry",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PG",
+    "jersey": "7",
+    "color": "#FFB627",
+    "era": "2006–present",
+    "themes": [
+      "2000s",
+      "guard",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A point guard in the NBA since 2006",
+        "difficulty": "hard"
+      },
+      {
+        "text": "6x All-Star, 1x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "1 ring, 0 MVPs",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#kyle-lowry"
+    ]
+  },
+  {
+    "slug": "kyrie-irving",
+    "player": "Kyrie Irving",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PG",
+    "jersey": "11",
+    "color": "#39FF88",
+    "era": "2011–present",
+    "themes": [
+      "2010s",
+      "guard",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A point guard in the NBA since 2011",
+        "difficulty": "hard"
+      },
+      {
+        "text": "9x All-Star, 3x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "1 ring, 0 MVPs",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#kyrie-irving"
+    ]
+  },
+  {
+    "slug": "lamarcus-aldridge",
+    "player": "LaMarcus Aldridge",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PF",
+    "jersey": "21",
+    "color": "#C9A6FF",
+    "era": "2006–2022",
+    "themes": [
+      "2000s",
+      "big-man"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A power forward who played 2006-2022",
+        "difficulty": "hard"
+      },
+      {
+        "text": "7x All-Star, 5x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2013-14, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#lamarcus-aldridge"
+    ]
+  },
+  {
+    "slug": "lamelo-ball",
+    "player": "LaMelo Ball",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PG",
+    "jersey": "1",
+    "color": "#FB7185",
+    "era": "2020–present",
+    "themes": [
+      "2020s",
+      "guard",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A point guard in the NBA since 2020",
+        "difficulty": "hard"
+      },
+      {
+        "text": "1x All-Star, never All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2021-22, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#lamelo-ball"
+    ]
+  },
+  {
+    "slug": "larry-bird",
+    "player": "Larry Bird",
+    "aliases": [],
+    "nicknames": [
+      "Larry Legend",
+      "The Hick from French Lick"
+    ],
+    "position": "SF",
+    "jersey": "33",
+    "color": "#38BDF8",
+    "era": "1979–1992",
+    "themes": [
+      "80s",
+      "wing",
+      "legend"
+    ],
+    "clue_style": "story",
+    "clues": [
+      {
+        "text": "I hit 10 left-handed shots in a 47-point game",
+        "difficulty": "hard"
+      },
+      {
+        "text": "I won a 3-point contest in a warm-up jacket",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I stole Isiah Thomas's inbound pass in 1987",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/news/week-history-larry-bird-left-handed-triple-double",
+      "https://www.nba.com/news/history-top-moments-bird-steal-pistons",
+      "https://www.nba.com/watch/video/larry-bird-wins-the-1988-3-point-shooting-contest"
+    ]
+  },
+  {
+    "slug": "lebron-james",
+    "player": "LeBron James",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SF",
+    "jersey": "23",
+    "color": "#A78BFA",
+    "era": "2003–present",
+    "themes": [
+      "2000s",
+      "wing",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A small forward in the NBA since 2003",
+        "difficulty": "hard"
+      },
+      {
+        "text": "22x All-Star, 21x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "4 rings, 4 MVPs, 4 Finals MVPs",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#lebron-james"
+    ]
+  },
+  {
+    "slug": "luka-doncic",
+    "player": "Luka Doncic",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PG",
+    "jersey": "77",
+    "color": "#FF4655",
+    "era": "2018–present",
+    "themes": [
+      "2010s",
+      "guard",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A point guard in the NBA since 2018",
+        "difficulty": "hard"
+      },
+      {
+        "text": "6x All-Star, 6x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2019-20, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#luka-doncic"
+    ]
+  },
+  {
+    "slug": "magic-johnson",
+    "player": "Magic Johnson",
+    "aliases": [],
+    "nicknames": [
+      "Magic",
+      "Earvin"
+    ],
+    "position": "PG",
+    "jersey": "32",
+    "color": "#00D9FF",
+    "era": "1979–1996",
+    "themes": [
+      "80s",
+      "guard",
+      "legend"
+    ],
+    "clue_style": "story",
+    "clues": [
+      {
+        "text": "As a rookie, I started at center in the Finals",
+        "difficulty": "hard"
+      },
+      {
+        "text": "I scored 42 to clinch the 1980 NBA title",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I beat Larry Bird in the 1979 NCAA final",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/news/history-nba-legend-magic-johnson",
+      "https://www.nba.com/news/history-finals-moments-magic-johnson-steps-in-at-center-in-1980"
+    ]
+  },
+  {
+    "slug": "manu-ginobili",
+    "player": "Manu Ginobili",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SG",
+    "jersey": "20",
+    "color": "#FFB627",
+    "era": "2002–2018",
+    "themes": [
+      "2000s",
+      "guard"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A shooting guard who played 2002-2018",
+        "difficulty": "hard"
+      },
+      {
+        "text": "2x All-Star, 2x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "4 rings, 0 MVPs",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#manu-ginobili"
+    ]
+  },
+  {
+    "slug": "marc-gasol",
+    "player": "Marc Gasol",
+    "aliases": [],
+    "nicknames": [],
+    "position": "C",
+    "jersey": "14",
+    "color": "#39FF88",
+    "era": "2008–2021",
+    "themes": [
+      "2000s",
+      "big-man"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A center who played 2008-2021",
+        "difficulty": "hard"
+      },
+      {
+        "text": "3x All-Star, 2x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "1 ring, 0 MVPs",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#marc-gasol"
+    ]
+  },
+  {
+    "slug": "michael-jordan",
+    "player": "Michael Jordan",
+    "aliases": [],
+    "nicknames": [
+      "MJ",
+      "Air Jordan",
+      "His Airness"
+    ],
+    "position": "SG",
+    "jersey": "23",
+    "color": "#C9A6FF",
+    "era": "1984–2003",
+    "themes": [
+      "80s",
+      "guard",
+      "legend"
+    ],
+    "clue_style": "story",
+    "clues": [
+      {
+        "text": "My last Bulls shot sealed title number six",
+        "difficulty": "hard"
+      },
+      {
+        "text": "I scored 38 while sick in the 1997 Finals",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I announced my comeback with 'I'm back'",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/news/legendary-moments-michael-jordan-returns-nba-1995",
+      "https://www.nba.com/news/history-finals-moments-jordan-flu-game-1997",
+      "https://www.nba.com/news/history-top-moments-michael-jordan-final-shot-1998"
+    ]
+  },
+  {
+    "slug": "monta-ellis",
+    "player": "Monta Ellis",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SG",
+    "jersey": "11",
+    "color": "#FB7185",
+    "era": "2005–2017",
+    "themes": [
+      "2000s",
+      "guard"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A shooting guard who played 2005-2017",
+        "difficulty": "hard"
+      },
+      {
+        "text": "Never an All-Star across 12 seasons",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2010-11, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#monta-ellis"
+    ]
+  },
+  {
+    "slug": "nikola-jokic",
+    "player": "Nikola Jokic",
+    "aliases": [],
+    "nicknames": [],
+    "position": "C",
+    "jersey": "15",
+    "color": "#38BDF8",
+    "era": "2015–present",
+    "themes": [
+      "2010s",
+      "big-man",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A center in the NBA since 2015",
+        "difficulty": "hard"
+      },
+      {
+        "text": "8x All-Star, 8x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "1 ring, 3 MVPs, 1 Finals MVP",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#nikola-jokic"
+    ]
+  },
+  {
+    "slug": "paolo-banchero",
+    "player": "Paolo Banchero",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PF",
+    "jersey": "5",
+    "color": "#A78BFA",
+    "era": "2022–present",
+    "themes": [
+      "2020s",
+      "big-man",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A power forward in the NBA since 2022",
+        "difficulty": "hard"
+      },
+      {
+        "text": "1x All-Star, never All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2023-24, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#paolo-banchero"
+    ]
+  },
+  {
+    "slug": "pascal-siakam",
+    "player": "Pascal Siakam",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PF",
+    "jersey": "43",
+    "color": "#FF4655",
+    "era": "2016–present",
+    "themes": [
+      "2010s",
+      "big-man",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A power forward in the NBA since 2016",
+        "difficulty": "hard"
+      },
+      {
+        "text": "4x All-Star, 2x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "1 ring, 0 MVPs",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#pascal-siakam"
+    ]
+  },
+  {
+    "slug": "pau-gasol",
+    "player": "Pau Gasol",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PF",
+    "jersey": "16",
+    "color": "#00D9FF",
+    "era": "2001–2020",
+    "themes": [
+      "2000s",
+      "big-man"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A power forward who played 2001-2020",
+        "difficulty": "hard"
+      },
+      {
+        "text": "6x All-Star, 4x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "2 rings, 0 MVPs",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#pau-gasol"
+    ]
+  },
+  {
+    "slug": "paul-george",
+    "player": "Paul George",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SF",
+    "jersey": "8",
+    "color": "#FFB627",
+    "era": "2010–present",
+    "themes": [
+      "2010s",
+      "wing",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A small forward in the NBA since 2010",
+        "difficulty": "hard"
+      },
+      {
+        "text": "9x All-Star, 6x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2018-19, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#paul-george"
+    ]
+  },
+  {
+    "slug": "paul-pierce",
+    "player": "Paul Pierce",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SF",
+    "jersey": "34",
+    "color": "#39FF88",
+    "era": "1998–2017",
+    "themes": [
+      "90s",
+      "wing",
+      "legend"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A small forward who played 1998-2017",
+        "difficulty": "hard"
+      },
+      {
+        "text": "10x All-Star, 4x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "1 ring, 0 MVPs, 1 Finals MVP",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#paul-pierce"
+    ]
+  },
+  {
+    "slug": "rajon-rondo",
+    "player": "Rajon Rondo",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PG",
+    "jersey": "1",
+    "color": "#C9A6FF",
+    "era": "2006–2022",
+    "themes": [
+      "2000s",
+      "guard"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A point guard who played 2006-2022",
+        "difficulty": "hard"
+      },
+      {
+        "text": "4x All-Star, 1x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "2 rings, 0 MVPs",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#rajon-rondo"
+    ]
+  },
+  {
+    "slug": "ray-allen",
+    "player": "Ray Allen",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SG",
+    "jersey": "34",
+    "color": "#FB7185",
+    "era": "1996–2014",
+    "themes": [
+      "90s",
+      "guard",
+      "legend"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A shooting guard who played 1996-2014",
+        "difficulty": "hard"
+      },
+      {
+        "text": "10x All-Star, 2x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "2 rings, 0 MVPs",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#ray-allen"
+    ]
+  },
+  {
     "slug": "reggie-miller",
+    "player": "Reggie Miller",
+    "aliases": [],
+    "nicknames": [
+      "Reggie",
+      "Knick Killer"
+    ],
+    "position": "SG",
+    "jersey": "31",
+    "color": "#38BDF8",
+    "era": "1987–2005",
+    "themes": [
+      "80s",
+      "guard"
+    ],
+    "clue_style": "story",
     "clues": [
-      "I gave Spike Lee the choke sign in New York",
-      "I scored 8 points in 9 seconds vs the Knicks",
-      "I spent my entire NBA career in Indiana"
+      {
+        "text": "I spent my entire NBA career in Indiana",
+        "difficulty": "hard"
+      },
+      {
+        "text": "I gave Spike Lee the choke sign in New York",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I scored 8 points in 9 seconds vs the Knicks",
+        "difficulty": "easy"
+      }
     ],
     "sources": [
       "https://www.nba.com/pacers/news/a-pacers-knicks-playoff-history-primer",
@@ -266,17 +3248,726 @@
     ]
   },
   {
-    "player": "John Stockton",
-    "slug": "john-stockton",
+    "slug": "rudy-gobert",
+    "player": "Rudy Gobert",
+    "aliases": [],
+    "nicknames": [],
+    "position": "C",
+    "jersey": "27",
+    "color": "#A78BFA",
+    "era": "2013–present",
+    "themes": [
+      "2010s",
+      "big-man",
+      "active"
+    ],
+    "clue_style": "data",
     "clues": [
-      "I kept short shorts in the baggy-shorts era",
-      "My buzzer-beater sent Utah to its first Finals",
-      "I retired atop NBA assists and steals lists"
+      {
+        "text": "A center in the NBA since 2013",
+        "difficulty": "hard"
+      },
+      {
+        "text": "3x All-Star, 4x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2018-19, still no ring",
+        "difficulty": "easy"
+      }
     ],
     "sources": [
-      "https://www.nba.com/news/history-nba-legend-john-stockton",
-      "https://www.nba.com/news/history-top-moments-west-buzzer-beaters-1997",
-      "https://www.nba.com/news/history-nba-legend-john-stockton"
+      "https://playfactsoverfeelings.com/api/comparison-data#rudy-gobert"
+    ]
+  },
+  {
+    "slug": "russell-westbrook",
+    "player": "Russell Westbrook",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PG",
+    "jersey": "18",
+    "color": "#FF4655",
+    "era": "2008–present",
+    "themes": [
+      "2000s",
+      "guard",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A point guard in the NBA since 2008",
+        "difficulty": "hard"
+      },
+      {
+        "text": "9x All-Star, 9x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "0 rings, 1 MVP",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#russell-westbrook"
+    ]
+  },
+  {
+    "slug": "scottie-barnes",
+    "player": "Scottie Barnes",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SF",
+    "jersey": "4",
+    "color": "#00D9FF",
+    "era": "2021–present",
+    "themes": [
+      "2020s",
+      "wing",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A small forward in the NBA since 2021",
+        "difficulty": "hard"
+      },
+      {
+        "text": "2x All-Star, never All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2025-26, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#scottie-barnes"
+    ]
+  },
+  {
+    "slug": "scottie-pippen",
+    "player": "Scottie Pippen",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SF",
+    "jersey": "33",
+    "color": "#FFB627",
+    "era": "1987–2004",
+    "themes": [
+      "80s",
+      "wing"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A small forward who played 1987-2004",
+        "difficulty": "hard"
+      },
+      {
+        "text": "7x All-Star, 7x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "6 rings, 0 MVPs",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#scottie-pippen"
+    ]
+  },
+  {
+    "slug": "shai-gilgeous-alexander",
+    "player": "Shai Gilgeous-Alexander",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PG",
+    "jersey": "2",
+    "color": "#39FF88",
+    "era": "2018–present",
+    "themes": [
+      "2010s",
+      "guard",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A point guard in the NBA since 2018",
+        "difficulty": "hard"
+      },
+      {
+        "text": "4x All-Star, 4x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "1 ring, 2 MVPs, 1 Finals MVP",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#shai-gilgeous-alexander"
+    ]
+  },
+  {
+    "slug": "shaquille-o-neal",
+    "player": "Shaquille O'Neal",
+    "aliases": [
+      "shaquille-oneal"
+    ],
+    "nicknames": [
+      "Shaq",
+      "Diesel",
+      "Big Aristotle",
+      "Shaq Daddy"
+    ],
+    "position": "C",
+    "jersey": "34",
+    "color": "#C9A6FF",
+    "era": "1992–2011",
+    "themes": [
+      "90s",
+      "big-man",
+      "legend"
+    ],
+    "clue_style": "story",
+    "clues": [
+      {
+        "text": "I brought down two hoops as a rookie",
+        "difficulty": "hard"
+      },
+      {
+        "text": "Teams fouled me on purpose at the foul line",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I won three straight Finals MVPs in L.A.",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/news/nba-things-have-been-ghosted",
+      "https://www.nba.com/lakers/news/150901shaqtopmoments-regularseason",
+      "https://www.nba.com/news/history-nba-legend-shaquille-oneal"
+    ]
+  },
+  {
+    "slug": "stephen-curry",
+    "player": "Stephen Curry",
+    "aliases": [],
+    "nicknames": [
+      "Steph",
+      "Chef Curry",
+      "Baby-Faced Assassin"
+    ],
+    "position": "PG",
+    "jersey": "30",
+    "color": "#FB7185",
+    "era": "2009–present",
+    "themes": [
+      "2000s",
+      "guard",
+      "active"
+    ],
+    "clue_style": "story",
+    "clues": [
+      {
+        "text": "Big college programs passed me by",
+        "difficulty": "hard"
+      },
+      {
+        "text": "I led Davidson on a Cinderella NCAA run",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I became the NBA's first unanimous MVP",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/news/stephen-curry-changed-game-long-before-3-point-milestone",
+      "https://www.nba.com/news/nba-players-ncaa-tournament-moments",
+      "https://pr.nba.com/stephen-curry-2015-16-kia-nba-mvp-award-warriors/"
+    ]
+  },
+  {
+    "slug": "steve-nash",
+    "player": "Steve Nash",
+    "aliases": [],
+    "nicknames": [
+      "Nash",
+      "Two-Time"
+    ],
+    "position": "PG",
+    "jersey": "10",
+    "color": "#38BDF8",
+    "era": "1996–2014",
+    "themes": [
+      "90s",
+      "guard",
+      "legend"
+    ],
+    "clue_style": "story",
+    "clues": [
+      {
+        "text": "I was born in South Africa, raised in Canada",
+        "difficulty": "hard"
+      },
+      {
+        "text": "I left Dallas, then won two MVPs in Phoenix",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I ran the Seven Seconds or Less Suns",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/news/international-players-to-win-nba-mvp-award",
+      "https://www.nba.com/nets/news/breaking/2020/09/03/steve-nash-to-brooklyn-from-british-columbia-an-unexpected-journey"
+    ]
+  },
+  {
+    "slug": "tim-duncan",
+    "player": "Tim Duncan",
+    "aliases": [],
+    "nicknames": [
+      "The Big Fundamental",
+      "Timmy"
+    ],
+    "position": "PF",
+    "jersey": "21",
+    "color": "#A78BFA",
+    "era": "1997–2016",
+    "themes": [
+      "90s",
+      "big-man",
+      "legend"
+    ],
+    "clue_style": "story",
+    "clues": [
+      {
+        "text": "A hurricane ended my Olympic swimming dream",
+        "difficulty": "hard"
+      },
+      {
+        "text": "A referee ejected me for laughing on the bench",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I won five titles, all with San Antonio",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/news/archive-75-tim-duncan",
+      "https://www.nba.com/news/hall-of-fame-class-of-2026-joey-crawford",
+      "https://www.nba.com/news/history-nba-legend-tim-duncan"
+    ]
+  },
+  {
+    "slug": "tony-parker",
+    "player": "Tony Parker",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PG",
+    "jersey": "9",
+    "color": "#FF4655",
+    "era": "2001–2019",
+    "themes": [
+      "2000s",
+      "guard"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A point guard who played 2001-2019",
+        "difficulty": "hard"
+      },
+      {
+        "text": "6x All-Star, 4x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "4 rings, 0 MVPs, 1 Finals MVP",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#tony-parker"
+    ]
+  },
+  {
+    "slug": "tracy-mcgrady",
+    "player": "Tracy McGrady",
+    "aliases": [],
+    "nicknames": [
+      "T-Mac",
+      "TMac"
+    ],
+    "position": "SG",
+    "jersey": "1",
+    "color": "#00D9FF",
+    "era": "1997–2012",
+    "themes": [
+      "90s",
+      "guard"
+    ],
+    "clue_style": "story",
+    "clues": [
+      {
+        "text": "I was teammates with my cousin Vince Carter",
+        "difficulty": "hard"
+      },
+      {
+        "text": "I scored 62 in one night for Orlando",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I scored 13 points in just 35 seconds",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/magic/news/catching-tracy-mcgrady",
+      "https://www.nba.com/news/legendary-moments-history-tracy-mcgrady-62-points-orlando-magic-2004",
+      "https://www.nba.com/news/2017-hall-of-fame-tracy-mcgrady-profile"
+    ]
+  },
+  {
+    "slug": "trae-young",
+    "player": "Trae Young",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PG",
+    "jersey": "3",
+    "color": "#FFB627",
+    "era": "2018–present",
+    "themes": [
+      "2010s",
+      "guard",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A point guard in the NBA since 2018",
+        "difficulty": "hard"
+      },
+      {
+        "text": "4x All-Star, 1x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2019-20, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#trae-young"
+    ]
+  },
+  {
+    "slug": "tyrese-haliburton",
+    "player": "Tyrese Haliburton",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PG",
+    "jersey": "0",
+    "color": "#39FF88",
+    "era": "2020–present",
+    "themes": [
+      "2020s",
+      "guard",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A point guard in the NBA since 2020",
+        "difficulty": "hard"
+      },
+      {
+        "text": "2x All-Star, 2x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2023-24, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#tyrese-haliburton"
+    ]
+  },
+  {
+    "slug": "tyrese-maxey",
+    "player": "Tyrese Maxey",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PG",
+    "jersey": "0",
+    "color": "#C9A6FF",
+    "era": "2020–present",
+    "themes": [
+      "2020s",
+      "guard",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A point guard in the NBA since 2020",
+        "difficulty": "hard"
+      },
+      {
+        "text": "2x All-Star, 1x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2025-26, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#tyrese-maxey"
+    ]
+  },
+  {
+    "slug": "victor-wembanyama",
+    "player": "Victor Wembanyama",
+    "aliases": [],
+    "nicknames": [],
+    "position": "C",
+    "jersey": "1",
+    "color": "#FB7185",
+    "era": "2023–present",
+    "themes": [
+      "2020s",
+      "big-man",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A center in the NBA since 2023",
+        "difficulty": "hard"
+      },
+      {
+        "text": "2x All-Star, 1x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2023-24, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#victor-wembanyama"
+    ]
+  },
+  {
+    "slug": "vince-carter",
+    "player": "Vince Carter",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SG",
+    "jersey": "15",
+    "color": "#38BDF8",
+    "era": "1998–2020",
+    "themes": [
+      "90s",
+      "guard",
+      "legend"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A shooting guard who played 1998-2020",
+        "difficulty": "hard"
+      },
+      {
+        "text": "8x All-Star, 2x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2006-07, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#vince-carter"
+    ]
+  },
+  {
+    "slug": "wilt-chamberlain",
+    "player": "Wilt Chamberlain",
+    "aliases": [],
+    "nicknames": [
+      "Wilt the Stilt",
+      "The Big Dipper",
+      "Wilt"
+    ],
+    "position": "C",
+    "jersey": "13",
+    "color": "#F97316",
+    "era": "1959–1973",
+    "themes": [
+      "80s",
+      "big-man",
+      "legend"
+    ],
+    "clue_style": "story",
+    "clues": [
+      {
+        "text": "I averaged 48.5 minutes per game one season",
+        "difficulty": "hard"
+      },
+      {
+        "text": "I never fouled out of an NBA game",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I scored 100 points in one game",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/news/history-season-review-1961-62",
+      "https://www.nba.com/sixers/76ers-alumni/wilt-chamberlain"
+    ]
+  },
+  {
+    "slug": "yao-ming",
+    "player": "Yao Ming",
+    "aliases": [],
+    "nicknames": [],
+    "position": "C",
+    "jersey": "11",
+    "color": "#A78BFA",
+    "era": "2002–2011",
+    "themes": [
+      "2000s",
+      "big-man",
+      "legend"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A center who played 2002-2011",
+        "difficulty": "hard"
+      },
+      {
+        "text": "8x All-Star, 5x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2006-07, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#yao-ming"
+    ]
+  },
+  {
+    "slug": "zach-lavine",
+    "player": "Zach LaVine",
+    "aliases": [],
+    "nicknames": [],
+    "position": "SG",
+    "jersey": "8",
+    "color": "#FF4655",
+    "era": "2014–present",
+    "themes": [
+      "2010s",
+      "guard",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A shooting guard in the NBA since 2014",
+        "difficulty": "hard"
+      },
+      {
+        "text": "2x All-Star, never All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2020-21, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#zach-lavine"
+    ]
+  },
+  {
+    "slug": "zach-randolph",
+    "player": "Zach Randolph",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PF",
+    "jersey": "50",
+    "color": "#00D9FF",
+    "era": "2001–2018",
+    "themes": [
+      "2000s",
+      "big-man"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A power forward who played 2001-2018",
+        "difficulty": "hard"
+      },
+      {
+        "text": "2x All-Star, 1x All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2006-07, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#zach-randolph"
+    ]
+  },
+  {
+    "slug": "zion-williamson",
+    "player": "Zion Williamson",
+    "aliases": [],
+    "nicknames": [],
+    "position": "PF",
+    "jersey": "1",
+    "color": "#FFB627",
+    "era": "2019–present",
+    "themes": [
+      "2010s",
+      "big-man",
+      "active"
+    ],
+    "clue_style": "data",
+    "clues": [
+      {
+        "text": "A power forward in the NBA since 2019",
+        "difficulty": "hard"
+      },
+      {
+        "text": "2x All-Star, never All-NBA",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Best season: 2020-21, still no ring",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://playfactsoverfeelings.com/api/comparison-data#zion-williamson"
     ]
   }
 ]
