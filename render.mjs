@@ -1,4 +1,4 @@
-// Renders the daily Mystery Player video (1080x1920, 30 fps, 20 s, loops back to the hook).
+// Renders the daily Mystery Player video (1080x1920, 30 fps, ~24.5 s, loops back to the hook).
 // Usage: node render.mjs [selected.json] [output-dir]
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -6,6 +6,7 @@ import {spawnSync} from 'node:child_process';
 import {chromium} from 'playwright';
 import {HOOK_LINES, TITLES, pick, postText, themeFor} from './lib/daily.mjs';
 import {checkEntry} from './lib/clues.mjs';
+import {DURATION, FPS, TIMELINE} from './lib/timeline.mjs';
 
 const project = path.dirname(new URL(import.meta.url).pathname).replace(/^\/([A-Za-z]:)/, '$1');
 const input = path.resolve(process.argv[2] ?? path.join(project, 'player.json'));
@@ -25,9 +26,7 @@ const frames = path.join(out, 'frames');
 await fs.rm(frames, {recursive: true, force: true});
 await fs.mkdir(frames, {recursive: true});
 
-export const FPS = 30;
-export const DURATION = 20;
-export const TIMELINE = {hookEnd: 1.6, clueStarts: [1.6, 5.9, 10.2], lockStart: 14.5, ctaStart: 16.0, loopStart: 19.4};
+export {FPS, DURATION, TIMELINE};
 
 const asData = async (file, mime) => `data:${mime};base64,${(await fs.readFile(file)).toString('base64')}`;
 const background = await asData(path.join(project, 'arena-background-v2.png'), 'image/png');
@@ -39,9 +38,29 @@ for (const state of ['thinking', 'surprised', 'nervous', 'celebration']) {
   for (let i = 0; i < 9; i++) mascot[state].push(await asData(path.join(project, 'assets', 'mascot', `${state}-${String(i).padStart(2, '0')}.png`), 'image/png'));
 }
 
+async function optionalHeadshot(player) {
+  const source = player.headshot || player.image;
+  if (!source || typeof source !== 'string') return null;
+  try {
+    if (/^https?:\/\//i.test(source)) {
+      const response = await fetch(source, {signal: AbortSignal.timeout(8000)});
+      if (!response.ok) return null;
+      const mime = (response.headers.get('content-type') || 'image/png').split(';')[0];
+      const bytes = Buffer.from(await response.arrayBuffer());
+      return `data:${mime};base64,${bytes.toString('base64')}`;
+    }
+    const file = path.resolve(project, source);
+    const mime = /\.jpe?g$/i.test(file) ? 'image/jpeg' : 'image/png';
+    return await asData(file, mime);
+  } catch {
+    return null;
+  }
+}
+
+const headshot = await optionalHeadshot(data);
 const payload = JSON.stringify({
   clues: data.clues.map((clue) => clue.text.toUpperCase()), jersey: data.jersey || '?', color: data.color || '#ff6428',
-  hook: hook.toUpperCase(), theme: theme.label.toUpperCase(), background, mascot, T: TIMELINE, duration: DURATION,
+  name: data.player, headshot, hook: hook.toUpperCase(), theme: theme.label.toUpperCase(), background, mascot, T: TIMELINE, duration: DURATION,
 });
 
 // Safe zones (1080x1920): keep content below y=210 (top tabs), above y=1480 (caption/username)
@@ -67,9 +86,18 @@ const html = `<!doctype html><html><head><meta charset="utf-8"><style>
 .pips{position:absolute;left:30px;width:560px;bottom:26px;display:flex;gap:10px}.pip{height:18px;flex:1;border-radius:4px;background:#283249}.pip.on{background:#ff5b1d}
 .box{position:absolute;left:60px;width:840px;border:4px solid #ff6428;border-radius:14px;background:rgba(3,7,16,.96);text-align:center}
 .locktitle{margin-top:80px;font:56px/1.35 Press}.locknum{margin-top:40px;font:220px Press;color:#ff5b1d;text-shadow:0 0 30px rgba(255,91,29,.6)}
-.ctaA{margin-top:70px;font:40px/1.45 Press}.ctaSite{margin:34px auto 0;width:760px;font:40px/1.3 Silk;color:#26d9ff;letter-spacing:2px}
+.ctaA{margin-top:90px;font:52px/1.35 Press}.ctaSite{margin:34px auto 0;width:760px;font:36px/1.3 Silk;color:#26d9ff;letter-spacing:1px}
 .ctaBio{margin-top:18px;font:30px Press;color:#ffd23f}.ctaMascot{width:220px;height:220px;object-fit:contain;image-rendering:pixelated;margin-top:26px}
 .ctaComment{margin:26px auto 0;width:760px;padding:26px 10px;border:3px dashed #ff6428;border-radius:12px;font:40px/1.4 Press;color:#ff6428}
+.revealKicker{margin-top:64px;font:34px Press;color:#ffd23f;letter-spacing:6px}
+.revealName{margin-top:48px;padding:0 36px}
+.nameLine{font-family:Press;line-height:1.28;text-shadow:0 6px 0 #000,0 0 18px rgba(255,91,29,.5)}
+.revealJersey{left:250px;top:560px;width:340px;height:380px}
+.revealJersey svg{width:340px;height:380px}
+.revealJersey.withShot{left:430px;top:600px;width:280px;height:314px}
+.revealJersey.withShot svg{width:280px;height:314px}
+.headshot{position:absolute;left:80px;top:620px;width:250px;height:250px;object-fit:cover;border:4px solid #fff;border-radius:18px;box-shadow:0 10px 0 #000}
+.revealMascot{position:absolute;right:24px;bottom:16px;width:150px;height:150px;object-fit:contain;image-rendering:pixelated}
 .flash{position:absolute;inset:0;background:#fff}
 </style></head><body><div id="root"></div><script>
 const D=${payload};const T=D.T;
@@ -77,14 +105,15 @@ const esc=(s)=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt
 const ease=(x)=>1-Math.pow(1-Math.min(1,Math.max(0,x)),3);
 const avatar=(state,t)=>D.mascot[state][Math.floor(t*11)%9];
 const header=(t)=>'<div class="shade"></div><div class="track"><div class="fill" style="width:'+Math.max(20,840*t/D.duration)+'px"></div></div><div class="brand">FACTS OVER FEELINGS</div><div class="theme">MYSTERY PLAYER // '+esc(D.theme)+'</div>';
-function jersey(t){const pulse=1+0.035*Math.sin(t*9);const q=0.55+0.45*Math.abs(Math.sin(t*5));
-  return '<div class="jerseywrap" style="transform:scale('+pulse+')"><svg viewBox="0 0 500 560" width="500" height="560">'
+function jersey(t, opts){opts=opts||{};const pulse=opts.pulse===false?(opts.scale||1):(1+0.035*Math.sin(t*9));const q=0.55+0.45*Math.abs(Math.sin(t*5));
+  const mark=opts.mark===false?'':'<text x="420" y="120" text-anchor="middle" font-family="Press" font-size="90" fill="#ff5b1d" opacity="'+q+'">?</text>';
+  return '<div class="'+(opts.className||'jerseywrap')+'" style="transform:scale('+pulse+')"><svg viewBox="0 0 500 560" width="500" height="560">'
   +'<defs><filter id="g"><feGaussianBlur stdDeviation="14"/></filter></defs>'
   +'<path d="M150 20 L205 20 Q250 85 295 20 L350 20 L360 120 Q385 150 430 160 L440 540 L60 540 L70 160 Q115 150 140 120 Z" fill="'+D.color+'" opacity=".55" filter="url(#g)"/>'
   +'<path d="M150 20 L205 20 Q250 85 295 20 L350 20 L360 120 Q385 150 430 160 L440 540 L60 540 L70 160 Q115 150 140 120 Z" fill="#0b1220" stroke="'+D.color+'" stroke-width="10"/>'
   +'<text x="250" y="400" text-anchor="middle" font-family="Press" font-size="'+(D.jersey.length>1?170:200)+'" fill="'+D.color+'" stroke="#000" stroke-width="8" paint-order="stroke">'+esc(D.jersey)+'</text>'
-  +'<text x="420" y="120" text-anchor="middle" font-family="Press" font-size="90" fill="#ff5b1d" opacity="'+q+'">?</text></svg></div>'}
-function hookScene(t){return header(t)+'<div class="hookline">'+esc(D.hook)+'</div>'+jersey(t)+'<div class="hooksub">3 CLUES // BEAT THE SHOT CLOCK</div>'}
+  +mark+'</svg></div>'}
+function hookScene(t){return header(t)+'<div class="hookline">'+esc(D.hook)+'</div>'+jersey(t,{mark:true})+'<div class="hooksub">3 CLUES // BEAT THE SHOT CLOCK</div>'}
 function typedLength(i,local){return Math.floor((local-.5)*40)}
 function clueScene(t){const starts=T.clueStarts;let current=Math.max(0,starts.findLastIndex(x=>t>=x));let body=header(t);
   for(let i=0;i<=current;i++){const local=t-starts[i];const full=D.clues[i];const typed=typedLength(i,local);
@@ -97,13 +126,28 @@ function clueScene(t){const starts=T.clueStarts;let current=Math.max(0,starts.fi
   body+='<div class="clock"><div class="clocklabel">SHOT CLOCK</div><div class="clocknum '+(n<=2?'warn':'')+'">'+n+'</div><div class="pips">'+[1,2,3,4,5].map(v=>'<i class="pip '+(v<=n?'on':'')+'"></i>').join('')+'</div></div>';return body}
 function lockScene(t){const local=t-T.lockStart;const n=local<.5?3:local<1?2:1;const pop=1+0.25*(1-ease((local%.5)/.2));
   return header(t)+'<div class="box" style="top:380px;height:820px"><div class="locktitle">LOCK IN<br>YOUR GUESS</div><div class="locknum" style="transform:scale('+pop+')">'+n+'</div></div>'}
+function nameLayout(name){const words=String(name||'').toUpperCase().split(/\\s+/).filter(Boolean);
+  const lines=words.length<=2?words:[words[0],words.slice(1).join(' ')];
+  const longest=Math.max(1,...lines.map(s=>s.length));
+  const size=longest<=7?72:longest<=10?56:longest<=14?44:longest<=18?34:28;
+  return {lines,size}}
+function revealScene(t){const local=t-T.revealStart;const slam=1+0.72*Math.pow(1-ease(local/.3),2);
+  const shake=local<.32?Math.sin(local*90)*(1-local/.32)*12:0;const layout=nameLayout(D.name);
+  const name=layout.lines.map(line=>'<div class="nameLine" style="font-size:'+layout.size+'px">'+esc(line)+'</div>').join('');
+  const shot=D.headshot?'<img class="headshot" src="'+D.headshot+'" alt="">':'';
+  const jerseyClass='jerseywrap revealJersey'+(D.headshot?' withShot':'');
+  return header(t)+'<div class="box" style="top:270px;height:1160px;transform:translateX('+shake+'px)">'
+    +'<div class="revealKicker">IT\\'S</div>'
+    +'<div class="revealName" style="transform:scale('+slam+');transform-origin:center top;color:'+D.color+'">'+name+'</div>'
+    +shot+jersey(t,{mark:false,pulse:false,scale:Math.min(slam,1.08),className:jerseyClass})
+    +'<img class="revealMascot" src="'+avatar('celebration',local)+'"></div>'
+    +(local<.14?'<div class="flash" style="opacity:'+(1-local/.14)*.92+'"></div>':'')}
 function ctaScene(t){const local=t-T.ctaStart;const rise=(k)=>'opacity:'+ease((local-k)/.25)+';transform:translateY('+(1-ease((local-k)/.25))*40+'px)';
-  return header(t)+'<div class="box" style="top:300px;height:1150px"><div class="ctaA" style="'+rise(0)+'">ANSWER +<br>TODAY\\'S GAME:</div><div class="ctaSite" style="'+rise(.15)+'">PLAYFACTSOVERFEELINGS.COM</div><div class="ctaBio" style="'+rise(.3)+'">LINK IN BIO</div><img class="ctaMascot" src="'+avatar('celebration',local)+'"><div class="ctaComment" style="'+rise(.6)+'">1, 2 OR 3 CLUES?<br>COMMENT</div></div>'
-  +(local<.1?'<div class="flash" style="opacity:'+(1-local/.1)*.8+'"></div>':'')}
+  return header(t)+'<div class="box" style="top:300px;height:1150px"><div class="ctaA" style="'+rise(0)+'">PLAY DAILY</div><div class="ctaSite" style="'+rise(.12)+'">PLAYFACTSOVERFEELINGS.COM</div><div class="ctaBio" style="'+rise(.24)+'">LINK IN BIO</div><img class="ctaMascot" src="'+avatar('celebration',local)+'"><div class="ctaComment" style="'+rise(.42)+'">1, 2 OR 3 CLUES?<br>COMMENT</div></div>'}
 window.draw=(t)=>{let html;
-  if(t<T.hookEnd)html=hookScene(t);else if(t<T.lockStart)html=clueScene(t);else if(t<T.ctaStart)html=lockScene(t);
-  else if(t<T.loopStart)html=ctaScene(t);
-  else{const k=(t-T.loopStart)/(D.duration-T.loopStart);html='<div class="layer" style="opacity:'+(1-ease(k*2))+'">'+ctaScene(t)+'</div><div class="layer" style="opacity:'+ease(k*2-1)+'">'+hookScene(t-D.duration)+'</div>'}
+  if(t<T.hookEnd)html=hookScene(t);else if(t<T.lockStart)html=clueScene(t);else if(t<T.revealStart)html=lockScene(t);
+  else if(t<T.ctaStart)html=revealScene(t);else if(t<T.loopStart)html=ctaScene(t);
+  else{const k=ease((t-T.loopStart)/(D.duration-T.loopStart));html='<div class="layer" style="opacity:'+(1-k)+'">'+ctaScene(T.loopStart)+'</div><div class="layer" style="opacity:'+k+'">'+hookScene(0)+'</div>'}
   document.getElementById('root').innerHTML='<main class="stage" style="background-image:url('+D.background+')">'+html+'</main>'};
 </script></body></html>`;
 
@@ -123,12 +167,13 @@ try {
 const speech = {
   hook: hook.toLowerCase().replace(/\b1\b/g, 'one').replace(/\b3\b/g, 'three').replace(/\b0\b/g, 'zero').replace(/90%/g, 'ninety percent'),
   clues: data.clues.map((clue) => clue.text),
+  answer: data.player,
 };
 await fs.writeFile(path.join(out, 'speech.json'), JSON.stringify({...speech, timeline: TIMELINE, duration: DURATION, fps: FPS}, null, 2));
-const py = process.env.PYTHON_EXE ?? 'python';
+const py = process.env.PYTHON_EXE ?? (spawnSync('python', ['--version']).status === 0 ? 'python' : 'python3');
 const enc = spawnSync(py, [path.join(project, 'encode.py'), out], {encoding: 'utf8', stdio: 'inherit'});
 if (enc.status !== 0) throw Error('Video encoding failed');
 await fs.writeFile(path.join(out, 'post.txt'), post.text);
-await fs.writeFile(path.join(out, 'release-notes.md'), `**Answer is not in this video** — viewers find it at PlayFactsOverFeelings.com.\n\nTwo downloads: **with music** and **no music** (add a trending sound in TikTok).\n\n### Title\n${post.title}\n\n### Caption\n${post.caption}\n`);
+await fs.writeFile(path.join(out, 'release-notes.md'), `**Answer: ${data.player}**\n\nThe name is revealed after the guess window, then the video sends viewers to play daily at PlayFactsOverFeelings.com.\n\nTwo downloads: **with music** and **no music** (add a trending sound in TikTok).\n\n### Title\n${post.title}\n\n### Caption\n${post.caption}\n`);
 await fs.writeFile(path.join(out, 'sources.json'), JSON.stringify(data.sources ?? [], null, 2));
 console.log(path.join(out, 'mystery-player.mp4'));

@@ -1,6 +1,6 @@
 # Facts Over Feelings: daily mystery video
 
-This project makes the daily 20-second, 1080 × 1920, 30 fps **Guess the Mystery Player** video for TikTok (@uknowball17) and YouTube Shorts (UknowBall). GitHub runs it every morning, even when your computer is off. The finished videos and a ready-to-paste title and caption appear on the [latest release](../../releases/latest) page.
+This project makes the daily 24.5-second, 1080 × 1920, 30 fps **Guess the Mystery Player** video for TikTok (@uknowball17) and YouTube Shorts (UknowBall). GitHub runs it every morning, even when your computer is off. The finished videos and a ready-to-paste title and caption appear on the [latest release](../../releases/latest) page.
 
 ## What each daily release contains
 
@@ -10,21 +10,22 @@ This project makes the daily 20-second, 1080 × 1920, 30 fps **Guess the Mystery
 | `mystery-player-no-music.mp4` (**no music**) | TikTok, when you want to add a trending sound in the app. |
 | `post.txt` | Title + caption + hashtags to copy and paste. The same text is in the release notes. |
 
-Titles rotate daily so the channel doesn't post the same title every day. The answer is never shown or spoken in the video, and never written in the release notes.
+Titles rotate daily so the channel doesn't post the same title every day. The player's name is revealed at the end of the video, spoken in the voiceover, and written in `post.txt` and the release notes.
 
 ## The video format
 
-1. **Hook (0–1.6 s):** the mystery player's jersey number in his team color, plus a challenge line that changes daily (for example "ONLY REAL HOOPERS GET HIM IN 1 CLUE").
-2. **Three clues, hard → medium → easy (1.6–14.5 s):** decoding dots, typed text, mascot reactions and a shot clock.
-3. **Lock-in countdown (14.5–16 s).**
-4. **Call to action (16–19.4 s):** "ANSWER + TODAY'S GAME: PLAYFACTSOVERFEELINGS.COM — LINK IN BIO" and "1, 2 OR 3 CLUES? COMMENT".
-5. **Loop (19.4–20 s):** the ending fades back into the opening hook, so the video replays seamlessly.
+1. **Hook (0–1.4 s):** the mystery player's jersey number in his team color, plus a challenge line that changes daily (for example "ONLY REAL HOOPERS GET HIM IN 1 CLUE").
+2. **Three clues, hard → medium → easy (1.4–13.1 s):** decoding dots, typed text, mascot reactions and a shot clock.
+3. **Lock-in countdown (13.1–14.6 s).**
+4. **Answer reveal (14.6–18.8 s):** the player's name slams on with his jersey (and a headshot when the player record has one), plus a hit and a victory sting.
+5. **Call to action (18.8–22.9 s):** "PLAY DAILY — PLAYFACTSOVERFEELINGS.COM — LINK IN BIO" and "1, 2 OR 3 CLUES? COMMENT".
+6. **Loop (22.9–24.5 s):** the ending fades back into the opening hook, so the video replays.
 
 Everything important stays inside the TikTok/Shorts safe area: below the top tabs, above the caption area, and left of the like/comment/share buttons. The audio is normalized to about −14 LUFS, which matches TikTok and YouTube playback loudness.
 
 ## How today's player is chosen
 
-1. **Same player as the website.** `select.mjs` asks PlayFactsOverFeelings.com which player is today's Daily Mystery Player, using the site's public read-only player-catalog API, so the video and the website's game match. The video doesn't reveal the name, which pushes viewers to the site for the answer. The website itself is not changed.
+1. **Same player as the website.** `select.mjs` asks PlayFactsOverFeelings.com which player is today's Daily Mystery Player, using the site's public read-only player-catalog API, so the video and the website's game match. After the guess window the video reveals the name, then points viewers to play daily on the site. The website itself is not changed.
 2. **Fallback pool.** If the site can't be reached, or its date isn't today's Eastern date, the video uses this repo's own `players.json` pool instead. That pool follows the weekday theme rotation (Sun legends, Mon 90s, Tue guards, Wed big men, Thu today's stars, Fri 2000s, Sat wings) and avoids players who have already appeared.
 
 Running the workflow twice on the same day never makes a second video.
@@ -46,7 +47,7 @@ Running the workflow twice on the same day never makes a second video.
 
 ## Voiceover and sound
 
-`voiceover.py` uses the free `edge-tts` package to read the hook, each clue, short pressure lines and the call to action. It never says the answer. If the free voice service is down, the video still completes with sound effects and music.
+`voiceover.py` uses the free `edge-tts` package to read the hook, each clue, short pressure lines, the player's name at the reveal, and the call to action. If the free voice service is down, the video still completes with sound effects and music.
 
 The music bed, `assets/music/arcade-bed.wav`, is original. It was synthesized by `tools/make-music.py` and dedicated to the public domain (CC0), so it can't trigger copyright claims; see `licenses/music-CC0.txt`. The sound effects, mascot frames and background were created for this project. The fonts are OFL-licensed (see `licenses/`).
 

@@ -24,18 +24,21 @@ async def _save_with_retries(text: str, destination: Path) -> None:
 
 
 def script(speech: dict, timeline: dict):
-    """(text, planned start in seconds, gain, required). The answer is never spoken.
-    Optional lines are dropped by encode.py when they would crowd a required line."""
+    """(text, planned start in seconds, gain, required). The name is spoken at the
+    reveal, then the call to action. Optional lines are dropped by encode.py
+    when they would crowd a required line."""
     starts = timeline['clueStarts']
+    name = speech.get('answer') or 'the mystery player'
     return [
         (speech['hook'], 0.0, 1.08, True),
-        (speech['clues'][0], starts[0] + 0.45, 1.12, True),
-        ('Got him yet?', starts[1] - 0.8, 1.08, False),
-        (speech['clues'][1], starts[1] + 0.45, 1.12, True),
-        ('Last chance.', starts[2] - 0.8, 1.08, False),
-        (speech['clues'][2], starts[2] + 0.45, 1.12, True),
+        (speech['clues'][0], starts[0] + 0.4, 1.12, True),
+        ('Got him yet?', starts[1] - 0.7, 1.08, False),
+        (speech['clues'][1], starts[1] + 0.4, 1.12, True),
+        ('Last chance.', starts[2] - 0.7, 1.08, False),
+        (speech['clues'][2], starts[2] + 0.4, 1.12, True),
         ('Lock it in!', timeline['lockStart'] + 0.05, 1.12, False),
-        ("Answer's at Play Facts Over Feelings dot com!", timeline['ctaStart'] + 0.15, 1.12, True),
+        (f"It's {name}!", timeline['revealStart'] + 0.12, 1.16, True),
+        ('Play daily at Play Facts Over Feelings dot com!', timeline['ctaStart'] + 0.08, 1.12, True),
     ]
 
 

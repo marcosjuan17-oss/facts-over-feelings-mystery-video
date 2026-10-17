@@ -37,11 +37,10 @@ def ms(seconds):
 cues = [('boot.wav', 0.0, 0.7)]
 for start in T['clueStarts']:
     cues += [('typing.wav', start + 0.5, 0.55), ('unlock.wav', start + 1.7, 0.65)]
-lock = T['lockStart']
+lock, reveal, cta = T['lockStart'], T['revealStart'], T['ctaStart']
 cues += [('beep.wav', lock, 0.72), ('beep.wav', lock + 0.5, 0.8), ('beep.wav', lock + 1.0, 0.9),
-         ('shot.wav', T['ctaStart'] - 0.2, 0.7), ('swish.wav', T['ctaStart'] - 0.05, 0.85),
-         ('impact.wav', T['ctaStart'], 0.85), ('victory.wav', T['ctaStart'] + 0.1, 0.6),
-         ('swish.wav', T['loopStart'] + 0.1, 0.6)]
+         ('shot.wav', reveal - 0.12, 0.78), ('impact.wav', reveal, 1.0), ('victory.wav', reveal + 0.05, 0.82),
+         ('swish.wav', cta, 0.62), ('swish.wav', T['loopStart'] + 0.05, 0.45)]
 
 def trimmed(file: Path) -> Path:
     """Strip the silence Edge TTS pads around each line so lines can sit closer together."""
@@ -79,15 +78,19 @@ run([ffmpeg, '-y', '-framerate', str(FPS), '-i', str(out / 'frames' / 'frame-%04
 
 def mix(with_music: bool) -> Path:
     inputs, filters, sfx, voice = [], [], [], []
+
+    def add_input(path, prefix=()):
+        inputs.extend(prefix)
+        inputs.extend(['-i', str(path)])
+        return sum(arg == '-i' for arg in inputs) - 1
+
     for filename, start, gain in cues:
-        inputs += ['-i', str(project / 'assets' / filename)]
-        i = len(inputs) // 2 - 1
+        i = add_input(project / 'assets' / filename)
         repeat = 'aloop=loop=-1:size=3360,atrim=duration=1.1,' if filename == 'typing.wav' else ''
         filters.append(f'[{i}:a]aformat=sample_rates=44100:channel_layouts=stereo,{repeat}adelay={ms(start)}|{ms(start)},volume={gain}[s{i}]')
         sfx.append(f'[s{i}]')
     for file, start, gain in narration:
-        inputs += ['-i', str(file)]
-        i = len(inputs) // 2 - 1
+        i = add_input(file)
         filters.append(f'[{i}:a]aformat=sample_rates=44100:channel_layouts=stereo,adelay={ms(start)}|{ms(start)},volume={gain}[v{i}]')
         voice.append(f'[v{i}]')
     if voice:
@@ -96,10 +99,10 @@ def mix(with_music: bool) -> Path:
         filters.append(f'anullsrc=r=44100:cl=stereo,atrim=duration={DURATION}[vo]')
     filters.append(''.join(sfx) + f'amix=inputs={len(sfx)}:normalize=0:duration=longest,apad=whole_dur={DURATION}[fx]')
     if with_music:
-        inputs += ['-i', str(project / 'assets' / 'music' / 'arcade-bed.wav')]
-        i = len(inputs) // 2 - 1
+        # The bed is 20s and written to loop; repeat it so a longer video stays covered.
+        i = add_input(project / 'assets' / 'music' / 'arcade-bed.wav', ('-stream_loop', '-1'))
         filters.append('[vo]asplit=2[vo1][vokey]')
-        filters.append(f'[{i}:a]aformat=sample_rates=44100:channel_layouts=stereo,volume=0.32[bed]')
+        filters.append(f'[{i}:a]aformat=sample_rates=44100:channel_layouts=stereo,atrim=duration={DURATION},volume=0.32[bed]')
         filters.append('[bed][vokey]sidechaincompress=threshold=0.03:ratio=6:attack=15:release=250[duck]')
         filters.append('[vo1][fx][duck]amix=inputs=3:normalize=0:duration=longest[mix]')
     else:

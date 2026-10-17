@@ -61,6 +61,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           VIDEO_DATE: ${{ steps.select.outputs.date }}
+        # Videos are published only as GitHub release assets. There is no Google Drive upload.
         run: |
           tag="daily-${VIDEO_DATE}"
           dir="renders/${VIDEO_DATE}"

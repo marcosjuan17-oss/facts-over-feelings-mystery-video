@@ -1,12 +1,12 @@
 // Chooses today's mystery player and writes selected.json.
 //
 // 1. Tie-in: ask the Facts Over Feelings website which player is today's daily
-//    mystery (public, read-only GET). The video uses the same player but never
-//    reveals the name, so viewers go to the site for the answer.
+//    mystery (public, read-only GET). The video reveals that name after the
+//    guess window, then sends viewers to play the daily game on the site.
 // 2. Fallback: if the site is unreachable or its date differs from today's
 //    Eastern date, pick from this repo's own pool, preferring today's weekday
 //    theme and players that have not appeared yet.
-// The player's name is never printed, so public Action logs don't spoil it.
+// This script does not print the player's name, so Action logs stay quiet.
 import fs from 'node:fs/promises';
 import {randomInt} from 'node:crypto';
 import {dataClues, themeTags} from './lib/clues.mjs';
