@@ -8,7 +8,10 @@ This project makes the daily 27-second, 1080 × 1920, 30 fps **Guess the Mystery
 | --- | --- |
 | `mystery-player.mp4` (**with music**) | Post as-is on YouTube Shorts or TikTok. |
 | `mystery-player-no-music.mp4` (**no music**) | TikTok, when you want to add a trending sound in the app. |
-| `post.txt` | Title + caption + hashtags to copy and paste. The same text is in the release notes. |
+| `post.txt` | Title + caption + hashtags to copy and paste. The same text is in the release notes. The caption includes the answer. |
+| `depixelate-carousel.zip` | The 7-slide Depixelate carousel plus `carousel-caption.txt`. |
+| `carousel-01-hook.png` … `carousel-07-cta.png` | The same slides one at a time. |
+| `carousel-caption.txt` | Carousel caption and hashtags. It does not include the answer. |
 
 Titles rotate daily so the channel doesn't post the same title every day. The player's name is revealed at the end of the video, spoken in the voiceover, and written in `post.txt` and the release notes.
 
@@ -23,7 +26,11 @@ Titles rotate daily so the channel doesn't post the same title every day. The pl
 
 Text stays inside the TikTok/Shorts safe area: below the top 12%, above the bottom 20%, and left of the right 15% where the app buttons sit. Type is big and close to the camera. The picture keeps moving: a slow zoom, a shake and a white flash on each clue, pulsing glows, and floating pixel sparks. The audio is normalized to about −14 LUFS.
 
-The mascot is the owner's basketball-with-eyes sprite. `assets/mascot.png` is a 2484×414 sheet of six 414×414 frames in order — idle, thinking, surprised, hype, celebrate, sad — and `assets/mascot/idle.png` (and the other five names) are the same frames on their own. The video draws whichever frame the moment needs, scaled with nearest-neighbor only: idle on the hook, thinking through the clues, surprised then hype on the countdown, celebrate on the name, and hype on the call to action. `tools/slice-mascot.py` rebuilds that sheet from the source art.
+The mascot is The Scout, a full-body pixel character. `assets/mascot.png` is a sheet of six square frames in order — idle, thinking, surprised, pointing, celebrate, disappointed — and `assets/mascot/idle.png` (and the other five names) are the same frames on their own. The video draws whichever frame the moment needs, scaled with nearest-neighbor only: idle on the hook, thinking through the clues, surprised when a clue flips, surprised on the countdown, celebrate on the name, and pointing on the call to action. The disappointed frame stays in the sheet. `tools/slice-mascot.py` rebuilds that sheet from the source art.
+
+## Depixelate carousel
+
+The same daily run also makes a 7-slide TikTok photo carousel, 1080 × 1920, in the same pixel-arcade style. It uses the selected player's clues and jersey only. The name and any real photo stay off every slide. The jersey starts as a heavy mosaic and gets clearer: hardest clue, next clue, then the jersey number, then the team color, then a crisp jersey on the easiest clue. The last slide is The Scout pointing at "comment your guess" and PlayFactsOverFeelings.com. The release gets `depixelate-carousel.zip`, the seven PNGs, and `carousel-caption.txt` (hashtags, no answer).
 
 ## How today's player is chosen
 

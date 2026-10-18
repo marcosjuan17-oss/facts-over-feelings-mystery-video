@@ -58,6 +58,8 @@ jobs:
       - if: steps.select.outputs.skip == 'false'
         run: node render.mjs selected.json renders/${{ steps.select.outputs.date }}
       - if: steps.select.outputs.skip == 'false'
+        run: node carousel.mjs selected.json renders/${{ steps.select.outputs.date }}
+      - if: steps.select.outputs.skip == 'false'
         env:
           GH_TOKEN: ${{ github.token }}
           VIDEO_DATE: ${{ steps.select.outputs.date }}
@@ -73,7 +75,16 @@ jobs:
           for asset in \
             "$dir/mystery-player.mp4#Download video (with music)" \
             "$dir/mystery-player-no-music.mp4#Download video (no music)" \
-            "$dir/post.txt#Title and caption (copy and paste)"; do
+            "$dir/post.txt#Title and caption (copy and paste)" \
+            "$dir/depixelate-carousel.zip#Depixelate carousel (zip)" \
+            "$dir/carousel-caption.txt#Carousel caption (no answer)" \
+            "$dir/carousel-01-hook.png#Carousel 1 hook" \
+            "$dir/carousel-02-impossible.png#Carousel 2 impossible" \
+            "$dir/carousel-03-hard.png#Carousel 3 hard" \
+            "$dir/carousel-04-medium.png#Carousel 4 medium" \
+            "$dir/carousel-05-easy.png#Carousel 5 easy" \
+            "$dir/carousel-06-obvious.png#Carousel 6 too easy" \
+            "$dir/carousel-07-cta.png#Carousel 7 call to action"; do
             uploaded=false
             for attempt in 1 2 3; do
               if gh release upload "$tag" "$asset" --clobber; then

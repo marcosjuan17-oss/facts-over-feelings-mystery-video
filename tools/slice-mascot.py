@@ -1,7 +1,7 @@
-# Slice the owner's basketball sprite into six square frames.
-# Frames sit in a row but not on an even grid. The pointing arm crosses
-# the celebrate pose, so that pair is parted by the arm instead of a
-# hard cut through either sprite.
+# Slice The Scout into six square frames.
+# Frames sit in a row but not on an even grid. A cluster much wider than
+# the others (flames, or a pointing arm that crosses the next pose) is
+# split on the thin overlap instead of a hard cut through either sprite.
 # Usage: python tools/slice-mascot.py [source.png]
 import sys
 from pathlib import Path
@@ -10,7 +10,7 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = Path(sys.argv[1] if len(sys.argv) > 1 else ROOT / 'assets' / 'mascot-source.png')
-NAMES = ['idle', 'thinking', 'surprised', 'hype', 'celebrate', 'sad']
+NAMES = ['idle', 'thinking', 'surprised', 'pointing', 'celebrate', 'disappointed']
 ALPHA = 16
 
 

@@ -133,7 +133,7 @@ const D=${payload};const T=D.T;
 const CX=540;
 const esc=(s)=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const ease=(x)=>1-Math.pow(1-Math.min(1,Math.max(0,x)),3);
-const MOODS=['idle','thinking','surprised','hype','celebrate','sad'];
+const MOODS=['idle','thinking','surprised','pointing','celebrate','disappointed'];
 function mascot(name,x,y,size,t){
   const i=MOODS.indexOf(name);
   const s=size||180;
@@ -200,7 +200,7 @@ function hookScene(t){
   // before the scale so the ink, not the empty em, sits on the frame center.
   return header(t)+'<div class="hookline" style="text-shadow:0 0 16px rgba(255,106,26,'+glow+')">'+esc(D.hook)+'</div>'
     +'<div class="heroq" style="transform:scale('+s+') translate(45px,45px);text-shadow:0 0 '+(16+glow*28)+'px rgba(255,200,61,'+glow+'),12px 12px 0 #FF6A1A">?</div>'
-    +mascot('idle',CX-85,1324,170,t);
+    +mascot('idle',CX-110,1288,220,t);
 }
 function clueScene(t){
   const current=Math.max(0,T.clueStarts.findLastIndex(x=>t>=x));
@@ -218,7 +218,7 @@ function clueScene(t){
     const cls=on?' on':done?' done':'';
     const mark=done?'<span class="qmark" style="font-size:72px;color:#07101f">'+(i+1)+'</span>':'<span class="qmark">?</span>';
     const grow=on?1+0.04*Math.sin(t*8):1;
-    tiles+='<div class="tile'+cls+'" style="left:'+(190+i*240)+'px;top:348px;width:220px;height:164px;transform:scale('+grow.toFixed(3)+');transform-origin:center center"><div class="inner">'+mark+'</div></div>';
+    tiles+='<div class="tile'+cls+'" style="left:'+(190+i*240)+'px;top:344px;width:220px;height:148px;transform:scale('+grow.toFixed(3)+');transform-origin:center center"><div class="inner">'+mark+'</div></div>';
   }
   let body;
   if(!face) body='<div class="cardbody"><span class="qmark" style="font-size:200px">?</span></div>';
@@ -229,20 +229,20 @@ function clueScene(t){
       +'<div class="cardbody">'+esc(full.slice(0,typed))+'</div>';
   }
   const pips=[1,2,3,4,5,6].map(v=>'<i class="pip'+(v<=n?' on':'')+'"></i>').join('');
+  const mood=local<0.55?'surprised':'thinking';
   return header(t)+tiles
-    +shell(528,552,face?'gold':'',body,t)
-    +shell(1096,150,'', '<div class="timerrow"><span class="timerlabel">SHOT CLOCK</span><span class="timernum'+(n<=2?' warn':'')+'">'+n+'</span></div><div class="pips">'+pips+'</div>', t)
-    +mascot('thinking',CX-100,1262,200,t);
+    +shell(508,430,face?'gold':'',body,t)
+    +shell(954,136,'', '<div class="timerrow"><span class="timerlabel">SHOT CLOCK</span><span class="timernum'+(n<=2?' warn':'')+'">'+n+'</span></div><div class="pips">'+pips+'</div>', t)
+    +mascot(mood,CX-180,1104,360,t);
 }
 function thinkScene(t){
   const local=t-T.thinkStart;
   const n=local<0.53?3:local<1.06?2:1;
   const pop=1+0.22*(1-ease((local%0.53)/0.18));
-  const mood=n>1?'surprised':'hype';
   const nx=n===1?1:27, ny=27;
   return header(t)+'<div class="thinktitle">LOCK IT<br>IN</div>'
     +'<div class="thinknum" style="transform:scale('+pop.toFixed(3)+') translate('+nx+'px,'+ny+'px)">'+n+'</div>'
-    +mascot(mood,CX-140,1096,280,t);
+    +mascot('surprised',CX-160,1168,320,t);
 }
 function nameLayout(name){
   const words=String(name||'').toUpperCase().split(/\s+/).filter(Boolean);
@@ -298,7 +298,7 @@ function nameScene(t){
   return header(t)+shell(shellTop,shellH,'gold',
     '<div class="jerseywrap" style="left:'+jLeft+'px;top:'+jTop+'px;width:'+jw+'px;height:'+jh+'px">'+jerseySvg(numBaseline)+'</div>'
     +'<div class="plate" style="left:'+plateLeft+'px;top:'+plateTop+'px;width:'+plateW+'px;height:'+plateH+'px;transform:scale('+slam.toFixed(3)+');transform-origin:center center">'+name+'</div>',
-    t)+mascot('celebrate',CX-150,shellTop+shellH+12,300,t);
+    t)+mascot('celebrate',CX-165,shellTop+shellH+8,330,t);
 }
 function ctaScene(t){
   const local=Math.max(0,t-T.ctaStart);
@@ -310,7 +310,7 @@ function ctaScene(t){
     +'<span class="ctaWord">MYSTERY</span>'
     +'<span class="ctaWord">AT</span>'
     +'<span class="ctaUrl">PLAYFACTSOVERFEELINGS.COM</span></div>'
-    +mascot('hype',CX-300,860,600,t);
+    +mascot('pointing',CX-250,920,500,t);
 }
 window.draw=(t)=>{
   const time=t>=T.loopStart?0:t;
