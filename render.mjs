@@ -1,5 +1,8 @@
-// Renders the daily Mystery Player video (1080x1920, 30 fps, ~24.5 s, loops back to the hook).
-// Usage: node render.mjs [selected.json] [output-dir]
+// Renders the daily Mystery Player video (1080x1920, 30 fps, 24 s).
+// One column stays inside the TikTok/Shorts safe area. The end card is a single
+// composition: nameplate on the jersey, then the site line. Usage:
+//   node render.mjs [selected.json] [output-dir]
+// PREVIEW_TIMES=0.2,3,18 renders only those seconds and skips encode.
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {spawnSync} from 'node:child_process';
@@ -14,7 +17,6 @@ const data = JSON.parse(await fs.readFile(input, 'utf8'));
 const problems = checkEntry(data);
 if (problems.length) throw Error(`Cannot render this player: ${problems.join('; ')}`);
 
-// Fill in daily extras when rendering a single player file directly.
 const date = data.date ?? new Date().toISOString().slice(0, 10);
 const theme = data.theme ?? themeFor(data, date);
 const hook = data.hook ?? pick(HOOK_LINES, date, 'hook');
@@ -29,14 +31,8 @@ await fs.mkdir(frames, {recursive: true});
 export {FPS, DURATION, TIMELINE};
 
 const asData = async (file, mime) => `data:${mime};base64,${(await fs.readFile(file)).toString('base64')}`;
-const background = await asData(path.join(project, 'arena-background-v2.png'), 'image/png');
 const press = await asData(path.join(project, 'PressStart2P-Regular.ttf'), 'font/ttf');
-const silk = await asData(path.join(project, 'Silkscreen-Regular.ttf'), 'font/ttf');
-const mascot = {};
-for (const state of ['thinking', 'surprised', 'nervous', 'celebration']) {
-  mascot[state] = [];
-  for (let i = 0; i < 9; i++) mascot[state].push(await asData(path.join(project, 'assets', 'mascot', `${state}-${String(i).padStart(2, '0')}.png`), 'image/png'));
-}
+const mascotSheet = await asData(path.join(project, 'assets', 'mascot.png'), 'image/png');
 
 async function optionalHeadshot(player) {
   const source = player.headshot || player.image;
@@ -59,109 +55,265 @@ async function optionalHeadshot(player) {
 
 const headshot = await optionalHeadshot(data);
 const payload = JSON.stringify({
-  clues: data.clues.map((clue) => clue.text.toUpperCase()), jersey: data.jersey || '?', color: data.color || '#ff6428',
-  name: data.player, headshot, hook: hook.toUpperCase(), theme: theme.label.toUpperCase(), background, mascot, T: TIMELINE, duration: DURATION,
+  clues: data.clues.map((clue) => clue.text.toUpperCase()),
+  jersey: data.jersey || '?',
+  color: data.color || '#FF6A1A',
+  name: data.player,
+  headshot,
+  hook: hook.toUpperCase(),
+  theme: theme.label.toUpperCase(),
+  mascot: mascotSheet,
+  T: TIMELINE,
+  duration: DURATION,
 });
 
-// Safe zones (1080x1920): keep content below y=210 (top tabs), above y=1480 (caption/username)
-// and left of x=900 between y=700 and y=1650 (TikTok/Shorts like/comment/share rail).
+// Safe column: x 168–912 (centered on 1080, right edge left of the 15% button rail),
+// y 248–1480 (below the top 12%, above the bottom 20%).
 const html = `<!doctype html><html><head><meta charset="utf-8"><style>
-@font-face{font-family:Press;src:url(${press}) format('truetype')}@font-face{font-family:Silk;src:url(${silk}) format('truetype')}
-*{box-sizing:border-box}html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#03060d}
-.stage{position:absolute;inset:0;overflow:hidden;background:#040711 center/cover no-repeat;color:#f4f7fb}
+@font-face{font-family:Press;src:url(${press}) format('truetype')}
+*{box-sizing:border-box}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#07101f}
+.stage{position:absolute;inset:0;overflow:hidden;background:#07101f;color:#f4f7fb;
+  background-image:linear-gradient(rgba(255,200,61,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,200,61,.045) 1px,transparent 1px);
+  background-size:32px 32px}
 .layer{position:absolute;inset:0}
-.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(1,4,11,.35),rgba(1,4,11,.2) 40%,rgba(1,4,11,.45))}
-.track{position:absolute;left:60px;top:214px;width:840px;height:10px;background:#263149;border-radius:5px}.fill{height:100%;background:#ff561b;border-radius:5px}
-.brand{position:absolute;left:60px;top:240px;font:24px Press;letter-spacing:1px}.theme{position:absolute;left:60px;top:276px;font:24px Silk;color:#ff6428;letter-spacing:3px}
-.hookline{position:absolute;left:60px;top:330px;width:960px;text-align:center;font:52px/1.3 Press;text-shadow:0 6px 0 #000,0 0 22px rgba(255,91,29,.55)}
-.jerseywrap{position:absolute;left:290px;top:690px;width:500px;height:560px}
-.hooksub{position:absolute;left:60px;top:1290px;width:840px;text-align:center;font:30px Silk;color:#24d8ff;letter-spacing:3px}
-.card{position:absolute;left:60px;width:840px;height:262px;border:3px solid #29354b;border-radius:12px;background:rgba(5,10,22,.94)}.card.active{border-color:#ff6a27;box-shadow:0 0 26px rgba(255,106,39,.35)}
-.status{position:absolute;left:30px;top:24px;font:24px Silk;color:#ff6428;letter-spacing:2px}.status.decode{color:#26d9ff}.diff{position:absolute;right:30px;top:24px;font:22px Silk;color:#9cabc2;letter-spacing:2px}
-.cluetext{position:absolute;left:30px;top:72px;width:610px;font:34px/1.38 Press}
-.dots{position:absolute;left:30px;top:70px;color:#ff5b1d;font:64px Silk;letter-spacing:8px}
-.avatar{position:absolute;right:14px;bottom:10px;width:170px;height:170px;object-fit:contain;image-rendering:pixelated}
-.clock{position:absolute;left:60px;top:1130px;width:840px;height:120px;border:3px solid #ff6428;border-radius:12px;background:#080d19}
-.clocklabel{position:absolute;left:30px;top:22px;font:24px Silk;color:#9cabc2;letter-spacing:3px}.clocknum{position:absolute;right:34px;top:20px;font:76px Press}.clocknum.warn{color:#ff5b1d}
-.pips{position:absolute;left:30px;width:560px;bottom:26px;display:flex;gap:10px}.pip{height:18px;flex:1;border-radius:4px;background:#283249}.pip.on{background:#ff5b1d}
-.box{position:absolute;left:60px;width:840px;border:4px solid #ff6428;border-radius:14px;background:rgba(3,7,16,.96);text-align:center}
-.locktitle{margin-top:80px;font:56px/1.35 Press}.locknum{margin-top:40px;font:220px Press;color:#ff5b1d;text-shadow:0 0 30px rgba(255,91,29,.6)}
-.ctaA{margin-top:90px;font:52px/1.35 Press}.ctaSite{margin:34px auto 0;width:760px;font:36px/1.3 Silk;color:#26d9ff;letter-spacing:1px}
-.ctaBio{margin-top:18px;font:30px Press;color:#ffd23f}.ctaMascot{width:220px;height:220px;object-fit:contain;image-rendering:pixelated;margin-top:26px}
-.ctaComment{margin:26px auto 0;width:760px;padding:26px 10px;border:3px dashed #ff6428;border-radius:12px;font:40px/1.4 Press;color:#ff6428}
-.revealKicker{margin-top:64px;font:34px Press;color:#ffd23f;letter-spacing:6px}
-.revealName{margin-top:48px;padding:0 36px}
-.nameLine{font-family:Press;line-height:1.28;text-shadow:0 6px 0 #000,0 0 18px rgba(255,91,29,.5)}
-.revealJersey{left:250px;top:560px;width:340px;height:380px}
-.revealJersey svg{width:340px;height:380px}
-.revealJersey.withShot{left:430px;top:600px;width:280px;height:314px}
-.revealJersey.withShot svg{width:280px;height:314px}
-.headshot{position:absolute;left:80px;top:620px;width:250px;height:250px;object-fit:cover;border:4px solid #fff;border-radius:18px;box-shadow:0 10px 0 #000}
-.revealMascot{position:absolute;right:24px;bottom:16px;width:150px;height:150px;object-fit:contain;image-rendering:pixelated}
-.flash{position:absolute;inset:0;background:#fff}
+.crt{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(to bottom,rgba(0,0,0,.16) 0 1px,transparent 1px 4px);mix-blend-mode:multiply}
+.vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 48%,rgba(0,0,0,.42) 100%)}
+.track{position:absolute;left:168px;top:248px;width:744px;height:20px;display:flex;gap:4px}
+.seg{flex:1;background:#152038;box-shadow:inset 0 0 0 2px #24324e}
+.seg.on{background:#FFC83D;box-shadow:none}
+.seg.lead{background:#FF6A1A;box-shadow:0 0 10px #FF6A1A}
+.brandrow{position:absolute;left:168px;top:284px;width:744px;height:40px;display:flex;align-items:center;justify-content:space-between}
+.brand{font:16px/16px Press;color:#f4f7fb}
+.theme{font:16px/16px Press;color:#FFC83D}
+.hookline{position:absolute;left:168px;top:348px;width:744px;height:120px;display:flex;align-items:center;justify-content:center;text-align:center;
+  font:26px/42px Press;color:#f4f7fb;text-shadow:0 4px 0 #000,0 0 16px rgba(255,106,26,.55)}
+.hooksub{position:absolute;left:168px;top:1284px;width:744px;height:40px;display:flex;align-items:center;justify-content:center;
+  font:16px/16px Press;color:#FFC83D;letter-spacing:1px}
+.shell{position:absolute;left:168px;width:744px;padding:6px;background:#FF6A1A;
+  clip-path:polygon(0 16px,16px 16px,16px 0,calc(100% - 16px) 0,calc(100% - 16px) 16px,100% 16px,100% calc(100% - 16px),calc(100% - 16px) calc(100% - 16px),calc(100% - 16px) 100%,16px 100%,16px calc(100% - 16px),0 calc(100% - 16px));
+  filter:drop-shadow(0 0 14px rgba(255,106,26,.35))}
+.shell.dim{background:#31425f;filter:none}
+.shell.gold{background:#FFC83D;filter:drop-shadow(0 0 18px rgba(255,200,61,.45))}
+.inner{height:100%;background:#0c1730;display:flex;flex-direction:column;
+  clip-path:polygon(0 12px,12px 12px,12px 0,calc(100% - 12px) 0,calc(100% - 12px) 12px,100% 12px,100% calc(100% - 12px),calc(100% - 12px) calc(100% - 12px),calc(100% - 12px) 100%,12px 100%,12px calc(100% - 12px),0 calc(100% - 12px))}
+.cardhead{height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;flex:none}
+.cardhead span{font:16px/16px Press}
+.clue-k{color:#FF6A1A}
+.diff{color:#FFC83D}
+.cardbody{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:12px 28px 20px;text-align:center;font:28px/42px Press;color:#f4f7fb}
+.cardbody.mid{align-items:center;padding-top:0}
+.qmark{font:88px/88px Press;color:#FFC83D;text-shadow:0 0 16px rgba(255,200,61,.65)}
+.timer{position:absolute;left:168px;top:1212px;width:744px;height:112px}
+.timerrow{height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 28px}
+.timerlabel{font:16px/16px Press;color:#FFC83D}
+.timernum{font:40px/40px Press;color:#FFC83D;min-width:48px;text-align:right}
+.timernum.warn{color:#FF6A1A;text-shadow:0 0 12px rgba(255,106,26,.8)}
+.pips{display:flex;gap:8px;height:24px;align-items:center;padding:0 28px}
+.pip{flex:1;height:20px;background:#1c2944}
+.pip.on{background:#FF6A1A;box-shadow:0 0 8px #FF6A1A}
+.inner.lockin{align-items:center;justify-content:center}
+.inner.timerin{justify-content:center;gap:8px}
+.locktitle{margin:0;text-align:center;font:28px/44px Press;color:#f4f7fb}
+.locknum{margin-top:40px;text-align:center;font:168px/168px Press;color:#FF6A1A;text-shadow:0 0 24px rgba(255,106,26,.75)}
+.jerseywrap{position:absolute}
+.plate{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:#FFC83D;color:#07101f;
+  box-shadow:0 0 0 4px #07101f,0 0 16px rgba(255,200,61,.75);text-align:center;padding:16px 18px;
+  clip-path:polygon(0 8px,8px 8px,8px 0,calc(100% - 8px) 0,calc(100% - 8px) 8px,100% 8px,100% calc(100% - 8px),calc(100% - 8px) calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,8px calc(100% - 8px),0 calc(100% - 8px))}
+.plate span{display:block;font-family:Press;line-height:1;height:1em;white-space:nowrap}
+.ctaBlock{position:absolute;left:24px;width:696px;text-align:center;font:20px/36px Press;color:#FFC83D;text-shadow:0 0 12px rgba(255,200,61,.45)}
+.ctaUrl{display:block;margin-top:12px;color:#FF6A1A}
+.mascot{position:absolute;width:128px;height:128px;background-repeat:no-repeat;image-rendering:pixelated;image-rendering:crisp-edges}
+.headshot{position:absolute;width:140px;height:140px;object-fit:cover;image-rendering:auto;border:4px solid #FFC83D;background:#07101f}
+.bit{position:absolute;width:12px;height:12px}
+.flash{position:absolute;inset:0;background:#fff;pointer-events:none}
 </style></head><body><div id="root"></div><script>
 const D=${payload};const T=D.T;
+const COL=168, CW=744, CX=540;
 const esc=(s)=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const ease=(x)=>1-Math.pow(1-Math.min(1,Math.max(0,x)),3);
-const avatar=(state,t)=>D.mascot[state][Math.floor(t*11)%9];
-const header=(t)=>'<div class="shade"></div><div class="track"><div class="fill" style="width:'+Math.max(20,840*t/D.duration)+'px"></div></div><div class="brand">FACTS OVER FEELINGS</div><div class="theme">MYSTERY PLAYER // '+esc(D.theme)+'</div>';
-function jersey(t, opts){opts=opts||{};const pulse=opts.pulse===false?(opts.scale||1):(1+0.035*Math.sin(t*9));const q=0.55+0.45*Math.abs(Math.sin(t*5));
-  const mark=opts.mark===false?'':'<text x="420" y="120" text-anchor="middle" font-family="Press" font-size="90" fill="#ff5b1d" opacity="'+q+'">?</text>';
-  return '<div class="'+(opts.className||'jerseywrap')+'" style="transform:scale('+pulse+')"><svg viewBox="0 0 500 560" width="500" height="560">'
-  +'<defs><filter id="g"><feGaussianBlur stdDeviation="14"/></filter></defs>'
-  +'<path d="M150 20 L205 20 Q250 85 295 20 L350 20 L360 120 Q385 150 430 160 L440 540 L60 540 L70 160 Q115 150 140 120 Z" fill="'+D.color+'" opacity=".55" filter="url(#g)"/>'
-  +'<path d="M150 20 L205 20 Q250 85 295 20 L350 20 L360 120 Q385 150 430 160 L440 540 L60 540 L70 160 Q115 150 140 120 Z" fill="#0b1220" stroke="'+D.color+'" stroke-width="10"/>'
-  +'<text x="250" y="400" text-anchor="middle" font-family="Press" font-size="'+(D.jersey.length>1?170:200)+'" fill="'+D.color+'" stroke="#000" stroke-width="8" paint-order="stroke">'+esc(D.jersey)+'</text>'
-  +mark+'</svg></div>'}
-function hookScene(t){return header(t)+'<div class="hookline">'+esc(D.hook)+'</div>'+jersey(t,{mark:true})+'<div class="hooksub">3 CLUES // BEAT THE SHOT CLOCK</div>'}
-function typedLength(i,local){return Math.floor((local-.5)*40)}
-function clueScene(t){const starts=T.clueStarts;let current=Math.max(0,starts.findLastIndex(x=>t>=x));let body=header(t);
-  for(let i=0;i<=current;i++){const local=t-starts[i];const full=D.clues[i];const typed=typedLength(i,local);
-    const state=i<current?'revealed':local<.5?'decode':typed<full.length?'typing':'revealed';
-    let text='',extra='',status='CLUE '+(i+1)+' // '+(state==='decode'?'DECODING':'REVEALED');
-    if(state==='decode')extra='<div class="dots">'+'•••'.slice(0,1+Math.floor(local*6)%3)+'</div>';else text=esc(state==='typing'?full.slice(0,typed):full);
-    const slide=i===current?(1-ease(local/.25))*80:0;const mood=['thinking','surprised','nervous'][i];
-    body+='<div class="card '+(i===current?'active':'')+'" style="top:'+(300+i*277)+'px;transform:translateX('+slide+'px)"><div class="status '+(state==='decode'?'decode':'')+'">'+status+'</div><div class="diff">'+['HARD','MEDIUM','EASY'][i]+'</div><div class="cluetext">'+text+'</div>'+extra+'<img class="avatar" src="'+avatar(mood,local)+'"></div>'}
-  const local=t-starts[current];const span=(current<2?starts[current+1]:T.lockStart)-starts[current];const n=Math.max(0,Math.ceil(5*(1-local/span)));
-  body+='<div class="clock"><div class="clocklabel">SHOT CLOCK</div><div class="clocknum '+(n<=2?'warn':'')+'">'+n+'</div><div class="pips">'+[1,2,3,4,5].map(v=>'<i class="pip '+(v<=n?'on':'')+'"></i>').join('')+'</div></div>';return body}
-function lockScene(t){const local=t-T.lockStart;const n=local<.5?3:local<1?2:1;const pop=1+0.25*(1-ease((local%.5)/.2));
-  return header(t)+'<div class="box" style="top:380px;height:820px"><div class="locktitle">LOCK IN<br>YOUR GUESS</div><div class="locknum" style="transform:scale('+pop+')">'+n+'</div></div>'}
-function nameLayout(name){const words=String(name||'').toUpperCase().split(/\\s+/).filter(Boolean);
-  const lines=words.length<=2?words:[words[0],words.slice(1).join(' ')];
-  const longest=Math.max(1,...lines.map(s=>s.length));
-  const size=longest<=7?72:longest<=10?56:longest<=14?44:longest<=18?34:28;
-  return {lines,size}}
-function revealScene(t){const local=t-T.revealStart;const slam=1+0.72*Math.pow(1-ease(local/.3),2);
-  const shake=local<.32?Math.sin(local*90)*(1-local/.32)*12:0;const layout=nameLayout(D.name);
-  const name=layout.lines.map(line=>'<div class="nameLine" style="font-size:'+layout.size+'px">'+esc(line)+'</div>').join('');
-  const shot=D.headshot?'<img class="headshot" src="'+D.headshot+'" alt="">':'';
-  const jerseyClass='jerseywrap revealJersey'+(D.headshot?' withShot':'');
-  return header(t)+'<div class="box" style="top:270px;height:1160px;transform:translateX('+shake+'px)">'
-    +'<div class="revealKicker">IT\\'S</div>'
-    +'<div class="revealName" style="transform:scale('+slam+');transform-origin:center top;color:'+D.color+'">'+name+'</div>'
-    +shot+jersey(t,{mark:false,pulse:false,scale:Math.min(slam,1.08),className:jerseyClass})
-    +'<img class="revealMascot" src="'+avatar('celebration',local)+'"></div>'
-    +(local<.14?'<div class="flash" style="opacity:'+(1-local/.14)*.92+'"></div>':'')}
-function ctaScene(t){const local=t-T.ctaStart;const rise=(k)=>'opacity:'+ease((local-k)/.25)+';transform:translateY('+(1-ease((local-k)/.25))*40+'px)';
-  return header(t)+'<div class="box" style="top:300px;height:1150px"><div class="ctaA" style="'+rise(0)+'">PLAY DAILY</div><div class="ctaSite" style="'+rise(.12)+'">PLAYFACTSOVERFEELINGS.COM</div><div class="ctaBio" style="'+rise(.24)+'">LINK IN BIO</div><img class="ctaMascot" src="'+avatar('celebration',local)+'"><div class="ctaComment" style="'+rise(.42)+'">1, 2 OR 3 CLUES?<br>COMMENT</div></div>'}
-window.draw=(t)=>{let html;
-  if(t<T.hookEnd)html=hookScene(t);else if(t<T.lockStart)html=clueScene(t);else if(t<T.revealStart)html=lockScene(t);
-  else if(t<T.ctaStart)html=revealScene(t);else if(t<T.loopStart)html=ctaScene(t);
-  else{const k=ease((t-T.loopStart)/(D.duration-T.loopStart));html='<div class="layer" style="opacity:'+(1-k)+'">'+ctaScene(T.loopStart)+'</div><div class="layer" style="opacity:'+k+'">'+hookScene(0)+'</div>'}
-  document.getElementById('root').innerHTML='<main class="stage" style="background-image:url('+D.background+')">'+html+'</main>'};
+const MOODS=['idle','thinking','surprised','hype','celebrate','sad'];
+function mascot(name,x,y,size){
+  const i=MOODS.indexOf(name);
+  const s=size||128;
+  return '<div class="mascot" style="left:'+x+'px;top:'+y+'px;width:'+s+'px;height:'+s+'px;background-image:url('+D.mascot+');background-size:'+(s*6)+'px '+s+'px;background-position:-'+(i*s)+'px 0"></div>';
+}
+function header(t){
+  const n=24, filled=Math.round(n*Math.min(1,Math.max(0,t)/D.duration));
+  let segs='';
+  for(let i=0;i<n;i++) segs+='<i class="seg'+(i<filled?' on':'')+(i===filled-1?' lead':'')+'"></i>';
+  return '<div class="crt"></div><div class="vignette"></div><div class="track">'+segs+'</div>'
+    +'<div class="brandrow"><span class="brand">FACTS OVER FEELINGS</span><span class="theme">'+esc(D.theme)+'</span></div>';
+}
+function jerseySvg(showMark, numBaseline){
+  const numSize=String(D.jersey).length>1?128:156;
+  const q=showMark?'<text x="250" y="250" text-anchor="middle" font-family="Press" font-size="120" fill="#FFC83D">?</text>':'';
+  const num=showMark?'':'<text x="250" y="'+(numBaseline||468)+'" text-anchor="middle" font-family="Press" font-size="'+numSize+'" fill="'+D.color+'" stroke="#07101f" stroke-width="10" paint-order="stroke">'+esc(D.jersey)+'</text>';
+  return '<svg viewBox="0 0 500 560" width="100%" height="100%">'
+    +'<path d="M150 28 L205 28 Q250 92 295 28 L350 28 L362 128 Q388 156 438 168 L446 532 L54 532 L62 168 Q112 156 138 128 Z" fill="'+D.color+'" opacity=".35"/>'
+    +'<path d="M150 28 L205 28 Q250 92 295 28 L350 28 L362 128 Q388 156 438 168 L446 532 L54 532 L62 168 Q112 156 138 128 Z" fill="#0c1730" stroke="'+D.color+'" stroke-width="12"/>'
+    +num+q+'</svg>';
+}
+function jerseyBox(left,top,w,h,showMark,numBaseline){
+  return '<div class="jerseywrap" style="left:'+left+'px;top:'+top+'px;width:'+w+'px;height:'+h+'px">'+jerseySvg(showMark,numBaseline)+'</div>';
+}
+function hookScene(t){
+  const subTop=1284, top=484, h=subTop-20-top, w=Math.round(h*500/560), left=Math.round(CX-w/2);
+  return header(t||0)+'<div class="hookline">'+esc(D.hook)+'</div>'
+    +jerseyBox(left,top,w,h,true)
+    +'<div class="hooksub" style="top:'+subTop+'px">3 CLUES  ·  BEAT THE SHOT CLOCK</div>'
+    +mascot('idle',CX-64,1340);
+}
+function nameLayout(name){
+  const words=String(name||'').toUpperCase().split(/\\s+/).filter(Boolean);
+  const maxText=240;
+  const chunks=(token)=>token.split('-').map((part,i,all)=>i<all.length-1?part+'-':part).filter(Boolean);
+  const candidates=[];
+  if(words.length<=1) candidates.push(words.length?words:['?']);
+  else{
+    candidates.push([words.slice(0,-1).join(' '), words[words.length-1]]);
+    candidates.push([...words.slice(0,-1).flatMap(chunks), ...chunks(words[words.length-1])]);
+  }
+  let best=null;
+  for(const lines of candidates){
+    const longest=Math.max(...lines.map(s=>s.length),1);
+    const size=Math.min(26,Math.floor(maxText/longest));
+    if(size<14) continue;
+    const score=size*10-lines.length;
+    if(!best||score>best.score) best={lines,size,score};
+  }
+  if(!best){
+    const lines=candidates[candidates.length-1];
+    const longest=Math.max(...lines.map(s=>s.length),1);
+    best={lines,size:Math.max(12,Math.floor(maxText/longest))};
+  }
+  return {lines:best.lines,size:best.size};
+}
+function clueCard(i,t){
+  const tops=[348,636,924];
+  const start=T.clueStarts[i];
+  const local=t-start;
+  const current=T.clueStarts.findLastIndex(x=>t>=x);
+  const opened=t>=start;
+  const face=i<current||(opened&&local>=0.18);
+  const rot=opened&&i===current&&local<0.36?(1-ease(local/0.36))*90:0;
+  const cls=i===current?' gold':face?'':' dim';
+  let body;
+  if(!face) body='<div class="cardbody mid"><div class="qmark">?</div></div>';
+  else{
+    const full=D.clues[i];
+    const typed=i<current?full.length:Math.min(full.length,Math.max(0,Math.floor((local-0.2)*34)));
+    const label='CLUE '+(i+1);
+    const diff=['HARD','MEDIUM','EASY'][i];
+    body='<div class="cardhead"><span class="clue-k">'+label+'</span><span class="diff">'+diff+'</span></div>'
+      +'<div class="cardbody">'+esc(full.slice(0,typed))+'</div>';
+  }
+  return '<div class="shell'+cls+'" style="top:'+tops[i]+'px;height:272px;transform:perspective(900px) rotateX('+rot+'deg)"><div class="inner">'+body+'</div></div>';
+}
+function clueScene(t){
+  const current=Math.max(0,T.clueStarts.findLastIndex(x=>t>=x));
+  const local=t-T.clueStarts[current];
+  const span=(current<2?T.clueStarts[current+1]:T.lockStart)-T.clueStarts[current];
+  const n=Math.max(0,Math.ceil(5*(1-local/span)));
+  const mood=['thinking','surprised','hype'][current];
+  let html=header(t);
+  for(let i=0;i<3;i++) html+=clueCard(i,t);
+  html+='<div class="shell" style="top:1212px;height:112px"><div class="inner timerin"><div class="timerrow"><span class="timerlabel">SHOT CLOCK</span><span class="timernum'+(n<=2?' warn':'')+'">'+n+'</span></div>'
+    +'<div class="pips">'+[1,2,3,4,5].map(v=>'<i class="pip'+(v<=n?' on':'')+'"></i>').join('')+'</div></div></div>';
+  html+=mascot(mood,CX-64,1340);
+  return html;
+}
+function lockScene(t){
+  const local=t-T.lockStart;
+  const n=local<0.5?3:local<1?2:1;
+  const pop=1+0.18*(1-ease((local%0.5)/0.22));
+  return header(t)+'<div class="shell gold" style="top:400px;height:880px"><div class="inner lockin">'
+    +'<div class="locktitle">LOCK IN<br>YOUR GUESS</div>'
+    +'<div class="locknum" style="transform:scale('+pop+')">'+n+'</div>'
+    +'</div></div>'+mascot('sad',CX-64,1340);
+}
+function endScene(t){
+  const local=Math.max(0,t-T.endStart);
+  const slam=1+0.55*Math.pow(1-ease(Math.min(1,local/0.32)),2);
+  const layout=nameLayout(D.name);
+  const platePadX=18, platePadY=16, plateLineGap=8, nameGap=36;
+  const textW=Math.max(...layout.lines.map(s=>s.length))*layout.size;
+  const plateW=textW+platePadX*2;
+  const plateH=platePadY*2+layout.lines.length*layout.size+(layout.lines.length-1)*plateLineGap;
+  const innerW=CW-12;
+  const jw=D.headshot?380:440, jh=Math.round(jw*560/500);
+  const shotW=D.headshot?120:0, gap=D.headshot?20:0;
+  const group=shotW+gap+jw;
+  const groupLeft=Math.round((innerW-group)/2);
+  const jLeft=groupLeft+shotW+gap;
+  const jTop=36;
+  const numSize=String(D.jersey).length>1?128:156;
+  const numBaseline=468;
+  const numTop=jTop+Math.round((numBaseline-numSize)*(jh/560));
+  const plateLeft=jLeft+Math.round((jw-plateW)/2);
+  const plateTop=Math.max(16, numTop-nameGap-plateH);
+  const name=layout.lines.map(line=>'<span style="font-size:'+layout.size+'px">'+esc(line)+'</span>').join('');
+  const shot=D.headshot?'<img class="headshot" alt="" src="'+D.headshot+'" style="left:'+groupLeft+'px;top:'+(jTop+Math.round(jh/2)-60)+'px;width:120px;height:120px">':'';
+  const ctaTop=jTop+jh+20;
+  const ctaIn=ease((local-0.45)/0.3);
+  const mascotTop=ctaTop+124;
+  const shellH=mascotTop+128+32;
+  const shellTop=Math.round((248+1488-shellH)/2);
+  let bits='';
+  if(local<1.35){
+    for(let i=0;i<24;i++){
+      const x=COL+24+((i*61)%680);
+      const y=shellTop+80+((i*37)%160)+local*(200+(i%5)*30);
+      if(y>1460) continue;
+      const color=i%2?'#FFC83D':'#FF6A1A';
+      bits+='<i class="bit" style="left:'+x+'px;top:'+y+'px;background:'+color+';opacity:'+(1-local/1.35)+';transform:rotate('+(i*28+local*240)+'deg)"></i>';
+    }
+  }
+  return header(t)+'<div class="shell gold" style="top:'+shellTop+'px;height:'+shellH+'px"><div class="inner" style="position:relative">'
+    +shot+jerseyBox(jLeft,jTop,jw,jh,false,numBaseline)
+    +'<div class="plate" style="left:'+plateLeft+'px;top:'+plateTop+'px;width:'+plateW+'px;height:'+plateH+'px;transform:scale('+slam+');transform-origin:center center">'+name+'</div>'
+    +'<div class="ctaBlock" style="top:'+ctaTop+'px;opacity:'+ctaIn+'">PLAY TODAY\\'S MYSTERY AT<span class="ctaUrl">PLAYFACTSOVERFEELINGS.COM</span></div>'
+    +mascot('celebrate',Math.round((innerW-128)/2),mascotTop)
+    +'</div></div>'
+    +bits
+    +(local<0.12?'<div class="flash" style="opacity:'+(1-local/0.12)*0.9+'"></div>':'');
+}
+window.draw=(t)=>{
+  let html;
+  if(t<T.hookEnd) html=hookScene(t);
+  else if(t<T.lockStart) html=clueScene(t);
+  else if(t<T.endStart) html=lockScene(t);
+  else if(t<T.loopStart) html=endScene(t);
+  else {
+    const k=ease((t-T.loopStart)/(D.duration-T.loopStart));
+    html='<div class="layer" style="opacity:'+(1-k)+'">'+endScene(T.loopStart)+'</div><div class="layer" style="opacity:'+k+'">'+hookScene(0)+'</div>';
+  }
+  document.getElementById('root').innerHTML='<main class="stage">'+html+'</main>';
+};
 </script></body></html>`;
+
+const preview = (process.env.PREVIEW_TIMES ?? '').split(',').map((value) => value.trim()).filter(Boolean).map(Number).filter((value) => Number.isFinite(value));
+const times = preview.length ? preview : Array.from({length: FPS * DURATION}, (_, index) => index / FPS);
 
 const browser = await chromium.launch({headless: true});
 try {
   const page = await browser.newPage({viewport: {width: 1080, height: 1920}, deviceScaleFactor: 1});
   await page.setContent(html, {waitUntil: 'load'});
   await page.evaluate(() => document.fonts.ready);
-  for (let frame = 0; frame < FPS * DURATION; frame++) {
-    await page.evaluate((t) => window.draw(t), frame / FPS);
-    await page.screenshot({path: path.join(frames, `frame-${String(frame + 1).padStart(4, '0')}.png`)});
+  for (let index = 0; index < times.length; index++) {
+    await page.evaluate((t) => window.draw(t), times[index]);
+    const file = preview.length
+      ? `preview-${String(times[index]).replace('.', '_')}.png`
+      : `frame-${String(index + 1).padStart(4, '0')}.png`;
+    await page.screenshot({path: path.join(frames, file)});
   }
 } finally {
   await browser.close();
+}
+
+if (preview.length) {
+  console.log(`Preview frames in ${frames}`);
+  process.exit(0);
 }
 
 const speech = {
@@ -174,6 +326,6 @@ const py = process.env.PYTHON_EXE ?? (spawnSync('python', ['--version']).status 
 const enc = spawnSync(py, [path.join(project, 'encode.py'), out], {encoding: 'utf8', stdio: 'inherit'});
 if (enc.status !== 0) throw Error('Video encoding failed');
 await fs.writeFile(path.join(out, 'post.txt'), post.text);
-await fs.writeFile(path.join(out, 'release-notes.md'), `**Answer: ${data.player}**\n\nThe name is revealed after the guess window, then the video sends viewers to play daily at PlayFactsOverFeelings.com.\n\nTwo downloads: **with music** and **no music** (add a trending sound in TikTok).\n\n### Title\n${post.title}\n\n### Caption\n${post.caption}\n`);
+await fs.writeFile(path.join(out, 'release-notes.md'), `**Answer: ${data.player}**\n\nThe name slams in on the jersey, and the same end card says to play today's mystery at PlayFactsOverFeelings.com.\n\nTwo downloads: **with music** and **no music** (add a trending sound in TikTok).\n\n### Title\n${post.title}\n\n### Caption\n${post.caption}\n`);
 await fs.writeFile(path.join(out, 'sources.json'), JSON.stringify(data.sources ?? [], null, 2));
 console.log(path.join(out, 'mystery-player.mp4'));

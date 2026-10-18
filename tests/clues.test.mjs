@@ -39,13 +39,14 @@ test('caption names the player and sends viewers to the daily game', () => {
   assert.match(post.text, /Allen Iverson/);
 });
 
-test('the video reveals the name before the CTA and stays within 22–25 seconds', () => {
+test('one end card holds the name and the CTA inside 22–25 seconds', () => {
   assert.ok(DURATION >= 22 && DURATION <= 25);
-  assert.ok(TIMELINE.lockStart < TIMELINE.revealStart);
-  assert.ok(TIMELINE.revealStart < TIMELINE.ctaStart);
-  assert.ok(TIMELINE.ctaStart < TIMELINE.loopStart);
+  assert.ok(TIMELINE.lockStart < TIMELINE.endStart);
+  assert.ok(TIMELINE.endStart < TIMELINE.loopStart);
   assert.ok(TIMELINE.loopStart < DURATION);
-  assert.deepEqual(TIMELINE.clueStarts[0], TIMELINE.hookEnd);
+  assert.equal(TIMELINE.revealStart, undefined);
+  assert.equal(TIMELINE.ctaStart, undefined);
+  assert.equal(TIMELINE.clueStarts[0], TIMELINE.hookEnd);
 });
 
 test('data clues never include the player name', () => {

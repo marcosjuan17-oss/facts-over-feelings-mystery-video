@@ -37,10 +37,10 @@ def ms(seconds):
 cues = [('boot.wav', 0.0, 0.7)]
 for start in T['clueStarts']:
     cues += [('typing.wav', start + 0.5, 0.55), ('unlock.wav', start + 1.7, 0.65)]
-lock, reveal, cta = T['lockStart'], T['revealStart'], T['ctaStart']
+lock, end = T['lockStart'], T['endStart']
 cues += [('beep.wav', lock, 0.72), ('beep.wav', lock + 0.5, 0.8), ('beep.wav', lock + 1.0, 0.9),
-         ('shot.wav', reveal - 0.12, 0.78), ('impact.wav', reveal, 1.0), ('victory.wav', reveal + 0.05, 0.82),
-         ('swish.wav', cta, 0.62), ('swish.wav', T['loopStart'] + 0.05, 0.45)]
+         ('shot.wav', end - 0.12, 0.78), ('impact.wav', end, 1.0), ('victory.wav', end + 0.06, 0.82),
+         ('swish.wav', end + 2.2, 0.55), ('swish.wav', T['loopStart'] + 0.05, 0.4)]
 
 def trimmed(file: Path) -> Path:
     """Strip the silence Edge TTS pads around each line so lines can sit closer together."""

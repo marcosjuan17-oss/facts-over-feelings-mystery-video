@@ -37,8 +37,8 @@ def script(speech: dict, timeline: dict):
         ('Last chance.', starts[2] - 0.7, 1.08, False),
         (speech['clues'][2], starts[2] + 0.4, 1.12, True),
         ('Lock it in!', timeline['lockStart'] + 0.05, 1.12, False),
-        (f"It's {name}!", timeline['revealStart'] + 0.12, 1.16, True),
-        ('Play daily at Play Facts Over Feelings dot com!', timeline['ctaStart'] + 0.08, 1.12, True),
+        (f"It's {name}!", timeline['endStart'] + 0.15, 1.16, True),
+        ("Play today's mystery at Play Facts Over Feelings dot com!", timeline['endStart'] + 2.35, 1.12, True),
     ]
 
 

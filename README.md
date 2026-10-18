@@ -1,6 +1,6 @@
 # Facts Over Feelings: daily mystery video
 
-This project makes the daily 24.5-second, 1080 × 1920, 30 fps **Guess the Mystery Player** video for TikTok (@uknowball17) and YouTube Shorts (UknowBall). GitHub runs it every morning, even when your computer is off. The finished videos and a ready-to-paste title and caption appear on the [latest release](../../releases/latest) page.
+This project makes the daily 24-second, 1080 × 1920, 30 fps **Guess the Mystery Player** video for TikTok (@uknowball17) and YouTube Shorts (UknowBall). GitHub runs it every morning, even when your computer is off. The finished videos and a ready-to-paste title and caption appear on the [latest release](../../releases/latest) page.
 
 ## What each daily release contains
 
@@ -14,14 +14,15 @@ Titles rotate daily so the channel doesn't post the same title every day. The pl
 
 ## The video format
 
-1. **Hook (0–1.4 s):** the mystery player's jersey number in his team color, plus a challenge line that changes daily (for example "ONLY REAL HOOPERS GET HIM IN 1 CLUE").
-2. **Three clues, hard → medium → easy (1.4–13.1 s):** decoding dots, typed text, mascot reactions and a shot clock.
-3. **Lock-in countdown (13.1–14.6 s).**
-4. **Answer reveal (14.6–18.8 s):** the player's name slams on with his jersey (and a headshot when the player record has one), plus a hit and a victory sting.
-5. **Call to action (18.8–22.9 s):** "PLAY DAILY — PLAYFACTSOVERFEELINGS.COM — LINK IN BIO" and "1, 2 OR 3 CLUES? COMMENT".
-6. **Loop (22.9–24.5 s):** the ending fades back into the opening hook, so the video replays.
+1. **Hook (0–1.4 s):** a mystery jersey with a question mark, plus a challenge line that changes daily (for example "ONLY REAL HOOPERS GET HIM IN 1 CLUE").
+2. **Three clues, hard → medium → easy (1.4–12.5 s):** locked clues are "?" blocks that flip into stat cards. A shot clock sits on the same column.
+3. **Lock-in countdown (12.5–14.1 s).**
+4. **End card (14.1–22.4 s):** one composition. The name slams in as a jersey nameplate above the number, and the same card says "PLAY TODAY'S MYSTERY AT PLAYFACTSOVERFEELINGS.COM". The voice says the name, then that line.
+5. **Loop (22.4–24 s):** the end card fades back into the opening hook.
 
-Everything important stays inside the TikTok/Shorts safe area: below the top tabs, above the caption area, and left of the like/comment/share buttons. The audio is normalized to about −14 LUFS, which matches TikTok and YouTube playback loudness.
+Text stays inside the TikTok/Shorts safe area: below the top 12%, above the bottom 20%, and left of the right 15% where the app buttons sit. Everything shares one centered column. The audio is normalized to about −14 LUFS.
+
+The mascot is `assets/mascot.png`: a 384×64 sheet, six 64×64 frames in order — idle, thinking, surprised, hype, celebrate, sad. It is drawn scaled up with nearest-neighbor. Drop the owner's basketball-with-eyes sprite on that path, same size and frame order, and the video picks it up. The file in the repo is a placeholder.
 
 ## How today's player is chosen
 
@@ -47,7 +48,7 @@ Running the workflow twice on the same day never makes a second video.
 
 ## Voiceover and sound
 
-`voiceover.py` uses the free `edge-tts` package to read the hook, each clue, short pressure lines, the player's name at the reveal, and the call to action. If the free voice service is down, the video still completes with sound effects and music.
+`voiceover.py` uses the free `edge-tts` package to read the hook, each clue, short pressure lines, then the player's name and "Play today's mystery at Play Facts Over Feelings dot com" over the end card. If the free voice service is down, the video still completes with sound effects and music.
 
 The music bed, `assets/music/arcade-bed.wav`, is original. It was synthesized by `tools/make-music.py` and dedicated to the public domain (CC0), so it can't trigger copyright claims; see `licenses/music-CC0.txt`. The sound effects, mascot frames and background were created for this project. The fonts are OFL-licensed (see `licenses/`).
 
