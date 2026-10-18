@@ -5,7 +5,6 @@
   "type": "module",
   "scripts": {
     "render": "node render.mjs",
-    "carousel": "node carousel.mjs",
     "select": "node select.mjs",
     "validate": "node validate-players.mjs",
     "test": "node --test tests/*.test.mjs",

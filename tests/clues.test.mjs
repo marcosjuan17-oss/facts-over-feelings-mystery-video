@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {checkEntry, dataClues} from '../lib/clues.mjs';
 import {postText} from '../lib/daily.mjs';
-import {DURATION, TIMELINE} from '../lib/timeline.mjs';
+import {DURATION, FPS, TIMELINE} from '../lib/timeline.mjs';
 
 const base = {slug: 'shaquille-o-neal', player: "Shaquille O'Neal", nicknames: ['Shaq', 'Diesel'], clue_style: 'story', sources: ['https://www.nba.com']};
 const clues = (a, b, c) => [{text: a, difficulty: 'hard'}, {text: b, difficulty: 'medium'}, {text: c, difficulty: 'easy'}];
@@ -39,21 +39,22 @@ test('caption names the player and sends viewers to the daily game', () => {
   assert.match(post.text, /Allen Iverson/);
 });
 
-test('clues stay readable and the ending is a short name, then the CTA', () => {
-  assert.ok(DURATION >= 25 && DURATION <= 30);
+test('each clue uses the earlier 3.7s slot, then a short name and the CTA', () => {
+  const frames = (t) => Math.round(t * FPS);
   const [first, second, third] = TIMELINE.clueStarts;
-  assert.ok(second - first >= 5 && second - first <= 6.5);
-  assert.ok(third - second >= 5 && third - second <= 6.5);
-  assert.ok(TIMELINE.thinkStart - third >= 5);
-  assert.ok(TIMELINE.nameStart - TIMELINE.thinkStart >= 1.2);
-  assert.ok(TIMELINE.nameStart - TIMELINE.thinkStart <= 2.2);
-  assert.ok(TIMELINE.ctaStart - TIMELINE.nameStart >= 1.5);
-  assert.ok(TIMELINE.ctaStart - TIMELINE.nameStart <= 2.5);
-  assert.ok(TIMELINE.loopStart - TIMELINE.ctaStart >= 2.2);
-  assert.ok(TIMELINE.loopStart - TIMELINE.ctaStart <= 3.2);
-  assert.ok(DURATION - TIMELINE.loopStart <= 0.5);
-  assert.ok(TIMELINE.loopStart < DURATION);
+  const earlier = frames(5.1) - frames(1.4);
+  assert.equal(earlier, 111);
+  assert.equal(frames(second) - frames(first), earlier);
+  assert.equal(frames(third) - frames(second), earlier);
+  assert.equal(frames(TIMELINE.thinkStart) - frames(third), earlier);
   assert.equal(first, TIMELINE.hookEnd);
+  assert.equal(frames(TIMELINE.hookEnd), 90);
+  assert.equal(frames(TIMELINE.nameStart) - frames(TIMELINE.thinkStart), 48);
+  assert.equal(frames(TIMELINE.ctaStart) - frames(TIMELINE.nameStart), 60);
+  assert.equal(frames(TIMELINE.loopStart) - frames(TIMELINE.ctaStart), 78);
+  assert.equal(frames(DURATION) - frames(TIMELINE.loopStart), 12);
+  assert.equal(frames(DURATION), 621);
+  assert.equal(DURATION, 20.7);
 });
 
 test('data clues never include the player name', () => {

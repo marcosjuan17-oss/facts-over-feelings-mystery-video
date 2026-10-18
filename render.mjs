@@ -1,4 +1,4 @@
-// Renders the daily Mystery Player video (1080x1920, 30 fps, 27 s).
+// Renders the daily Mystery Player video (1080x1920, 30 fps, 20.7 s).
 // Big type inside the TikTok/Shorts safe area. The name and the site line
 // are two short cards, then the picture cuts back to the opening frame. Usage:
 //   node render.mjs [selected.json] [output-dir]
@@ -141,7 +141,7 @@ function mascot(name,x,y,size,t){
   return '<div class="mascot" style="left:'+x+'px;top:'+(y+bob)+'px;width:'+s+'px;height:'+s+'px;background-image:url('+D.mascot+');background-size:'+(s*6)+'px '+s+'px;background-position:-'+(i*s)+'px 0"></div>';
 }
 function header(t){
-  const n=27, filled=Math.round(n*Math.min(1,Math.max(0,t)/D.duration));
+  const n=Math.round(D.duration), filled=Math.round(n*Math.min(1,Math.max(0,t)/D.duration));
   let segs='';
   for(let i=0;i<n;i++) segs+='<i class="seg'+(i<filled?' on':'')+(i===filled-1?' lead':'')+'"></i>';
   return '<div class="crt"></div><div class="track">'+segs+'</div>'

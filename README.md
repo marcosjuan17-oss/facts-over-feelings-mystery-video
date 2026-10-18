@@ -1,6 +1,6 @@
 # Facts Over Feelings: daily mystery video
 
-This project makes the daily 27-second, 1080 × 1920, 30 fps **Guess the Mystery Player** video for TikTok (@uknowball17) and YouTube Shorts (UknowBall). GitHub runs it every morning, even when your computer is off. The finished videos and a ready-to-paste title and caption appear on the [latest release](../../releases/latest) page.
+This project makes the daily 20.7-second, 1080 × 1920, 30 fps **Guess the Mystery Player** video for TikTok (@uknowball17) and YouTube Shorts (UknowBall). GitHub runs it every morning, even when your computer is off. The finished videos and a ready-to-paste title and caption appear on the [latest release](../../releases/latest) page.
 
 ## What each daily release contains
 
@@ -8,29 +8,22 @@ This project makes the daily 27-second, 1080 × 1920, 30 fps **Guess the Mystery
 | --- | --- |
 | `mystery-player.mp4` (**with music**) | Post as-is on YouTube Shorts or TikTok. |
 | `mystery-player-no-music.mp4` (**no music**) | TikTok, when you want to add a trending sound in the app. |
-| `post.txt` | Title + caption + hashtags to copy and paste. The same text is in the release notes. The caption includes the answer. |
-| `depixelate-carousel.zip` | The 7-slide Depixelate carousel plus `carousel-caption.txt`. |
-| `carousel-01-hook.png` … `carousel-07-cta.png` | The same slides one at a time. |
-| `carousel-caption.txt` | Carousel caption and hashtags. It does not include the answer. |
+| `post.txt` | Title + caption + hashtags to copy and paste. The same text is in the release notes. |
 
 Titles rotate daily so the channel doesn't post the same title every day. The player's name is revealed at the end of the video, spoken in the voiceover, and written in `post.txt` and the release notes.
 
 ## The video format
 
 1. **Hook (0–3 s):** a full-frame question mark, plus a challenge line that changes daily (for example "ONLY REAL HOOPERS GET HIM IN 1 CLUE"). The camera eases in the whole time.
-2. **Three clues, hard → medium → easy (3–20.4 s):** each clue stays up for about 5.8 seconds, long enough to read the finished line for about 4 seconds. Locked clues are "?" blocks that flip into stat cards. A shot clock ticks on the same column.
-3. **Think beat (20.4–22 s):** a 3-2-1 lock-in.
-4. **Name (22–24 s):** the name slams in on the jersey nameplate. The voice says the name.
-5. **Call to action (24–26.6 s):** "PLAY TODAY'S MYSTERY AT PLAYFACTSOVERFEELINGS.COM".
-6. **Loop (26.6–27 s):** a hard cut back to the exact opening frame, so a replay starts clean.
+2. **Three clues, hard → medium → easy (3–14.1 s):** each clue stays up for 3.7 seconds. Locked clues are "?" blocks that flip into stat cards. A shot clock ticks on the same column.
+3. **Think beat (14.1–15.7 s):** a 3-2-1 lock-in.
+4. **Name (15.7–17.7 s):** the name slams in on the jersey nameplate. The voice says the name.
+5. **Call to action (17.7–20.3 s):** "PLAY TODAY'S MYSTERY AT PLAYFACTSOVERFEELINGS.COM".
+6. **Loop (20.3–20.7 s):** a hard cut back to the exact opening frame, so a replay starts clean.
 
 Text stays inside the TikTok/Shorts safe area: below the top 12%, above the bottom 20%, and left of the right 15% where the app buttons sit. Type is big and close to the camera. The picture keeps moving: a slow zoom, a shake and a white flash on each clue, pulsing glows, and floating pixel sparks. The audio is normalized to about −14 LUFS.
 
 The mascot is The Scout, a full-body pixel character. `assets/mascot.png` is a sheet of six square frames in order — idle, thinking, surprised, pointing, celebrate, disappointed — and `assets/mascot/idle.png` (and the other five names) are the same frames on their own. The video draws whichever frame the moment needs, scaled with nearest-neighbor only: idle on the hook, thinking through the clues, surprised when a clue flips, surprised on the countdown, celebrate on the name, and pointing on the call to action. The disappointed frame stays in the sheet. `tools/slice-mascot.py` rebuilds that sheet from the source art.
-
-## Depixelate carousel
-
-The same daily run also makes a 7-slide TikTok photo carousel, 1080 × 1920, in the same pixel-arcade style. It uses the selected player's clues and jersey only. The name and any real photo stay off every slide. The jersey starts as a heavy mosaic and gets clearer: hardest clue, next clue, then the jersey number, then the team color, then a crisp jersey on the easiest clue. The last slide is The Scout pointing at "comment your guess" and PlayFactsOverFeelings.com. The release gets `depixelate-carousel.zip`, the seven PNGs, and `carousel-caption.txt` (hashtags, no answer).
 
 ## How today's player is chosen
 
