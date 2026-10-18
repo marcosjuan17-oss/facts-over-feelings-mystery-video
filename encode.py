@@ -35,12 +35,19 @@ def ms(seconds):
 
 
 cues = [('boot.wav', 0.0, 0.7)]
-for start in T['clueStarts']:
-    cues += [('typing.wav', start + 0.5, 0.55), ('unlock.wav', start + 1.7, 0.65)]
-lock, end = T['lockStart'], T['endStart']
-cues += [('beep.wav', lock, 0.72), ('beep.wav', lock + 0.5, 0.8), ('beep.wav', lock + 1.0, 0.9),
-         ('shot.wav', end - 0.12, 0.78), ('impact.wav', end, 1.0), ('victory.wav', end + 0.06, 0.82),
-         ('swish.wav', end + 2.2, 0.55), ('swish.wav', T['loopStart'] + 0.05, 0.4)]
+bounds = list(T['clueStarts']) + [T['thinkStart']]
+for index, start in enumerate(T['clueStarts']):
+    end = bounds[index + 1]
+    cues += [('impact.wav', start, 0.9), ('typing.wav', start + 0.22, 0.5), ('unlock.wav', start + 0.16, 0.7)]
+    tick = start + 1.0
+    while tick < end - 0.15:
+        left = end - tick
+        cues.append(('beep.wav', round(tick, 3), 0.62 if left < 2 else 0.3))
+        tick += 0.5 if left < 2 else 1.0
+think, name, cta = T['thinkStart'], T['nameStart'], T['ctaStart']
+cues += [('beep.wav', think, 0.78), ('beep.wav', think + 0.53, 0.86), ('beep.wav', think + 1.06, 0.96),
+         ('shot.wav', name - 0.08, 0.8), ('impact.wav', name, 1.0), ('victory.wav', name + 0.06, 0.85),
+         ('swish.wav', cta, 0.62)]
 
 def trimmed(file: Path) -> Path:
     """Strip the silence Edge TTS pads around each line so lines can sit closer together."""

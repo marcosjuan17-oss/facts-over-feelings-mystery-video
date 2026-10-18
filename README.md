@@ -1,6 +1,6 @@
 # Facts Over Feelings: daily mystery video
 
-This project makes the daily 24-second, 1080 × 1920, 30 fps **Guess the Mystery Player** video for TikTok (@uknowball17) and YouTube Shorts (UknowBall). GitHub runs it every morning, even when your computer is off. The finished videos and a ready-to-paste title and caption appear on the [latest release](../../releases/latest) page.
+This project makes the daily 27-second, 1080 × 1920, 30 fps **Guess the Mystery Player** video for TikTok (@uknowball17) and YouTube Shorts (UknowBall). GitHub runs it every morning, even when your computer is off. The finished videos and a ready-to-paste title and caption appear on the [latest release](../../releases/latest) page.
 
 ## What each daily release contains
 
@@ -14,15 +14,16 @@ Titles rotate daily so the channel doesn't post the same title every day. The pl
 
 ## The video format
 
-1. **Hook (0–1.4 s):** a mystery jersey with a question mark, plus a challenge line that changes daily (for example "ONLY REAL HOOPERS GET HIM IN 1 CLUE").
-2. **Three clues, hard → medium → easy (1.4–12.5 s):** locked clues are "?" blocks that flip into stat cards. A shot clock sits on the same column.
-3. **Lock-in countdown (12.5–14.1 s).**
-4. **End card (14.1–22.4 s):** one composition. The name slams in as a jersey nameplate above the number, and the same card says "PLAY TODAY'S MYSTERY AT PLAYFACTSOVERFEELINGS.COM". The voice says the name, then that line.
-5. **Loop (22.4–24 s):** the end card fades back into the opening hook.
+1. **Hook (0–3 s):** a full-frame question mark, plus a challenge line that changes daily (for example "ONLY REAL HOOPERS GET HIM IN 1 CLUE"). The camera eases in the whole time.
+2. **Three clues, hard → medium → easy (3–20.4 s):** each clue stays up for about 5.8 seconds, long enough to read the finished line for about 4 seconds. Locked clues are "?" blocks that flip into stat cards. A shot clock ticks on the same column.
+3. **Think beat (20.4–22 s):** a 3-2-1 lock-in.
+4. **Name (22–24 s):** the name slams in on the jersey nameplate. The voice says the name.
+5. **Call to action (24–26.6 s):** "PLAY TODAY'S MYSTERY AT PLAYFACTSOVERFEELINGS.COM".
+6. **Loop (26.6–27 s):** a hard cut back to the exact opening frame, so a replay starts clean.
 
-Text stays inside the TikTok/Shorts safe area: below the top 12%, above the bottom 20%, and left of the right 15% where the app buttons sit. Everything shares one centered column. The audio is normalized to about −14 LUFS.
+Text stays inside the TikTok/Shorts safe area: below the top 12%, above the bottom 20%, and left of the right 15% where the app buttons sit. Type is big and close to the camera. The picture keeps moving: a slow zoom, a shake and a white flash on each clue, pulsing glows, and floating pixel sparks. The audio is normalized to about −14 LUFS.
 
-The mascot is the owner's basketball-with-eyes sprite. `assets/mascot.png` is a 2484×414 sheet of six 414×414 frames in order — idle, thinking, surprised, hype, celebrate, sad — and `assets/mascot/idle.png` (and the other five names) are the same frames on their own. The video draws whichever frame the moment needs, scaled with nearest-neighbor only: idle on the hook, thinking through the clues, sad for the "did you get it?" beat, surprised then hype on the countdown, and celebrate on the reveal. `tools/slice-mascot.py` rebuilds that sheet from the source art.
+The mascot is the owner's basketball-with-eyes sprite. `assets/mascot.png` is a 2484×414 sheet of six 414×414 frames in order — idle, thinking, surprised, hype, celebrate, sad — and `assets/mascot/idle.png` (and the other five names) are the same frames on their own. The video draws whichever frame the moment needs, scaled with nearest-neighbor only: idle on the hook, thinking through the clues, surprised then hype on the countdown, celebrate on the name, and hype on the call to action. `tools/slice-mascot.py` rebuilds that sheet from the source art.
 
 ## How today's player is chosen
 
@@ -48,7 +49,7 @@ Running the workflow twice on the same day never makes a second video.
 
 ## Voiceover and sound
 
-`voiceover.py` uses the free `edge-tts` package to read the hook, each clue, short pressure lines, then the player's name and "Play today's mystery at Play Facts Over Feelings dot com" over the end card. If the free voice service is down, the video still completes with sound effects and music.
+`voiceover.py` uses the free `edge-tts` package to read the hook, each clue, short pressure lines, then the player's name and "Play today's mystery at Play Facts Over Feelings dot com". If the free voice service is down, the video still completes with sound effects and music.
 
 The music bed, `assets/music/arcade-bed.wav`, is original. It was synthesized by `tools/make-music.py` and dedicated to the public domain (CC0), so it can't trigger copyright claims; see `licenses/music-CC0.txt`. The sound effects and background were created for this project. The fonts are OFL-licensed (see `licenses/`).
 

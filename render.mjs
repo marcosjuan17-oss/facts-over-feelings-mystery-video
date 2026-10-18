@@ -1,6 +1,6 @@
-// Renders the daily Mystery Player video (1080x1920, 30 fps, 24 s).
-// One column stays inside the TikTok/Shorts safe area. The end card is a single
-// composition: nameplate on the jersey, then the site line. Usage:
+// Renders the daily Mystery Player video (1080x1920, 30 fps, 27 s).
+// Big type inside the TikTok/Shorts safe area. The name and the site line
+// are two short cards, then the picture cuts back to the opening frame. Usage:
 //   node render.mjs [selected.json] [output-dir]
 // PREVIEW_TIMES=0.2,3,18 renders only those seconds and skips encode.
 import fs from 'node:fs/promises';
@@ -67,232 +67,264 @@ const payload = JSON.stringify({
   duration: DURATION,
 });
 
-// Safe column: x 168–912 (centered on 1080, right edge left of the 15% button rail),
-// y 248–1480 (below the top 12%, above the bottom 20%).
+// Safe column: x 190–890, y 268–1500. A 3% camera zoom plus the shake
+// still clears the top 12%, bottom 20%, and right 15% of 1080×1920.
 const html = `<!doctype html><html><head><meta charset="utf-8"><style>
 @font-face{font-family:Press;src:url(${press}) format('truetype')}
 *{box-sizing:border-box}
 html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#07101f}
 .stage{position:absolute;inset:0;overflow:hidden;background:#07101f;color:#f4f7fb;
-  background-image:linear-gradient(rgba(255,200,61,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,200,61,.045) 1px,transparent 1px);
-  background-size:32px 32px}
-.layer{position:absolute;inset:0}
-.crt{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(to bottom,rgba(0,0,0,.16) 0 1px,transparent 1px 4px);mix-blend-mode:multiply}
-.vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 48%,rgba(0,0,0,.42) 100%)}
-.track{position:absolute;left:168px;top:248px;width:744px;height:20px;display:flex;gap:4px}
-.seg{flex:1;background:#152038;box-shadow:inset 0 0 0 2px #24324e}
-.seg.on{background:#FFC83D;box-shadow:none}
-.seg.lead{background:#FF6A1A;box-shadow:0 0 10px #FF6A1A}
-.brandrow{position:absolute;left:168px;top:284px;width:744px;height:40px;display:flex;align-items:center;justify-content:space-between}
-.brand{font:16px/16px Press;color:#f4f7fb}
-.theme{font:16px/16px Press;color:#FFC83D}
-.hookline{position:absolute;left:168px;top:348px;width:744px;height:120px;display:flex;align-items:center;justify-content:center;text-align:center;
-  font:26px/42px Press;color:#f4f7fb;text-shadow:0 4px 0 #000,0 0 16px rgba(255,106,26,.55)}
-.hooksub{position:absolute;left:168px;top:1284px;width:744px;height:40px;display:flex;align-items:center;justify-content:center;
-  font:16px/16px Press;color:#FFC83D;letter-spacing:1px}
-.shell{position:absolute;left:168px;width:744px;padding:6px;background:#FF6A1A;
-  clip-path:polygon(0 16px,16px 16px,16px 0,calc(100% - 16px) 0,calc(100% - 16px) 16px,100% 16px,100% calc(100% - 16px),calc(100% - 16px) calc(100% - 16px),calc(100% - 16px) 100%,16px 100%,16px calc(100% - 16px),0 calc(100% - 16px));
-  filter:drop-shadow(0 0 14px rgba(255,106,26,.35))}
-.shell.dim{background:#31425f;filter:none}
-.shell.gold{background:#FFC83D;filter:drop-shadow(0 0 18px rgba(255,200,61,.45))}
-.inner{height:100%;background:#0c1730;display:flex;flex-direction:column;
+  background-image:linear-gradient(rgba(255,200,61,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,200,61,.05) 1px,transparent 1px);
+  background-size:24px 24px}
+.cam{position:absolute;inset:0;transform-origin:540px 880px}
+.crt{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(to bottom,rgba(0,0,0,.14) 0 1px,transparent 1px 4px);mix-blend-mode:multiply}
+.track{position:absolute;left:190px;top:268px;width:700px;height:16px;display:flex;gap:4px}
+.seg{flex:1;background:#152038}
+.seg.on{background:#FFC83D}
+.seg.lead{background:#FF6A1A}
+.brandrow{position:absolute;left:190px;top:294px;width:700px;height:44px;display:flex;align-items:center;justify-content:space-between}
+.brand{font:18px/18px Press;color:#f4f7fb}
+.theme{font:18px/18px Press;color:#FFC83D}
+.hookline{position:absolute;left:190px;top:348px;width:700px;height:200px;display:flex;align-items:center;justify-content:center;text-align:center;
+  font:44px/64px Press;color:#f4f7fb}
+.heroq{position:absolute;left:180px;top:600px;width:720px;height:720px;display:flex;align-items:center;justify-content:center;
+  font:720px/720px Press;color:#FFC83D;transform-origin:center center}
+.shell{position:absolute;left:190px;width:700px;padding:8px;background:#FF6A1A;
+  clip-path:polygon(0 18px,18px 18px,18px 0,calc(100% - 18px) 0,calc(100% - 18px) 18px,100% 18px,100% calc(100% - 18px),calc(100% - 18px) calc(100% - 18px),calc(100% - 18px) 100%,18px 100%,18px calc(100% - 18px),0 calc(100% - 18px))}
+.shell.gold{background:#FFC83D}
+.shell.dim{background:#31425f}
+.tile{position:absolute;width:224px;padding:6px;background:#31425f;
+  clip-path:polygon(0 14px,14px 14px,14px 0,calc(100% - 14px) 0,calc(100% - 14px) 14px,100% 14px,100% calc(100% - 14px),calc(100% - 14px) calc(100% - 14px),calc(100% - 14px) 100%,14px 100%,14px calc(100% - 14px),0 calc(100% - 14px))}
+.tile.on{background:#FFC83D}
+.tile.done{background:#FF6A1A}
+.inner{position:relative;height:100%;background:#0c1730;display:flex;flex-direction:column;
   clip-path:polygon(0 12px,12px 12px,12px 0,calc(100% - 12px) 0,calc(100% - 12px) 12px,100% 12px,100% calc(100% - 12px),calc(100% - 12px) calc(100% - 12px),calc(100% - 12px) 100%,12px 100%,12px calc(100% - 12px),0 calc(100% - 12px))}
-.cardhead{height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;flex:none}
-.cardhead span{font:16px/16px Press}
+.tile .inner{align-items:center;justify-content:center}
+.qmark{font:120px/120px Press;color:#FFC83D}
+.tile .qmark{font:96px/96px Press}
+.cardhead{height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;flex:none}
+.cardhead span{font:20px/20px Press}
 .clue-k{color:#FF6A1A}
 .diff{color:#FFC83D}
-.cardbody{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:12px 28px 20px;text-align:center;font:28px/42px Press;color:#f4f7fb}
-.cardbody.mid{align-items:center;padding-top:0}
-.qmark{font:88px/88px Press;color:#FFC83D;text-shadow:0 0 16px rgba(255,200,61,.65)}
-.timer{position:absolute;left:168px;top:1212px;width:744px;height:112px}
-.timerrow{height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 28px}
-.timerlabel{font:16px/16px Press;color:#FFC83D}
-.timernum{font:40px/40px Press;color:#FFC83D;min-width:48px;text-align:right}
-.timernum.warn{color:#FF6A1A;text-shadow:0 0 12px rgba(255,106,26,.8)}
-.pips{display:flex;gap:8px;height:24px;align-items:center;padding:0 28px}
-.pip{flex:1;height:20px;background:#1c2944}
-.pip.on{background:#FF6A1A;box-shadow:0 0 8px #FF6A1A}
-.inner.lockin{align-items:center;justify-content:center}
-.inner.timerin{justify-content:center;gap:8px}
-.locktitle{margin:0;text-align:center;font:28px/44px Press;color:#f4f7fb}
-.locknum{margin-top:40px;text-align:center;font:168px/168px Press;color:#FF6A1A;text-shadow:0 0 24px rgba(255,106,26,.75)}
+.cardbody{flex:1;display:flex;align-items:center;justify-content:center;padding:8px 28px 20px;text-align:center;font:46px/66px Press;color:#f4f7fb}
+.timerrow{height:78px;display:flex;align-items:center;justify-content:space-between;padding:0 28px}
+.timerlabel{font:20px/20px Press;color:#FFC83D}
+.timernum{font:72px/72px Press;color:#FFC83D;min-width:80px;text-align:right}
+.timernum.warn{color:#FF6A1A}
+.pips{display:flex;gap:10px;height:36px;align-items:center;padding:0 28px}
+.pip{flex:1;height:28px;background:#1c2944}
+.pip.on{background:#FF6A1A}
+.thinktitle{position:absolute;left:190px;top:360px;width:700px;text-align:center;font:58px/84px Press;color:#f4f7fb}
+.thinknum{position:absolute;left:190px;top:560px;width:700px;height:640px;display:flex;align-items:center;justify-content:center;
+  font:420px/420px Press;color:#FF6A1A;transform-origin:center center}
 .jerseywrap{position:absolute}
 .plate{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:#FFC83D;color:#07101f;
-  box-shadow:0 0 0 4px #07101f,0 0 16px rgba(255,200,61,.75);text-align:center;padding:16px 18px;
+  text-align:center;padding:16px 18px;
   clip-path:polygon(0 8px,8px 8px,8px 0,calc(100% - 8px) 0,calc(100% - 8px) 8px,100% 8px,100% calc(100% - 8px),calc(100% - 8px) calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,8px calc(100% - 8px),0 calc(100% - 8px))}
 .plate span{display:block;font-family:Press;line-height:1;height:1em;white-space:nowrap}
-.ctaBlock{position:absolute;left:24px;width:696px;text-align:center;font:20px/36px Press;color:#FFC83D;text-shadow:0 0 12px rgba(255,200,61,.45)}
-.ctaUrl{display:block;margin-top:12px;color:#FF6A1A}
-.mascot{position:absolute;width:128px;height:128px;background-repeat:no-repeat;image-rendering:pixelated;image-rendering:crisp-edges}
-.headshot{position:absolute;width:140px;height:140px;object-fit:cover;image-rendering:auto;border:4px solid #FFC83D;background:#07101f}
-.bit{position:absolute;width:12px;height:12px}
+.ctaWrap{position:absolute;left:190px;width:700px;text-align:center}
+.ctaWord{display:block;font:92px/108px Press;color:#FFC83D}
+.ctaUrl{display:block;margin-top:16px;font:26px/40px Press;color:#FF6A1A}
+.mascot{position:absolute;background-repeat:no-repeat;image-rendering:pixelated;image-rendering:crisp-edges}
+.bit{position:absolute}
 .flash{position:absolute;inset:0;background:#fff;pointer-events:none}
 </style></head><body><div id="root"></div><script>
 const D=${payload};const T=D.T;
-const COL=168, CW=744, CX=540;
+const CX=540;
 const esc=(s)=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const ease=(x)=>1-Math.pow(1-Math.min(1,Math.max(0,x)),3);
 const MOODS=['idle','thinking','surprised','hype','celebrate','sad'];
-const M=160;
-function mascot(name,x,y,size){
+function mascot(name,x,y,size,t){
   const i=MOODS.indexOf(name);
-  const s=size||M;
-  return '<div class="mascot" style="left:'+x+'px;top:'+y+'px;width:'+s+'px;height:'+s+'px;background-image:url('+D.mascot+');background-size:'+(s*6)+'px '+s+'px;background-position:-'+(i*s)+'px 0"></div>';
+  const s=size||180;
+  const bob=Math.sin((t||0)*3.4+i)*8;
+  return '<div class="mascot" style="left:'+x+'px;top:'+(y+bob)+'px;width:'+s+'px;height:'+s+'px;background-image:url('+D.mascot+');background-size:'+(s*6)+'px '+s+'px;background-position:-'+(i*s)+'px 0"></div>';
 }
 function header(t){
-  const n=24, filled=Math.round(n*Math.min(1,Math.max(0,t)/D.duration));
+  const n=27, filled=Math.round(n*Math.min(1,Math.max(0,t)/D.duration));
   let segs='';
   for(let i=0;i<n;i++) segs+='<i class="seg'+(i<filled?' on':'')+(i===filled-1?' lead':'')+'"></i>';
-  return '<div class="crt"></div><div class="vignette"></div><div class="track">'+segs+'</div>'
+  return '<div class="crt"></div><div class="track">'+segs+'</div>'
     +'<div class="brandrow"><span class="brand">FACTS OVER FEELINGS</span><span class="theme">'+esc(D.theme)+'</span></div>';
 }
-function jerseySvg(showMark, numBaseline){
-  const numSize=String(D.jersey).length>1?128:156;
-  const q=showMark?'<text x="250" y="250" text-anchor="middle" font-family="Press" font-size="120" fill="#FFC83D">?</text>':'';
-  const num=showMark?'':'<text x="250" y="'+(numBaseline||468)+'" text-anchor="middle" font-family="Press" font-size="'+numSize+'" fill="'+D.color+'" stroke="#07101f" stroke-width="10" paint-order="stroke">'+esc(D.jersey)+'</text>';
-  return '<svg viewBox="0 0 500 560" width="100%" height="100%">'
-    +'<path d="M150 28 L205 28 Q250 92 295 28 L350 28 L362 128 Q388 156 438 168 L446 532 L54 532 L62 168 Q112 156 138 128 Z" fill="'+D.color+'" opacity=".35"/>'
-    +'<path d="M150 28 L205 28 Q250 92 295 28 L350 28 L362 128 Q388 156 438 168 L446 532 L54 532 L62 168 Q112 156 138 128 Z" fill="#0c1730" stroke="'+D.color+'" stroke-width="12"/>'
-    +num+q+'</svg>';
+function sparks(t){
+  let h='';
+  for(let i=0;i<16;i++){
+    const sp=28+(i%5)*14;
+    const x=196+((i*83+t*sp*20)%688);
+    const y=300+((i*61+t*sp*26)%1120);
+    const s=8+(i%3)*6;
+    const color=i%2?'#FFC83D':'#FF6A1A';
+    const o=(0.25+0.55*Math.abs(Math.sin(t*4+i))).toFixed(2);
+    h+='<i class="bit" style="left:'+x.toFixed(1)+'px;top:'+y.toFixed(1)+'px;width:'+s+'px;height:'+s+'px;background:'+color+';opacity:'+o+'"></i>';
+  }
+  return h;
 }
-function jerseyBox(left,top,w,h,showMark,numBaseline){
-  return '<div class="jerseywrap" style="left:'+left+'px;top:'+top+'px;width:'+w+'px;height:'+h+'px">'+jerseySvg(showMark,numBaseline)+'</div>';
+function shell(top,height,cls,inner,t){
+  const pulse=0.3+0.35*Math.abs(Math.sin((t||0)*6));
+  const glow=cls.indexOf('gold')>=0
+    ? 'drop-shadow(0 0 '+(10+pulse*16).toFixed(0)+'px rgba(255,200,61,'+(0.35+pulse*0.4).toFixed(2)+'))'
+    : 'drop-shadow(0 0 '+(8+pulse*12).toFixed(0)+'px rgba(255,106,26,'+(0.28+pulse*0.35).toFixed(2)+'))';
+  return '<div class="shell '+cls+'" style="top:'+top+'px;height:'+height+'px;filter:'+glow+'"><div class="inner">'+inner+'</div></div>';
+}
+function cam(inner,time,start,len){
+  const local=Math.max(0,time-start);
+  const zoom=1+0.03*Math.min(1,local/Math.max(len,0.2));
+  const breathe=0.004*Math.sin(time*5.2);
+  let x=0,y=0;
+  const kicks=T.clueStarts.concat([T.nameStart,T.ctaStart]);
+  for(let k=0;k<kicks.length;k++){
+    const d=time-kicks[k];
+    if(d>=0&&d<0.26){
+      const a=1-d/0.26;
+      x+=Math.sin(d*95)*8*a;
+      y+=Math.cos(d*75)*5*a;
+    }
+  }
+  const z=(zoom+breathe).toFixed(4);
+  return '<div class="cam" style="transform:translate('+x.toFixed(2)+'px,'+y.toFixed(2)+'px) scale('+z+')">'+inner+sparks(time)+'</div>';
+}
+function flash(time,hits){
+  for(let i=0;i<hits.length;i++){
+    const d=time-hits[i];
+    if(d>=0&&d<0.1) return '<div class="flash" style="opacity:'+((1-d/0.1)*0.75).toFixed(3)+'"></div>';
+  }
+  return '';
 }
 function hookScene(t){
-  const subTop=1284, top=484, h=subTop-20-top, w=Math.round(h*500/560), left=Math.round(CX-w/2);
-  return header(t||0)+'<div class="hookline">'+esc(D.hook)+'</div>'
-    +jerseyBox(left,top,w,h,true)
-    +'<div class="hooksub" style="top:'+subTop+'px">3 CLUES  ·  BEAT THE SHOT CLOCK</div>'
-    +mascot('idle',CX-M/2,1340);
+  const pop=0.78+0.22*ease(Math.min(1,(t||0)/0.3));
+  const push=1+0.05*ease(Math.min(1,(t||0)/T.hookEnd));
+  const glow=(0.45+0.4*Math.abs(Math.sin((t||0)*6))).toFixed(2);
+  const s=(pop*push).toFixed(3);
+  // Press Start 2P keeps the "?" in the top-left of the em box. Nudge it
+  // before the scale so the ink, not the empty em, sits on the frame center.
+  return header(t)+'<div class="hookline" style="text-shadow:0 0 16px rgba(255,106,26,'+glow+')">'+esc(D.hook)+'</div>'
+    +'<div class="heroq" style="transform:scale('+s+') translate(45px,45px);text-shadow:0 0 '+(16+glow*28)+'px rgba(255,200,61,'+glow+'),12px 12px 0 #FF6A1A">?</div>'
+    +mascot('idle',CX-85,1324,170,t);
+}
+function clueScene(t){
+  const current=Math.max(0,T.clueStarts.findLastIndex(x=>t>=x));
+  const start=T.clueStarts[current];
+  const next=current<2?T.clueStarts[current+1]:T.thinkStart;
+  const local=t-start;
+  const span=next-start;
+  const left=Math.max(0,span-local);
+  const n=Math.max(1,Math.ceil(left));
+  const face=local>=0.16;
+  const rot=local<0.34?(1-ease(local/0.34))*90:0;
+  let tiles='';
+  for(let i=0;i<3;i++){
+    const on=i===current, done=i<current;
+    const cls=on?' on':done?' done':'';
+    const mark=done?'<span class="qmark" style="font-size:72px;color:#07101f">'+(i+1)+'</span>':'<span class="qmark">?</span>';
+    const grow=on?1+0.04*Math.sin(t*8):1;
+    tiles+='<div class="tile'+cls+'" style="left:'+(190+i*240)+'px;top:348px;width:220px;height:164px;transform:scale('+grow.toFixed(3)+');transform-origin:center center"><div class="inner">'+mark+'</div></div>';
+  }
+  let body;
+  if(!face) body='<div class="cardbody"><span class="qmark" style="font-size:200px">?</span></div>';
+  else {
+    const full=D.clues[current];
+    const typed=Math.min(full.length,Math.max(0,Math.floor((local-0.18)*42)));
+    body='<div class="cardhead"><span class="clue-k">CLUE '+(current+1)+'</span><span class="diff">'+['HARD','MEDIUM','EASY'][current]+'</span></div>'
+      +'<div class="cardbody">'+esc(full.slice(0,typed))+'</div>';
+  }
+  const pips=[1,2,3,4,5,6].map(v=>'<i class="pip'+(v<=n?' on':'')+'"></i>').join('');
+  return header(t)+tiles
+    +shell(528,552,face?'gold':'',body,t)
+    +shell(1096,150,'', '<div class="timerrow"><span class="timerlabel">SHOT CLOCK</span><span class="timernum'+(n<=2?' warn':'')+'">'+n+'</span></div><div class="pips">'+pips+'</div>', t)
+    +mascot('thinking',CX-100,1262,200,t);
+}
+function thinkScene(t){
+  const local=t-T.thinkStart;
+  const n=local<0.53?3:local<1.06?2:1;
+  const pop=1+0.22*(1-ease((local%0.53)/0.18));
+  const mood=n>1?'surprised':'hype';
+  const nx=n===1?1:27, ny=27;
+  return header(t)+'<div class="thinktitle">LOCK IT<br>IN</div>'
+    +'<div class="thinknum" style="transform:scale('+pop.toFixed(3)+') translate('+nx+'px,'+ny+'px)">'+n+'</div>'
+    +mascot(mood,CX-140,1096,280,t);
 }
 function nameLayout(name){
-  const words=String(name||'').toUpperCase().split(/\\s+/).filter(Boolean);
-  const maxText=240;
+  const words=String(name||'').toUpperCase().split(/\s+/).filter(Boolean);
+  const maxText=500;
   const chunks=(token)=>token.split('-').map((part,i,all)=>i<all.length-1?part+'-':part).filter(Boolean);
   const candidates=[];
   if(words.length<=1) candidates.push(words.length?words:['?']);
-  else{
+  else {
     candidates.push([words.slice(0,-1).join(' '), words[words.length-1]]);
-    candidates.push([...words.slice(0,-1).flatMap(chunks), ...chunks(words[words.length-1])]);
+    candidates.push(words.slice(0,-1).flatMap(chunks).concat(chunks(words[words.length-1])));
   }
   let best=null;
-  for(const lines of candidates){
-    const longest=Math.max(...lines.map(s=>s.length),1);
-    const size=Math.min(26,Math.floor(maxText/longest));
-    if(size<14) continue;
+  for(let c=0;c<candidates.length;c++){
+    const lines=candidates[c];
+    const longest=Math.max.apply(null,lines.map(s=>s.length).concat([1]));
+    const size=Math.min(60,Math.floor(maxText/longest));
+    if(size<16) continue;
     const score=size*10-lines.length;
     if(!best||score>best.score) best={lines,size,score};
   }
   if(!best){
     const lines=candidates[candidates.length-1];
-    const longest=Math.max(...lines.map(s=>s.length),1);
-    best={lines,size:Math.max(12,Math.floor(maxText/longest))};
+    const longest=Math.max.apply(null,lines.map(s=>s.length).concat([1]));
+    best={lines,size:Math.max(14,Math.floor(maxText/longest))};
   }
-  return {lines:best.lines,size:best.size};
+  return best;
 }
-function clueCard(i,t){
-  const tops=[348,636,924];
-  const start=T.clueStarts[i];
-  const local=t-start;
-  const current=T.clueStarts.findLastIndex(x=>t>=x);
-  const opened=t>=start;
-  const face=i<current||(opened&&local>=0.18);
-  const rot=opened&&i===current&&local<0.36?(1-ease(local/0.36))*90:0;
-  const cls=i===current?' gold':face?'':' dim';
-  let body;
-  if(!face) body='<div class="cardbody mid"><div class="qmark">?</div></div>';
-  else{
-    const full=D.clues[i];
-    const typed=i<current?full.length:Math.min(full.length,Math.max(0,Math.floor((local-0.2)*34)));
-    const label='CLUE '+(i+1);
-    const diff=['HARD','MEDIUM','EASY'][i];
-    body='<div class="cardhead"><span class="clue-k">'+label+'</span><span class="diff">'+diff+'</span></div>'
-      +'<div class="cardbody">'+esc(full.slice(0,typed))+'</div>';
-  }
-  return '<div class="shell'+cls+'" style="top:'+tops[i]+'px;height:272px;transform:perspective(900px) rotateX('+rot+'deg)"><div class="inner">'+body+'</div></div>';
+function jerseySvg(numBaseline){
+  const numSize=String(D.jersey).length>1?140:180;
+  return '<svg viewBox="0 0 500 560" width="100%" height="100%">'
+    +'<path d="M150 28 L205 28 Q250 92 295 28 L350 28 L362 128 Q388 156 438 168 L446 532 L54 532 L62 168 Q112 156 138 128 Z" fill="'+D.color+'" opacity=".35"/>'
+    +'<path d="M150 28 L205 28 Q250 92 295 28 L350 28 L362 128 Q388 156 438 168 L446 532 L54 532 L62 168 Q112 156 138 128 Z" fill="#0c1730" stroke="'+D.color+'" stroke-width="12"/>'
+    +'<text x="250" y="'+(numBaseline||470)+'" text-anchor="middle" font-family="Press" font-size="'+numSize+'" fill="'+D.color+'" stroke="#07101f" stroke-width="10" paint-order="stroke">'+esc(D.jersey)+'</text>'
+    +'</svg>';
 }
-function clueScene(t){
-  const current=Math.max(0,T.clueStarts.findLastIndex(x=>t>=x));
-  const local=t-T.clueStarts[current];
-  const span=(current<2?T.clueStarts[current+1]:T.lockStart)-T.clueStarts[current];
-  const n=Math.max(0,Math.ceil(5*(1-local/span)));
-  const mood=t>=T.lockStart-1.15?'sad':'thinking';
-  let html=header(t);
-  for(let i=0;i<3;i++) html+=clueCard(i,t);
-  html+='<div class="shell" style="top:1212px;height:112px"><div class="inner timerin"><div class="timerrow"><span class="timerlabel">SHOT CLOCK</span><span class="timernum'+(n<=2?' warn':'')+'">'+n+'</span></div>'
-    +'<div class="pips">'+[1,2,3,4,5].map(v=>'<i class="pip'+(v<=n?' on':'')+'"></i>').join('')+'</div></div></div>';
-  html+=mascot(mood,CX-M/2,1340);
-  return html;
-}
-function lockScene(t){
-  const local=t-T.lockStart;
-  const n=local<0.5?3:local<1?2:1;
-  const pop=1+0.18*(1-ease((local%0.5)/0.22));
-  return header(t)+'<div class="shell gold" style="top:400px;height:880px"><div class="inner lockin">'
-    +'<div class="locktitle">LOCK IN<br>YOUR GUESS</div>'
-    +'<div class="locknum" style="transform:scale('+pop+')">'+n+'</div>'
-    +'</div></div>'+mascot(local<1?'surprised':'hype',CX-M/2,1340);
-}
-function endScene(t){
-  const local=Math.max(0,t-T.endStart);
-  const slam=1+0.55*Math.pow(1-ease(Math.min(1,local/0.32)),2);
+function nameScene(t){
+  const local=Math.max(0,t-T.nameStart);
+  const slam=1+0.5*Math.pow(1-ease(Math.min(1,local/0.24)),2);
   const layout=nameLayout(D.name);
-  const platePadX=18, platePadY=16, plateLineGap=8, nameGap=36;
-  const textW=Math.max(...layout.lines.map(s=>s.length))*layout.size;
-  const plateW=textW+platePadX*2;
-  const plateH=platePadY*2+layout.lines.length*layout.size+(layout.lines.length-1)*plateLineGap;
-  const innerW=CW-12;
-  const jw=D.headshot?380:440, jh=Math.round(jw*560/500);
-  const shotW=D.headshot?120:0, gap=D.headshot?20:0;
-  const group=shotW+gap+jw;
-  const groupLeft=Math.round((innerW-group)/2);
-  const jLeft=groupLeft+shotW+gap;
+  const plateW=Math.max.apply(null,layout.lines.map(s=>s.length))*layout.size+36;
+  const plateH=32+layout.lines.length*layout.size+(layout.lines.length-1)*8;
+  const jw=640, jh=Math.round(jw*560/500);
+  const jLeft=Math.round((684-jw)/2);
   const jTop=36;
-  const numSize=String(D.jersey).length>1?128:156;
+  const numSize=String(D.jersey).length>1?140:180;
   const numBaseline=468;
   const numTop=jTop+Math.round((numBaseline-numSize)*(jh/560));
+  const plateTop=Math.max(16,numTop-32-plateH);
   const plateLeft=jLeft+Math.round((jw-plateW)/2);
-  const plateTop=Math.max(16, numTop-nameGap-plateH);
   const name=layout.lines.map(line=>'<span style="font-size:'+layout.size+'px">'+esc(line)+'</span>').join('');
-  const shot=D.headshot?'<img class="headshot" alt="" src="'+D.headshot+'" style="left:'+groupLeft+'px;top:'+(jTop+Math.round(jh/2)-60)+'px;width:120px;height:120px">':'';
-  const ctaTop=jTop+jh+20;
-  const ctaIn=ease((local-0.45)/0.3);
-  const mascotTop=ctaTop+124;
-  const shellH=mascotTop+M+32;
-  const shellTop=Math.round((248+1488-shellH)/2);
-  let bits='';
-  if(local<1.35){
-    for(let i=0;i<24;i++){
-      const x=COL+24+((i*61)%680);
-      const y=shellTop+80+((i*37)%160)+local*(200+(i%5)*30);
-      if(y>1460) continue;
-      const color=i%2?'#FFC83D':'#FF6A1A';
-      bits+='<i class="bit" style="left:'+x+'px;top:'+y+'px;background:'+color+';opacity:'+(1-local/1.35)+';transform:rotate('+(i*28+local*240)+'deg)"></i>';
-    }
-  }
-  return header(t)+'<div class="shell gold" style="top:'+shellTop+'px;height:'+shellH+'px"><div class="inner" style="position:relative">'
-    +shot+jerseyBox(jLeft,jTop,jw,jh,false,numBaseline)
-    +'<div class="plate" style="left:'+plateLeft+'px;top:'+plateTop+'px;width:'+plateW+'px;height:'+plateH+'px;transform:scale('+slam+');transform-origin:center center">'+name+'</div>'
-    +'<div class="ctaBlock" style="top:'+ctaTop+'px;opacity:'+ctaIn+'">PLAY TODAY\\'S MYSTERY AT<span class="ctaUrl">PLAYFACTSOVERFEELINGS.COM</span></div>'
-    +mascot('celebrate',Math.round((innerW-M)/2),mascotTop,M)
-    +'</div></div>'
-    +bits
-    +(local<0.12?'<div class="flash" style="opacity:'+(1-local/0.12)*0.9+'"></div>':'');
+  const shellH=jTop+jh+36;
+  const shellTop=352;
+  return header(t)+shell(shellTop,shellH,'gold',
+    '<div class="jerseywrap" style="left:'+jLeft+'px;top:'+jTop+'px;width:'+jw+'px;height:'+jh+'px">'+jerseySvg(numBaseline)+'</div>'
+    +'<div class="plate" style="left:'+plateLeft+'px;top:'+plateTop+'px;width:'+plateW+'px;height:'+plateH+'px;transform:scale('+slam.toFixed(3)+');transform-origin:center center">'+name+'</div>',
+    t)+mascot('celebrate',CX-150,shellTop+shellH+12,300,t);
+}
+function ctaScene(t){
+  const local=Math.max(0,t-T.ctaStart);
+  const pop=0.86+0.14*ease(Math.min(1,local/0.22));
+  const glow=(0.4+0.5*Math.abs(Math.sin(local*7))).toFixed(2);
+  return header(t)+'<div class="ctaWrap" style="top:390px;transform:scale('+pop.toFixed(3)+');transform-origin:center top">'
+    +'<span class="ctaWord" style="text-shadow:0 0 18px rgba(255,200,61,'+glow+')">PLAY</span>'
+    +'<span class="ctaWord">TODAY\\'S</span>'
+    +'<span class="ctaWord">MYSTERY</span>'
+    +'<span class="ctaWord">AT</span>'
+    +'<span class="ctaUrl">PLAYFACTSOVERFEELINGS.COM</span></div>'
+    +mascot('hype',CX-300,860,600,t);
 }
 window.draw=(t)=>{
-  let html;
-  if(t<T.hookEnd) html=hookScene(t);
-  else if(t<T.lockStart) html=clueScene(t);
-  else if(t<T.endStart) html=lockScene(t);
-  else if(t<T.loopStart) html=endScene(t);
-  else {
-    const k=ease((t-T.loopStart)/(D.duration-T.loopStart));
-    html='<div class="layer" style="opacity:'+(1-k)+'">'+endScene(T.loopStart)+'</div><div class="layer" style="opacity:'+k+'">'+hookScene(0)+'</div>';
-  }
-  document.getElementById('root').innerHTML='<main class="stage">'+html+'</main>';
+  const time=t>=T.loopStart?0:t;
+  let html,start,len,hits;
+  if(time<T.hookEnd){html=hookScene(time);start=0;len=T.hookEnd;hits=[];}
+  else if(time<T.thinkStart){
+    const i=Math.max(0,T.clueStarts.findLastIndex(x=>time>=x));
+    html=clueScene(time);start=T.clueStarts[i];len=(i<2?T.clueStarts[i+1]:T.thinkStart)-start;hits=T.clueStarts;
+  } else if(time<T.nameStart){html=thinkScene(time);start=T.thinkStart;len=T.nameStart-T.thinkStart;hits=[T.thinkStart];}
+  else if(time<T.ctaStart){html=nameScene(time);start=T.nameStart;len=T.ctaStart-T.nameStart;hits=[T.nameStart];}
+  else {html=ctaScene(time);start=T.ctaStart;len=T.loopStart-T.ctaStart;hits=[T.ctaStart];}
+  document.getElementById('root').innerHTML='<main class="stage">'+cam(html,time,start,len)+flash(time,hits)+'</main>';
 };
 </script></body></html>`;
-
 const preview = (process.env.PREVIEW_TIMES ?? '').split(',').map((value) => value.trim()).filter(Boolean).map(Number).filter((value) => Number.isFinite(value));
 const times = preview.length ? preview : Array.from({length: FPS * DURATION}, (_, index) => index / FPS);
 
@@ -327,6 +359,6 @@ const py = process.env.PYTHON_EXE ?? (spawnSync('python', ['--version']).status 
 const enc = spawnSync(py, [path.join(project, 'encode.py'), out], {encoding: 'utf8', stdio: 'inherit'});
 if (enc.status !== 0) throw Error('Video encoding failed');
 await fs.writeFile(path.join(out, 'post.txt'), post.text);
-await fs.writeFile(path.join(out, 'release-notes.md'), `**Answer: ${data.player}**\n\nThe name slams in on the jersey, and the same end card says to play today's mystery at PlayFactsOverFeelings.com.\n\nTwo downloads: **with music** and **no music** (add a trending sound in TikTok).\n\n### Title\n${post.title}\n\n### Caption\n${post.caption}\n`);
+await fs.writeFile(path.join(out, 'release-notes.md'), `**Answer: ${data.player}**\n\nThe name slams in on the jersey, then the card says to play today's mystery at PlayFactsOverFeelings.com. The picture cuts back to the opening frame.\n\nTwo downloads: **with music** and **no music** (add a trending sound in TikTok).\n\n### Title\n${post.title}\n\n### Caption\n${post.caption}\n`);
 await fs.writeFile(path.join(out, 'sources.json'), JSON.stringify(data.sources ?? [], null, 2));
 console.log(path.join(out, 'mystery-player.mp4'));

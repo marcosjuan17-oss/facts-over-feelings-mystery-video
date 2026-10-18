@@ -39,14 +39,21 @@ test('caption names the player and sends viewers to the daily game', () => {
   assert.match(post.text, /Allen Iverson/);
 });
 
-test('one end card holds the name and the CTA inside 22–25 seconds', () => {
-  assert.ok(DURATION >= 22 && DURATION <= 25);
-  assert.ok(TIMELINE.lockStart < TIMELINE.endStart);
-  assert.ok(TIMELINE.endStart < TIMELINE.loopStart);
+test('clues stay readable and the ending is a short name, then the CTA', () => {
+  assert.ok(DURATION >= 25 && DURATION <= 30);
+  const [first, second, third] = TIMELINE.clueStarts;
+  assert.ok(second - first >= 5 && second - first <= 6.5);
+  assert.ok(third - second >= 5 && third - second <= 6.5);
+  assert.ok(TIMELINE.thinkStart - third >= 5);
+  assert.ok(TIMELINE.nameStart - TIMELINE.thinkStart >= 1.2);
+  assert.ok(TIMELINE.nameStart - TIMELINE.thinkStart <= 2.2);
+  assert.ok(TIMELINE.ctaStart - TIMELINE.nameStart >= 1.5);
+  assert.ok(TIMELINE.ctaStart - TIMELINE.nameStart <= 2.5);
+  assert.ok(TIMELINE.loopStart - TIMELINE.ctaStart >= 2.2);
+  assert.ok(TIMELINE.loopStart - TIMELINE.ctaStart <= 3.2);
+  assert.ok(DURATION - TIMELINE.loopStart <= 0.5);
   assert.ok(TIMELINE.loopStart < DURATION);
-  assert.equal(TIMELINE.revealStart, undefined);
-  assert.equal(TIMELINE.ctaStart, undefined);
-  assert.equal(TIMELINE.clueStarts[0], TIMELINE.hookEnd);
+  assert.equal(first, TIMELINE.hookEnd);
 });
 
 test('data clues never include the player name', () => {

@@ -31,15 +31,14 @@ def script(speech: dict, timeline: dict):
     name = speech.get('answer') or 'the mystery player'
     return [
         (speech['hook'], 0.0, 1.08, True),
-        (speech['clues'][0], starts[0] + 0.4, 1.12, True),
-        ('Got him yet?', starts[1] - 0.7, 1.08, False),
-        (speech['clues'][1], starts[1] + 0.4, 1.12, True),
-        ('Last chance.', starts[2] - 0.7, 1.08, False),
-        (speech['clues'][2], starts[2] + 0.4, 1.12, True),
-        ('Did you get it?', timeline['lockStart'] - 1.15, 1.08, False),
-        ('Lock it in!', timeline['lockStart'] + 0.05, 1.12, False),
-        (f"It's {name}!", timeline['endStart'] + 0.15, 1.16, True),
-        ("Play today's mystery at Play Facts Over Feelings dot com!", timeline['endStart'] + 2.35, 1.12, True),
+        (speech['clues'][0], starts[0] + 0.35, 1.12, True),
+        ('Got him yet?', starts[1] - 1.3, 1.08, False),
+        (speech['clues'][1], starts[1] + 0.35, 1.12, True),
+        ('Last chance.', starts[2] - 1.3, 1.08, False),
+        (speech['clues'][2], starts[2] + 0.35, 1.12, True),
+        ('Lock it in!', timeline['thinkStart'] + 0.05, 1.12, False),
+        (f"It's {name}!", timeline['nameStart'] + 0.08, 1.16, True),
+        ("Play today's mystery at Play Facts Over Feelings dot com!", timeline['ctaStart'] + 0.06, 1.12, True),
     ]
 
 
