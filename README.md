@@ -22,7 +22,7 @@ Titles rotate daily so the channel doesn't post the same title every day. The pl
 
 Text stays inside the TikTok/Shorts safe area: below the top 12%, above the bottom 20%, and left of the right 15% where the app buttons sit. Everything shares one centered column. The audio is normalized to about −14 LUFS.
 
-The mascot is `assets/mascot.png`: a 384×64 sheet, six 64×64 frames in order — idle, thinking, surprised, hype, celebrate, sad. It is drawn scaled up with nearest-neighbor. Drop the owner's basketball-with-eyes sprite on that path, same size and frame order, and the video picks it up. The file in the repo is a placeholder.
+The mascot is the owner's basketball-with-eyes sprite. `assets/mascot.png` is a 2484×414 sheet of six 414×414 frames in order — idle, thinking, surprised, hype, celebrate, sad — and `assets/mascot/idle.png` (and the other five names) are the same frames on their own. The video draws whichever frame the moment needs, scaled with nearest-neighbor only: idle on the hook, thinking through the clues, sad for the "did you get it?" beat, surprised then hype on the countdown, and celebrate on the reveal. `tools/slice-mascot.py` rebuilds that sheet from the source art.
 
 ## How today's player is chosen
 
@@ -50,7 +50,7 @@ Running the workflow twice on the same day never makes a second video.
 
 `voiceover.py` uses the free `edge-tts` package to read the hook, each clue, short pressure lines, then the player's name and "Play today's mystery at Play Facts Over Feelings dot com" over the end card. If the free voice service is down, the video still completes with sound effects and music.
 
-The music bed, `assets/music/arcade-bed.wav`, is original. It was synthesized by `tools/make-music.py` and dedicated to the public domain (CC0), so it can't trigger copyright claims; see `licenses/music-CC0.txt`. The sound effects, mascot frames and background were created for this project. The fonts are OFL-licensed (see `licenses/`).
+The music bed, `assets/music/arcade-bed.wav`, is original. It was synthesized by `tools/make-music.py` and dedicated to the public domain (CC0), so it can't trigger copyright claims; see `licenses/music-CC0.txt`. The sound effects and background were created for this project. The fonts are OFL-licensed (see `licenses/`).
 
 ## Optional: automatic YouTube Shorts upload (off by default)
 

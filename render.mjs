@@ -133,9 +133,10 @@ const COL=168, CW=744, CX=540;
 const esc=(s)=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const ease=(x)=>1-Math.pow(1-Math.min(1,Math.max(0,x)),3);
 const MOODS=['idle','thinking','surprised','hype','celebrate','sad'];
+const M=160;
 function mascot(name,x,y,size){
   const i=MOODS.indexOf(name);
-  const s=size||128;
+  const s=size||M;
   return '<div class="mascot" style="left:'+x+'px;top:'+y+'px;width:'+s+'px;height:'+s+'px;background-image:url('+D.mascot+');background-size:'+(s*6)+'px '+s+'px;background-position:-'+(i*s)+'px 0"></div>';
 }
 function header(t){
@@ -162,7 +163,7 @@ function hookScene(t){
   return header(t||0)+'<div class="hookline">'+esc(D.hook)+'</div>'
     +jerseyBox(left,top,w,h,true)
     +'<div class="hooksub" style="top:'+subTop+'px">3 CLUES  ·  BEAT THE SHOT CLOCK</div>'
-    +mascot('idle',CX-64,1340);
+    +mascot('idle',CX-M/2,1340);
 }
 function nameLayout(name){
   const words=String(name||'').toUpperCase().split(/\\s+/).filter(Boolean);
@@ -215,12 +216,12 @@ function clueScene(t){
   const local=t-T.clueStarts[current];
   const span=(current<2?T.clueStarts[current+1]:T.lockStart)-T.clueStarts[current];
   const n=Math.max(0,Math.ceil(5*(1-local/span)));
-  const mood=['thinking','surprised','hype'][current];
+  const mood=t>=T.lockStart-1.15?'sad':'thinking';
   let html=header(t);
   for(let i=0;i<3;i++) html+=clueCard(i,t);
   html+='<div class="shell" style="top:1212px;height:112px"><div class="inner timerin"><div class="timerrow"><span class="timerlabel">SHOT CLOCK</span><span class="timernum'+(n<=2?' warn':'')+'">'+n+'</span></div>'
     +'<div class="pips">'+[1,2,3,4,5].map(v=>'<i class="pip'+(v<=n?' on':'')+'"></i>').join('')+'</div></div></div>';
-  html+=mascot(mood,CX-64,1340);
+  html+=mascot(mood,CX-M/2,1340);
   return html;
 }
 function lockScene(t){
@@ -230,7 +231,7 @@ function lockScene(t){
   return header(t)+'<div class="shell gold" style="top:400px;height:880px"><div class="inner lockin">'
     +'<div class="locktitle">LOCK IN<br>YOUR GUESS</div>'
     +'<div class="locknum" style="transform:scale('+pop+')">'+n+'</div>'
-    +'</div></div>'+mascot('sad',CX-64,1340);
+    +'</div></div>'+mascot(local<1?'surprised':'hype',CX-M/2,1340);
 }
 function endScene(t){
   const local=Math.max(0,t-T.endStart);
@@ -257,7 +258,7 @@ function endScene(t){
   const ctaTop=jTop+jh+20;
   const ctaIn=ease((local-0.45)/0.3);
   const mascotTop=ctaTop+124;
-  const shellH=mascotTop+128+32;
+  const shellH=mascotTop+M+32;
   const shellTop=Math.round((248+1488-shellH)/2);
   let bits='';
   if(local<1.35){
@@ -273,7 +274,7 @@ function endScene(t){
     +shot+jerseyBox(jLeft,jTop,jw,jh,false,numBaseline)
     +'<div class="plate" style="left:'+plateLeft+'px;top:'+plateTop+'px;width:'+plateW+'px;height:'+plateH+'px;transform:scale('+slam+');transform-origin:center center">'+name+'</div>'
     +'<div class="ctaBlock" style="top:'+ctaTop+'px;opacity:'+ctaIn+'">PLAY TODAY\\'S MYSTERY AT<span class="ctaUrl">PLAYFACTSOVERFEELINGS.COM</span></div>'
-    +mascot('celebrate',Math.round((innerW-128)/2),mascotTop)
+    +mascot('celebrate',Math.round((innerW-M)/2),mascotTop,M)
     +'</div></div>'
     +bits
     +(local<0.12?'<div class="flash" style="opacity:'+(1-local/0.12)*0.9+'"></div>':'');
