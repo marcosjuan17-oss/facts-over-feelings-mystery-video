@@ -1,13 +1,17 @@
 {
+  "slug": "allen-iverson",
   "player": "Allen Iverson",
-  "slug": "allen-iverson-demo",
+  "nicknames": ["The Answer", "AI", "Bubba Chuck"],
+  "position": "SG",
+  "jersey": "3",
+  "color": "#3B82F6",
+  "era": "1996–2010",
+  "themes": ["90s", "guard", "legend"],
+  "clue_style": "story",
   "clues": [
-    "11-time NBA All-Star",
-    "Won the 2000-01 NBA MVP",
-    "The first pick in the 1996 NBA Draft"
+    {"text": "I stepped over Tyronn Lue in a Finals win", "difficulty": "hard"},
+    {"text": "I crossed over Michael Jordan as a rookie", "difficulty": "medium"},
+    {"text": "I made 'practice' a famous press conference", "difficulty": "easy"}
   ],
-  "sources": [
-    "https://www.nba.com/sixers/76ers-alumni/allen-iverson",
-    "https://www.nba.com/sixers/news/iverson_allstar_100121.html"
-  ]
+  "sources": ["https://www.nba.com/news/archive-75-allen-iverson"]
 }

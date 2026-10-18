@@ -1,0 +1,12 @@
+arcade-bed.wav (assets/music/arcade-bed.wav)
+
+Original music bed synthesized from scratch by tools/make-music.py for this
+project. It contains no samples, loops, or recordings from any third party.
+
+The project owner dedicates this audio to the public domain under the
+Creative Commons CC0 1.0 Universal Public Domain Dedication:
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Because the track is original and is not registered with any Content ID or
+music-rights service, it should not trigger copyright claims on TikTok or
+YouTube. Regenerate it any time with: python tools/make-music.py

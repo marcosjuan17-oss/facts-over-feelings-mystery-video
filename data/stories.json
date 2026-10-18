@@ -1,0 +1,582 @@
+[
+  {
+    "slug": "allen-iverson",
+    "aliases": [],
+    "nicknames": [
+      "The Answer",
+      "AI",
+      "Bubba Chuck"
+    ],
+    "clues": [
+      {
+        "text": "I stepped over Tyronn Lue in a Finals win",
+        "difficulty": "hard"
+      },
+      {
+        "text": "I crossed over Michael Jordan as a rookie",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I made 'practice' a famous press conference",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/news/archive-75-allen-iverson",
+      "https://www.nba.com/news/history-finals-moments-allen-iverson-crossover-2001",
+      "https://www.nba.com/news/philadelphia-76ers-unveil-allen-iverson-sculpture"
+    ]
+  },
+  {
+    "slug": "michael-jordan",
+    "aliases": [],
+    "nicknames": [
+      "MJ",
+      "Air Jordan",
+      "His Airness"
+    ],
+    "clues": [
+      {
+        "text": "My last Bulls shot sealed title number six",
+        "difficulty": "hard"
+      },
+      {
+        "text": "I scored 38 while sick in the 1997 Finals",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I announced my comeback with 'I'm back'",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/news/legendary-moments-michael-jordan-returns-nba-1995",
+      "https://www.nba.com/news/history-finals-moments-jordan-flu-game-1997",
+      "https://www.nba.com/news/history-top-moments-michael-jordan-final-shot-1998"
+    ]
+  },
+  {
+    "slug": "magic-johnson",
+    "aliases": [],
+    "nicknames": [
+      "Magic",
+      "Earvin"
+    ],
+    "clues": [
+      {
+        "text": "As a rookie, I started at center in the Finals",
+        "difficulty": "hard"
+      },
+      {
+        "text": "I scored 42 to clinch the 1980 NBA title",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I beat Larry Bird in the 1979 NCAA final",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/news/history-nba-legend-magic-johnson",
+      "https://www.nba.com/news/history-finals-moments-magic-johnson-steps-in-at-center-in-1980"
+    ]
+  },
+  {
+    "slug": "larry-bird",
+    "aliases": [],
+    "nicknames": [
+      "Larry Legend",
+      "The Hick from French Lick"
+    ],
+    "clues": [
+      {
+        "text": "I hit 10 left-handed shots in a 47-point game",
+        "difficulty": "hard"
+      },
+      {
+        "text": "I won a 3-point contest in a warm-up jacket",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I stole Isiah Thomas's inbound pass in 1987",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/news/week-history-larry-bird-left-handed-triple-double",
+      "https://www.nba.com/news/history-top-moments-bird-steal-pistons",
+      "https://www.nba.com/watch/video/larry-bird-wins-the-1988-3-point-shooting-contest"
+    ]
+  },
+  {
+    "slug": "kobe-bryant",
+    "aliases": [],
+    "nicknames": [
+      "Black Mamba",
+      "Mamba",
+      "Kobe"
+    ],
+    "clues": [
+      {
+        "text": "I jumped from high school to the 1996 NBA draft",
+        "difficulty": "hard"
+      },
+      {
+        "text": "I scored 60 in my final NBA game",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I dropped 81 points on Toronto",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/news/kobe-bryant-10-things-to-know",
+      "https://www.nba.com/news/history-top-moments-kobe-bryant-81-points"
+    ]
+  },
+  {
+    "slug": "shaquille-o-neal",
+    "aliases": [
+      "shaquille-oneal"
+    ],
+    "nicknames": [
+      "Shaq",
+      "Diesel",
+      "Big Aristotle",
+      "Shaq Daddy"
+    ],
+    "clues": [
+      {
+        "text": "I brought down two hoops as a rookie",
+        "difficulty": "hard"
+      },
+      {
+        "text": "Teams fouled me on purpose at the foul line",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I won three straight Finals MVPs in L.A.",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/news/nba-things-have-been-ghosted",
+      "https://www.nba.com/lakers/news/150901shaqtopmoments-regularseason",
+      "https://www.nba.com/news/history-nba-legend-shaquille-oneal"
+    ]
+  },
+  {
+    "slug": "tim-duncan",
+    "aliases": [],
+    "nicknames": [
+      "The Big Fundamental",
+      "Timmy"
+    ],
+    "clues": [
+      {
+        "text": "A hurricane ended my Olympic swimming dream",
+        "difficulty": "hard"
+      },
+      {
+        "text": "A referee ejected me for laughing on the bench",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I won five titles, all with San Antonio",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/news/archive-75-tim-duncan",
+      "https://www.nba.com/news/hall-of-fame-class-of-2026-joey-crawford",
+      "https://www.nba.com/news/history-nba-legend-tim-duncan"
+    ]
+  },
+  {
+    "slug": "kevin-garnett",
+    "aliases": [],
+    "nicknames": [
+      "KG",
+      "The Big Ticket"
+    ],
+    "clues": [
+      {
+        "text": "I was the first high-school pick in 20 years",
+        "difficulty": "hard"
+      },
+      {
+        "text": "I helped end Boston's 22-year title drought",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I yelled 'Anything is possible!' after it",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/news/players-only-kevin-garnett-tnt",
+      "https://www.nba.com/news/the-history-of-celtics-18th-championship-banner-hunt",
+      "https://www.nba.com/watch/video/kevin-garnett-postgame-interview-anything-is-possible-in-2008"
+    ]
+  },
+  {
+    "slug": "dirk-nowitzki",
+    "aliases": [],
+    "nicknames": [
+      "Dirk",
+      "The Germanator"
+    ],
+    "clues": [
+      {
+        "text": "My 67-win team lost to an 8-seed",
+        "difficulty": "hard"
+      },
+      {
+        "text": "My signature fadeaway used one leg",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I beat Miami in the 2011 Finals",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/news/blogtable-what-will-you-remember-most-about-dirk-nowitzkis-career",
+      "https://www.nba.com/news/history-season-review-2010-11"
+    ]
+  },
+  {
+    "slug": "dwyane-wade",
+    "aliases": [],
+    "nicknames": [
+      "Flash",
+      "D-Wade",
+      "D Wade"
+    ],
+    "clues": [
+      {
+        "text": "A triple-double sent Marquette to the Final Four",
+        "difficulty": "hard"
+      },
+      {
+        "text": "Down 0-2, I sparked a 2006 Finals comeback",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I won Miami's first title as Finals MVP",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/heat/news/heat_signs_wade_030819.html",
+      "https://www.nba.com/news/archive-75-dwyane-wade",
+      "https://www.nba.com/news/history-finals-moments-dwyane-wade-2006"
+    ]
+  },
+  {
+    "slug": "stephen-curry",
+    "aliases": [],
+    "nicknames": [
+      "Steph",
+      "Chef Curry",
+      "Baby-Faced Assassin"
+    ],
+    "clues": [
+      {
+        "text": "Big college programs passed me by",
+        "difficulty": "hard"
+      },
+      {
+        "text": "I led Davidson on a Cinderella NCAA run",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I became the NBA's first unanimous MVP",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/news/stephen-curry-changed-game-long-before-3-point-milestone",
+      "https://www.nba.com/news/nba-players-ncaa-tournament-moments",
+      "https://pr.nba.com/stephen-curry-2015-16-kia-nba-mvp-award-warriors/"
+    ]
+  },
+  {
+    "slug": "wilt-chamberlain",
+    "aliases": [],
+    "nicknames": [
+      "Wilt the Stilt",
+      "The Big Dipper",
+      "Wilt"
+    ],
+    "clues": [
+      {
+        "text": "I averaged 48.5 minutes per game one season",
+        "difficulty": "hard"
+      },
+      {
+        "text": "I never fouled out of an NBA game",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I scored 100 points in one game",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/news/history-season-review-1961-62",
+      "https://www.nba.com/sixers/76ers-alumni/wilt-chamberlain"
+    ],
+    "profile": {
+      "player": "Wilt Chamberlain",
+      "position": "C",
+      "jerseyNumber": "13",
+      "era": "1959–1973",
+      "color": "#F97316",
+      "accolades": {
+        "allstar": 13,
+        "mvp": 4,
+        "rings": 2
+      }
+    }
+  },
+  {
+    "slug": "kareem-abdul-jabbar",
+    "aliases": [],
+    "nicknames": [
+      "Kareem",
+      "Cap",
+      "Lew Alcindor",
+      "Alcindor"
+    ],
+    "clues": [
+      {
+        "text": "I played a co-pilot in the film Airplane!",
+        "difficulty": "hard"
+      },
+      {
+        "text": "I won six NBA MVP awards",
+        "difficulty": "medium"
+      },
+      {
+        "text": "My signature shot was the skyhook",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/bucks/features/bucks-legend-kareem-abdul-jabbar-making-splash",
+      "https://www.nba.com/news/history-nba-legend-kareem-abdul-jabbar",
+      "https://www.nba.com/news/kareem-abdul-jabbar-skyhook-absent-modern-nba"
+    ],
+    "profile": {
+      "player": "Kareem Abdul-Jabbar",
+      "position": "C",
+      "jerseyNumber": "33",
+      "era": "1969–1989",
+      "color": "#FACC15",
+      "accolades": {
+        "allstar": 19,
+        "mvp": 6,
+        "rings": 6
+      }
+    }
+  },
+  {
+    "slug": "hakeem-olajuwon",
+    "aliases": [],
+    "nicknames": [
+      "The Dream",
+      "Hakeem the Dream",
+      "Akeem"
+    ],
+    "clues": [
+      {
+        "text": "I recorded a quadruple-double in 1990",
+        "difficulty": "hard"
+      },
+      {
+        "text": "I won back-to-back titles in 1994 and 1995",
+        "difficulty": "medium"
+      },
+      {
+        "text": "Houston drafted me ahead of Michael Jordan",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/news/history-nba-legend-hakeem-olajuwon",
+      "https://www.nba.com/news/archive-75-hakeem-olajuwon"
+    ]
+  },
+  {
+    "slug": "charles-barkley",
+    "aliases": [],
+    "nicknames": [
+      "Sir Charles",
+      "Chuck",
+      "The Round Mound of Rebound"
+    ],
+    "clues": [
+      {
+        "text": "I gave a rookie teammate a place to stay",
+        "difficulty": "hard"
+      },
+      {
+        "text": "I won MVP with Phoenix in 1993",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I declared 'I am not a role model'",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/news/history-nba-legend-charles-barkley"
+    ]
+  },
+  {
+    "slug": "dennis-rodman",
+    "aliases": [],
+    "nicknames": [
+      "The Worm",
+      "Worm"
+    ],
+    "clues": [
+      {
+        "text": "I wore a wedding dress to promote a book",
+        "difficulty": "hard"
+      },
+      {
+        "text": "I left the 1998 Finals for a wrestling event",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I led the NBA in rebounding 7 straight years",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/bulls/history/rodman-was-different-in-a-good-way",
+      "https://www.nba.com/bulls/news/the-worm-is-back-dennis-rodman-returns-to-united-center-for-the-first-time-in-13-years-for-aew-appearance",
+      "https://www.nba.com/news/history-nba-legend-dennis-rodman"
+    ],
+    "profile": {
+      "player": "Dennis Rodman",
+      "position": "PF",
+      "jerseyNumber": "91",
+      "era": "1986–2000",
+      "color": "#EF4444",
+      "accolades": {
+        "allstar": 2,
+        "mvp": 0,
+        "rings": 5
+      }
+    }
+  },
+  {
+    "slug": "steve-nash",
+    "aliases": [],
+    "nicknames": [
+      "Nash",
+      "Two-Time"
+    ],
+    "clues": [
+      {
+        "text": "I was born in South Africa, raised in Canada",
+        "difficulty": "hard"
+      },
+      {
+        "text": "I left Dallas, then won two MVPs in Phoenix",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I ran the Seven Seconds or Less Suns",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/news/international-players-to-win-nba-mvp-award",
+      "https://www.nba.com/nets/news/breaking/2020/09/03/steve-nash-to-brooklyn-from-british-columbia-an-unexpected-journey"
+    ]
+  },
+  {
+    "slug": "tracy-mcgrady",
+    "aliases": [],
+    "nicknames": [
+      "T-Mac",
+      "TMac"
+    ],
+    "clues": [
+      {
+        "text": "I was teammates with my cousin Vince Carter",
+        "difficulty": "hard"
+      },
+      {
+        "text": "I scored 62 in one night for Orlando",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I scored 13 points in just 35 seconds",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/magic/news/catching-tracy-mcgrady",
+      "https://www.nba.com/news/legendary-moments-history-tracy-mcgrady-62-points-orlando-magic-2004",
+      "https://www.nba.com/news/2017-hall-of-fame-tracy-mcgrady-profile"
+    ]
+  },
+  {
+    "slug": "reggie-miller",
+    "aliases": [],
+    "nicknames": [
+      "Reggie",
+      "Knick Killer"
+    ],
+    "clues": [
+      {
+        "text": "I spent my entire NBA career in Indiana",
+        "difficulty": "hard"
+      },
+      {
+        "text": "I gave Spike Lee the choke sign in New York",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I scored 8 points in 9 seconds vs the Knicks",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/pacers/news/a-pacers-knicks-playoff-history-primer",
+      "https://www.nba.com/news/archive-75-reggie-miller",
+      "https://www.nba.com/news/history-nba-legend-reggie-miller"
+    ]
+  },
+  {
+    "slug": "john-stockton",
+    "aliases": [],
+    "nicknames": [
+      "Stock"
+    ],
+    "clues": [
+      {
+        "text": "I kept short shorts in the baggy-shorts era",
+        "difficulty": "hard"
+      },
+      {
+        "text": "My buzzer-beater sent Utah to its first Finals",
+        "difficulty": "medium"
+      },
+      {
+        "text": "I retired atop NBA assists and steals lists",
+        "difficulty": "easy"
+      }
+    ],
+    "sources": [
+      "https://www.nba.com/news/history-nba-legend-john-stockton",
+      "https://www.nba.com/news/history-top-moments-west-buzzer-beaters-1997"
+    ]
+  }
+]

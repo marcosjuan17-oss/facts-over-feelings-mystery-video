@@ -1,66 +1,364 @@
+// Renders the daily Mystery Player video (1080x1920, 30 fps, 20.7 s).
+// Big type inside the TikTok/Shorts safe area. The name and the site line
+// are two short cards, then the picture cuts back to the opening frame. Usage:
+//   node render.mjs [selected.json] [output-dir]
+// PREVIEW_TIMES=0.2,3,18 renders only those seconds and skips encode.
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {spawnSync} from 'node:child_process';
 import {chromium} from 'playwright';
+import {HOOK_LINES, TITLES, pick, postText, themeFor} from './lib/daily.mjs';
+import {checkEntry} from './lib/clues.mjs';
+import {DURATION, FPS, TIMELINE} from './lib/timeline.mjs';
 
 const project = path.dirname(new URL(import.meta.url).pathname).replace(/^\/([A-Za-z]:)/, '$1');
 const input = path.resolve(process.argv[2] ?? path.join(project, 'player.json'));
 const data = JSON.parse(await fs.readFile(input, 'utf8'));
-if (!data.player || !Array.isArray(data.clues) || data.clues.length !== 3) throw Error('Need a player and exactly three clues');
-if (data.player.length > 24 || data.clues.some((x) => typeof x !== 'string' || x.length > 56)) throw Error('Player name max 24 characters; each clue max 56');
+const problems = checkEntry(data);
+if (problems.length) throw Error(`Cannot render this player: ${problems.join('; ')}`);
 
-const slug = (data.slug ?? data.player.toLowerCase().replace(/[^a-z0-9]+/g, '-')).replace(/[^a-z0-9-]/g, '');
-const out = path.resolve(process.argv[3] ?? path.join(project, 'renders', slug));
+const date = data.date ?? new Date().toISOString().slice(0, 10);
+const theme = data.theme ?? themeFor(data, date);
+const hook = data.hook ?? pick(HOOK_LINES, date, 'hook');
+const title = data.title ?? pick(TITLES, date, 'title')(data, theme);
+const post = data.post ?? postText({player: data, date, theme, title});
+
+const out = path.resolve(process.argv[3] ?? path.join(project, 'renders', data.slug));
 const frames = path.join(out, 'frames');
+await fs.rm(frames, {recursive: true, force: true});
 await fs.mkdir(frames, {recursive: true});
 
+export {FPS, DURATION, TIMELINE};
+
 const asData = async (file, mime) => `data:${mime};base64,${(await fs.readFile(file)).toString('base64')}`;
-const background = await asData(path.join(project, 'arena-background-v2.png'), 'image/png');
 const press = await asData(path.join(project, 'PressStart2P-Regular.ttf'), 'font/ttf');
-const silk = await asData(path.join(project, 'Silkscreen-Regular.ttf'), 'font/ttf');
-const mascot = {};
-for (const state of ['thinking', 'surprised', 'nervous', 'celebration']) {
-  mascot[state] = [];
-  for (let i = 0; i < 9; i++) mascot[state].push(await asData(path.join(project, 'assets', 'mascot', `${state}-${String(i).padStart(2, '0')}.png`), 'image/png'));
+const mascotSheet = await asData(path.join(project, 'assets', 'mascot.png'), 'image/png');
+
+async function optionalHeadshot(player) {
+  const source = player.headshot || player.image;
+  if (!source || typeof source !== 'string') return null;
+  try {
+    if (/^https?:\/\//i.test(source)) {
+      const response = await fetch(source, {signal: AbortSignal.timeout(8000)});
+      if (!response.ok) return null;
+      const mime = (response.headers.get('content-type') || 'image/png').split(';')[0];
+      const bytes = Buffer.from(await response.arrayBuffer());
+      return `data:${mime};base64,${bytes.toString('base64')}`;
+    }
+    const file = path.resolve(project, source);
+    const mime = /\.jpe?g$/i.test(file) ? 'image/jpeg' : 'image/png';
+    return await asData(file, mime);
+  } catch {
+    return null;
+  }
 }
 
-const payload = JSON.stringify({player: data.player.toUpperCase(), clues: data.clues.map((c) => c.toUpperCase()), background, mascot});
-const html = `<!doctype html><html><head><meta charset="utf-8"><style>
-@font-face{font-family:Press;src:url(${press}) format('truetype')}@font-face{font-family:Silk;src:url(${silk}) format('truetype')}
-*{box-sizing:border-box}html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#03060d}.stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:#040711 center/cover no-repeat;color:#f4f7fb}.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(1,4,11,.08),rgba(1,4,11,.18) 38%,rgba(1,4,11,.03))}.pixel{font-family:Press}.silk{font-family:Silk}.toptrack{position:absolute;left:60px;top:52px;width:960px;height:10px;background:#263149}.topfill{height:100%;background:#ff561b}.brand{position:absolute;left:70px;top:84px;font:31px Press}.mode{position:absolute;left:70px;top:154px;font:18px Silk;color:#ff6428;letter-spacing:2px}.prompt{position:absolute;left:70px;top:210px;width:700px;font:46px/1.06 Press}.sub{font:17px Silk;color:#9cabc2;letter-spacing:2px}.hook{position:absolute;left:70px;top:575px;width:940px;text-align:center;font:62px/1.38 Press}.hooksub{position:absolute;left:70px;top:825px;width:940px;text-align:center;font:29px Press;color:#ff6125}.gamestart{position:absolute;left:70px;top:900px;width:940px;text-align:center;font:23px Silk;color:#24d8ff;letter-spacing:3px}.hookmark{position:absolute;left:390px;top:1020px;width:300px;text-align:center;font:170px Press;color:#ff5b1d;text-shadow:0 0 18px rgba(255,91,29,.65)}.card{position:absolute;left:70px;width:760px;height:220px;border:2px solid #29354b;border-radius:10px;background:rgba(5,10,22,.93)}.card.active{border-color:#ff6a27}.status{position:absolute;left:35px;top:27px;font:20px Silk;color:#ff6428;letter-spacing:2px}.status.decode{color:#26d9ff}.cluetext{position:absolute;left:35px;top:88px;width:520px;font:27px/1.35 Press}.dots{position:absolute;left:35px;top:72px;color:#ff5b1d;font:48px Silk;letter-spacing:5px}.avatar{position:absolute;right:0;top:12px;width:196px;height:196px;object-fit:contain;image-rendering:pixelated}.timer{position:absolute;left:850px;width:170px;height:220px;border:3px solid #ff6428;border-radius:12px;background:#080d19;text-align:center}.timerlabel{position:absolute;left:0;top:27px;width:100%;font:17px Silk;color:#9cabc2;letter-spacing:2px}.timernum{position:absolute;left:0;top:67px;width:100%;font:68px Press;text-align:center}.timernum.warning{color:#ff5b1d}.pips{position:absolute;left:16px;right:16px;bottom:30px;display:flex;gap:7px}.pip{height:13px;flex:1;border-radius:4px;background:#283249}.pip.on{background:#ff5b1d}.lock{position:absolute;left:70px;top:360px;width:940px;height:900px;border:4px solid #ff6428;border-radius:12px;background:rgba(3,7,16,.96);text-align:center}.locktitle{margin-top:82px;font:49px/1.35 Press}.locknum{margin-top:58px;font:180px Press;color:#ff5b1d}.locksite{margin-top:95px;font:28px Silk;color:#26d9ff;letter-spacing:2px}.reveal{position:absolute;left:70px;top:360px;width:940px;height:1420px;border:3px solid #ff6428;border-radius:12px;background:rgba(3,7,16,.95);text-align:center}.revealcap{margin-top:55px;font:29px Press}.player{margin:90px auto 0;width:860px;font:54px/1.28 Press;color:#ff5b1d}.celebrate{width:235px;height:235px;object-fit:contain;image-rendering:pixelated;margin-top:5px}.site{margin-top:0;font:30px Silk;color:#26d9ff;letter-spacing:2px}.recap{margin:35px auto 0;width:820px;text-align:left}.recaprow{display:flex;gap:22px;margin:0 0 26px;font:21px/1.25 Press}.recaprow b{color:#ff6428}.comment{margin:52px auto 0;font:26px Press;color:#ff6428;letter-spacing:1px}.particle{position:absolute;width:8px;height:8px;background:#ff6428}.flash{position:absolute;inset:0;background:white}.glitch{filter:contrast(1.14) saturate(1.18)}
-</style></head><body><div id="root"></div><script>
-const D=${payload};
-const esc=(s)=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const avatar=(state,t)=>D.mascot[state][Math.floor(t*11)%9];
-const header=(t)=>'<div class="shade"></div><div class="toptrack"><div class="topfill" style="width:'+Math.max(16,960*t/23)+'px"></div></div><div class="brand">FACTS OVER FEELINGS</div><div class="mode">MYSTERY PLAYER // ARCADE MODE</div>';
-const timer=(y,n)=>'<div class="timer" style="top:'+y+'px"><div class="timerlabel">SHOT CLOCK</div><div class="timernum '+(n<=2?'warning':'')+'">'+n+'</div><div class="pips">'+[5,4,3,2,1].map(v=>'<i class="pip '+(v<=n?'on':'')+'"></i>').join('')+'</div></div>';
-const card=(i,y,state,local,active)=>{let text='',status='CLUE '+(i+1)+' // REVEALED',extra='';if(state==='decode'){status='CLUE '+(i+1)+' // DECODING';extra='<div class="dots">•••</div>'}else if(state==='typing'){const full=D.clues[i];text=esc(full.slice(0,Math.floor((local-.72)*38)))}else{text=esc(D.clues[i])}const mood=['thinking','surprised','nervous'][i];return '<div class="card '+(active?'active':'')+'" style="top:'+y+'px"><div class="status '+(state==='decode'?'decode':'')+'">'+status+'</div><div class="cluetext">'+text+'</div>'+extra+'<img class="avatar" src="'+avatar(mood,local)+'"></div>'};
-function game(t){const starts=[1.2,6.25,11.3];let current=starts.findLastIndex(x=>t>=x);current=Math.max(0,current);let body='<div class="prompt">WHO IS THE<br>PLAYER?<div class="sub">READ THE CLUES / BEAT THE CLOCK</div></div>';for(let i=0;i<=current;i++){const local=t-starts[i];const state=i<current?'revealed':local<.72?'decode':local<1.55?'typing':'revealed';body+=card(i,390+i*260,state,Math.max(0,local),i===current)}const local=t-starts[current];const n=Math.max(1,5-Math.floor(Math.max(0,local)));body+=timer(390+current*260,n);return body}
-function lock(t){const local=t-16.3;const n=local<.5?3:local<1?2:1;return '<div class="lock"><div class="locktitle">LOCK IN<br>YOUR GUESS</div><div class="locknum">'+n+'</div><div class="locksite">PLAYFACTSOVERFEELINGS.COM</div></div>'}
-function reveal(t){const local=t-17.8;const nameSize=D.player.length>16?43:54;let particles='';for(let i=0;i<26;i++){const a=i*2.399,dist=Math.min(240,local*85+i*2),x=540+Math.cos(a)*dist,y=690+Math.sin(a)*dist;particles+='<i class="particle" style="left:'+x+'px;top:'+y+'px;opacity:'+Math.max(0,1-local/4)+'"></i>'}return '<div class="reveal"><div class="revealcap">THE PLAYER IS</div><div class="player" style="font-size:'+nameSize+'px">'+esc(D.player)+'</div><img class="celebrate" src="'+avatar('celebration',local)+'"><div class="site">PLAYFACTSOVERFEELINGS.COM</div><div class="recap">'+D.clues.map((c,i)=>'<div class="recaprow"><b>0'+(i+1)+'</b><span>'+esc(c)+'</span></div>').join('')+'</div><div class="comment">LEAVE A COMMENT</div></div>'+particles+(local<.12?'<div class="flash" style="opacity:'+(1-local/.12)+'"></div>':'')}
-window.draw=(t)=>{let content='';if(t<.95)content='<div class="hook">GUESS THE NBA<br>PLAYER</div><div class="hooksub">3 CLUES. ONE LEGEND.</div><div class="gamestart">GAME START</div><div class="hookmark">?</div>';else if(t<1.2)content='<div class="prompt">WHO IS THE<br>PLAYER?<div class="sub">READ THE CLUES / BEAT THE CLOCK</div></div>';else if(t<16.3)content=game(t);else if(t<17.8)content=lock(t);else content=reveal(t);document.getElementById('root').innerHTML='<main class="stage '+(t>17.75&&t<18.05?'glitch':'')+'" style="background-image:url('+D.background+')">'+header(t)+content+'</main>'};
-</script></body></html>`;
+const headshot = await optionalHeadshot(data);
+const payload = JSON.stringify({
+  clues: data.clues.map((clue) => clue.text.toUpperCase()),
+  jersey: data.jersey || '?',
+  color: data.color || '#FF6A1A',
+  name: data.player,
+  headshot,
+  hook: hook.toUpperCase(),
+  theme: theme.label.toUpperCase(),
+  mascot: mascotSheet,
+  T: TIMELINE,
+  duration: DURATION,
+});
 
-const fps = 15;
-const totalFrames = 23 * fps;
+// Safe column: x 190–890, y 268–1500. A 3% camera zoom plus the shake
+// still clears the top 12%, bottom 20%, and right 15% of 1080×1920.
+const html = `<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Press;src:url(${press}) format('truetype')}
+*{box-sizing:border-box}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#07101f}
+.stage{position:absolute;inset:0;overflow:hidden;background:#07101f;color:#f4f7fb;
+  background-image:linear-gradient(rgba(255,200,61,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,200,61,.05) 1px,transparent 1px);
+  background-size:24px 24px}
+.cam{position:absolute;inset:0;transform-origin:540px 880px}
+.crt{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(to bottom,rgba(0,0,0,.14) 0 1px,transparent 1px 4px);mix-blend-mode:multiply}
+.track{position:absolute;left:190px;top:268px;width:700px;height:16px;display:flex;gap:4px}
+.seg{flex:1;background:#152038}
+.seg.on{background:#FFC83D}
+.seg.lead{background:#FF6A1A}
+.brandrow{position:absolute;left:190px;top:294px;width:700px;height:44px;display:flex;align-items:center;justify-content:space-between}
+.brand{font:18px/18px Press;color:#f4f7fb}
+.theme{font:18px/18px Press;color:#FFC83D}
+.hookline{position:absolute;left:190px;top:348px;width:700px;height:200px;display:flex;align-items:center;justify-content:center;text-align:center;
+  font:44px/64px Press;color:#f4f7fb}
+.heroq{position:absolute;left:180px;top:600px;width:720px;height:720px;display:flex;align-items:center;justify-content:center;
+  font:720px/720px Press;color:#FFC83D;transform-origin:center center}
+.shell{position:absolute;left:190px;width:700px;padding:8px;background:#FF6A1A;
+  clip-path:polygon(0 18px,18px 18px,18px 0,calc(100% - 18px) 0,calc(100% - 18px) 18px,100% 18px,100% calc(100% - 18px),calc(100% - 18px) calc(100% - 18px),calc(100% - 18px) 100%,18px 100%,18px calc(100% - 18px),0 calc(100% - 18px))}
+.shell.gold{background:#FFC83D}
+.shell.dim{background:#31425f}
+.tile{position:absolute;width:224px;padding:6px;background:#31425f;
+  clip-path:polygon(0 14px,14px 14px,14px 0,calc(100% - 14px) 0,calc(100% - 14px) 14px,100% 14px,100% calc(100% - 14px),calc(100% - 14px) calc(100% - 14px),calc(100% - 14px) 100%,14px 100%,14px calc(100% - 14px),0 calc(100% - 14px))}
+.tile.on{background:#FFC83D}
+.tile.done{background:#FF6A1A}
+.inner{position:relative;height:100%;background:#0c1730;display:flex;flex-direction:column;
+  clip-path:polygon(0 12px,12px 12px,12px 0,calc(100% - 12px) 0,calc(100% - 12px) 12px,100% 12px,100% calc(100% - 12px),calc(100% - 12px) calc(100% - 12px),calc(100% - 12px) 100%,12px 100%,12px calc(100% - 12px),0 calc(100% - 12px))}
+.tile .inner{align-items:center;justify-content:center}
+.qmark{font:120px/120px Press;color:#FFC83D}
+.tile .qmark{font:96px/96px Press}
+.cardhead{height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;flex:none}
+.cardhead span{font:20px/20px Press}
+.clue-k{color:#FF6A1A}
+.diff{color:#FFC83D}
+.cardbody{flex:1;display:flex;align-items:center;justify-content:center;padding:8px 28px 20px;text-align:center;font:46px/66px Press;color:#f4f7fb}
+.timerrow{height:78px;display:flex;align-items:center;justify-content:space-between;padding:0 28px}
+.timerlabel{font:20px/20px Press;color:#FFC83D}
+.timernum{font:72px/72px Press;color:#FFC83D;min-width:80px;text-align:right}
+.timernum.warn{color:#FF6A1A}
+.pips{display:flex;gap:10px;height:36px;align-items:center;padding:0 28px}
+.pip{flex:1;height:28px;background:#1c2944}
+.pip.on{background:#FF6A1A}
+.thinktitle{position:absolute;left:190px;top:360px;width:700px;text-align:center;font:58px/84px Press;color:#f4f7fb}
+.thinknum{position:absolute;left:190px;top:560px;width:700px;height:640px;display:flex;align-items:center;justify-content:center;
+  font:420px/420px Press;color:#FF6A1A;transform-origin:center center}
+.jerseywrap{position:absolute}
+.plate{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:#FFC83D;color:#07101f;
+  text-align:center;padding:16px 18px;
+  clip-path:polygon(0 8px,8px 8px,8px 0,calc(100% - 8px) 0,calc(100% - 8px) 8px,100% 8px,100% calc(100% - 8px),calc(100% - 8px) calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,8px calc(100% - 8px),0 calc(100% - 8px))}
+.plate span{display:block;font-family:Press;line-height:1;height:1em;white-space:nowrap}
+.ctaWrap{position:absolute;left:190px;width:700px;text-align:center}
+.ctaWord{display:block;font:92px/108px Press;color:#FFC83D}
+.ctaUrl{display:block;margin-top:16px;font:26px/40px Press;color:#FF6A1A}
+.mascot{position:absolute;background-repeat:no-repeat;image-rendering:pixelated;image-rendering:crisp-edges}
+.bit{position:absolute}
+.flash{position:absolute;inset:0;background:#fff;pointer-events:none}
+</style></head><body><div id="root"></div><script>
+const D=${payload};const T=D.T;
+const CX=540;
+const esc=(s)=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ease=(x)=>1-Math.pow(1-Math.min(1,Math.max(0,x)),3);
+const MOODS=['idle','thinking','surprised','pointing','celebrate','disappointed'];
+function mascot(name,x,y,size,t){
+  const i=MOODS.indexOf(name);
+  const s=size||180;
+  const bob=Math.sin((t||0)*3.4+i)*8;
+  return '<div class="mascot" style="left:'+x+'px;top:'+(y+bob)+'px;width:'+s+'px;height:'+s+'px;background-image:url('+D.mascot+');background-size:'+(s*6)+'px '+s+'px;background-position:-'+(i*s)+'px 0"></div>';
+}
+function header(t){
+  const n=Math.round(D.duration), filled=Math.round(n*Math.min(1,Math.max(0,t)/D.duration));
+  let segs='';
+  for(let i=0;i<n;i++) segs+='<i class="seg'+(i<filled?' on':'')+(i===filled-1?' lead':'')+'"></i>';
+  return '<div class="crt"></div><div class="track">'+segs+'</div>'
+    +'<div class="brandrow"><span class="brand">FACTS OVER FEELINGS</span><span class="theme">'+esc(D.theme)+'</span></div>';
+}
+function sparks(t){
+  let h='';
+  for(let i=0;i<16;i++){
+    const sp=28+(i%5)*14;
+    const x=196+((i*83+t*sp*20)%688);
+    const y=300+((i*61+t*sp*26)%1120);
+    const s=8+(i%3)*6;
+    const color=i%2?'#FFC83D':'#FF6A1A';
+    const o=(0.25+0.55*Math.abs(Math.sin(t*4+i))).toFixed(2);
+    h+='<i class="bit" style="left:'+x.toFixed(1)+'px;top:'+y.toFixed(1)+'px;width:'+s+'px;height:'+s+'px;background:'+color+';opacity:'+o+'"></i>';
+  }
+  return h;
+}
+function shell(top,height,cls,inner,t){
+  const pulse=0.3+0.35*Math.abs(Math.sin((t||0)*6));
+  const glow=cls.indexOf('gold')>=0
+    ? 'drop-shadow(0 0 '+(10+pulse*16).toFixed(0)+'px rgba(255,200,61,'+(0.35+pulse*0.4).toFixed(2)+'))'
+    : 'drop-shadow(0 0 '+(8+pulse*12).toFixed(0)+'px rgba(255,106,26,'+(0.28+pulse*0.35).toFixed(2)+'))';
+  return '<div class="shell '+cls+'" style="top:'+top+'px;height:'+height+'px;filter:'+glow+'"><div class="inner">'+inner+'</div></div>';
+}
+function cam(inner,time,start,len){
+  const local=Math.max(0,time-start);
+  const zoom=1+0.03*Math.min(1,local/Math.max(len,0.2));
+  const breathe=0.004*Math.sin(time*5.2);
+  let x=0,y=0;
+  const kicks=T.clueStarts.concat([T.nameStart,T.ctaStart]);
+  for(let k=0;k<kicks.length;k++){
+    const d=time-kicks[k];
+    if(d>=0&&d<0.26){
+      const a=1-d/0.26;
+      x+=Math.sin(d*95)*8*a;
+      y+=Math.cos(d*75)*5*a;
+    }
+  }
+  const z=(zoom+breathe).toFixed(4);
+  return '<div class="cam" style="transform:translate('+x.toFixed(2)+'px,'+y.toFixed(2)+'px) scale('+z+')">'+inner+sparks(time)+'</div>';
+}
+function flash(time,hits){
+  for(let i=0;i<hits.length;i++){
+    const d=time-hits[i];
+    if(d>=0&&d<0.1) return '<div class="flash" style="opacity:'+((1-d/0.1)*0.75).toFixed(3)+'"></div>';
+  }
+  return '';
+}
+function hookScene(t){
+  const pop=0.78+0.22*ease(Math.min(1,(t||0)/0.3));
+  const push=1+0.05*ease(Math.min(1,(t||0)/T.hookEnd));
+  const glow=(0.45+0.4*Math.abs(Math.sin((t||0)*6))).toFixed(2);
+  const s=(pop*push).toFixed(3);
+  // Press Start 2P keeps the "?" in the top-left of the em box. Nudge it
+  // before the scale so the ink, not the empty em, sits on the frame center.
+  return header(t)+'<div class="hookline" style="text-shadow:0 0 16px rgba(255,106,26,'+glow+')">'+esc(D.hook)+'</div>'
+    +'<div class="heroq" style="transform:scale('+s+') translate(45px,45px);text-shadow:0 0 '+(16+glow*28)+'px rgba(255,200,61,'+glow+'),12px 12px 0 #FF6A1A">?</div>'
+    +mascot('idle',CX-110,1288,220,t);
+}
+function clueScene(t){
+  const current=Math.max(0,T.clueStarts.findLastIndex(x=>t>=x));
+  const start=T.clueStarts[current];
+  const next=current<2?T.clueStarts[current+1]:T.thinkStart;
+  const local=t-start;
+  const span=next-start;
+  const left=Math.max(0,span-local);
+  const n=Math.max(1,Math.ceil(left));
+  const face=local>=0.16;
+  const rot=local<0.34?(1-ease(local/0.34))*90:0;
+  let tiles='';
+  for(let i=0;i<3;i++){
+    const on=i===current, done=i<current;
+    const cls=on?' on':done?' done':'';
+    const mark=done?'<span class="qmark" style="font-size:72px;color:#07101f">'+(i+1)+'</span>':'<span class="qmark">?</span>';
+    const grow=on?1+0.04*Math.sin(t*8):1;
+    tiles+='<div class="tile'+cls+'" style="left:'+(190+i*240)+'px;top:344px;width:220px;height:148px;transform:scale('+grow.toFixed(3)+');transform-origin:center center"><div class="inner">'+mark+'</div></div>';
+  }
+  let body;
+  if(!face) body='<div class="cardbody"><span class="qmark" style="font-size:200px">?</span></div>';
+  else {
+    const full=D.clues[current];
+    const typed=Math.min(full.length,Math.max(0,Math.floor((local-0.18)*42)));
+    body='<div class="cardhead"><span class="clue-k">CLUE '+(current+1)+'</span><span class="diff">'+['HARD','MEDIUM','EASY'][current]+'</span></div>'
+      +'<div class="cardbody">'+esc(full.slice(0,typed))+'</div>';
+  }
+  const pips=[1,2,3,4,5,6].map(v=>'<i class="pip'+(v<=n?' on':'')+'"></i>').join('');
+  const mood=local<0.55?'surprised':'thinking';
+  return header(t)+tiles
+    +shell(508,430,face?'gold':'',body,t)
+    +shell(954,136,'', '<div class="timerrow"><span class="timerlabel">SHOT CLOCK</span><span class="timernum'+(n<=2?' warn':'')+'">'+n+'</span></div><div class="pips">'+pips+'</div>', t)
+    +mascot(mood,CX-180,1104,360,t);
+}
+function thinkScene(t){
+  const local=t-T.thinkStart;
+  const n=local<0.53?3:local<1.06?2:1;
+  const pop=1+0.22*(1-ease((local%0.53)/0.18));
+  const nx=n===1?1:27, ny=27;
+  return header(t)+'<div class="thinktitle">LOCK IT<br>IN</div>'
+    +'<div class="thinknum" style="transform:scale('+pop.toFixed(3)+') translate('+nx+'px,'+ny+'px)">'+n+'</div>'
+    +mascot('surprised',CX-160,1168,320,t);
+}
+function nameLayout(name){
+  const words=String(name||'').toUpperCase().split(/\s+/).filter(Boolean);
+  const maxText=500;
+  const chunks=(token)=>token.split('-').map((part,i,all)=>i<all.length-1?part+'-':part).filter(Boolean);
+  const candidates=[];
+  if(words.length<=1) candidates.push(words.length?words:['?']);
+  else {
+    candidates.push([words.slice(0,-1).join(' '), words[words.length-1]]);
+    candidates.push(words.slice(0,-1).flatMap(chunks).concat(chunks(words[words.length-1])));
+  }
+  let best=null;
+  for(let c=0;c<candidates.length;c++){
+    const lines=candidates[c];
+    const longest=Math.max.apply(null,lines.map(s=>s.length).concat([1]));
+    const size=Math.min(60,Math.floor(maxText/longest));
+    if(size<16) continue;
+    const score=size*10-lines.length;
+    if(!best||score>best.score) best={lines,size,score};
+  }
+  if(!best){
+    const lines=candidates[candidates.length-1];
+    const longest=Math.max.apply(null,lines.map(s=>s.length).concat([1]));
+    best={lines,size:Math.max(14,Math.floor(maxText/longest))};
+  }
+  return best;
+}
+function jerseySvg(numBaseline){
+  const numSize=String(D.jersey).length>1?140:180;
+  return '<svg viewBox="0 0 500 560" width="100%" height="100%">'
+    +'<path d="M150 28 L205 28 Q250 92 295 28 L350 28 L362 128 Q388 156 438 168 L446 532 L54 532 L62 168 Q112 156 138 128 Z" fill="'+D.color+'" opacity=".35"/>'
+    +'<path d="M150 28 L205 28 Q250 92 295 28 L350 28 L362 128 Q388 156 438 168 L446 532 L54 532 L62 168 Q112 156 138 128 Z" fill="#0c1730" stroke="'+D.color+'" stroke-width="12"/>'
+    +'<text x="250" y="'+(numBaseline||470)+'" text-anchor="middle" font-family="Press" font-size="'+numSize+'" fill="'+D.color+'" stroke="#07101f" stroke-width="10" paint-order="stroke">'+esc(D.jersey)+'</text>'
+    +'</svg>';
+}
+function nameScene(t){
+  const local=Math.max(0,t-T.nameStart);
+  const slam=1+0.5*Math.pow(1-ease(Math.min(1,local/0.24)),2);
+  const layout=nameLayout(D.name);
+  const plateW=Math.max.apply(null,layout.lines.map(s=>s.length))*layout.size+36;
+  const plateH=32+layout.lines.length*layout.size+(layout.lines.length-1)*8;
+  const jw=640, jh=Math.round(jw*560/500);
+  const jLeft=Math.round((684-jw)/2);
+  const jTop=36;
+  const numSize=String(D.jersey).length>1?140:180;
+  const numBaseline=468;
+  const numTop=jTop+Math.round((numBaseline-numSize)*(jh/560));
+  const plateTop=Math.max(16,numTop-32-plateH);
+  const plateLeft=jLeft+Math.round((jw-plateW)/2);
+  const name=layout.lines.map(line=>'<span style="font-size:'+layout.size+'px">'+esc(line)+'</span>').join('');
+  const shellH=jTop+jh+36;
+  const shellTop=352;
+  return header(t)+shell(shellTop,shellH,'gold',
+    '<div class="jerseywrap" style="left:'+jLeft+'px;top:'+jTop+'px;width:'+jw+'px;height:'+jh+'px">'+jerseySvg(numBaseline)+'</div>'
+    +'<div class="plate" style="left:'+plateLeft+'px;top:'+plateTop+'px;width:'+plateW+'px;height:'+plateH+'px;transform:scale('+slam.toFixed(3)+');transform-origin:center center">'+name+'</div>',
+    t)+mascot('celebrate',CX-165,shellTop+shellH+8,330,t);
+}
+function ctaScene(t){
+  const local=Math.max(0,t-T.ctaStart);
+  const pop=0.86+0.14*ease(Math.min(1,local/0.22));
+  const glow=(0.4+0.5*Math.abs(Math.sin(local*7))).toFixed(2);
+  return header(t)+'<div class="ctaWrap" style="top:390px;transform:scale('+pop.toFixed(3)+');transform-origin:center top">'
+    +'<span class="ctaWord" style="text-shadow:0 0 18px rgba(255,200,61,'+glow+')">PLAY</span>'
+    +'<span class="ctaWord">TODAY\\'S</span>'
+    +'<span class="ctaWord">MYSTERY</span>'
+    +'<span class="ctaWord">AT</span>'
+    +'<span class="ctaUrl">PLAYFACTSOVERFEELINGS.COM</span></div>'
+    +mascot('pointing',CX-250,920,500,t);
+}
+window.draw=(t)=>{
+  const time=t>=T.loopStart?0:t;
+  let html,start,len,hits;
+  if(time<T.hookEnd){html=hookScene(time);start=0;len=T.hookEnd;hits=[];}
+  else if(time<T.thinkStart){
+    const i=Math.max(0,T.clueStarts.findLastIndex(x=>time>=x));
+    html=clueScene(time);start=T.clueStarts[i];len=(i<2?T.clueStarts[i+1]:T.thinkStart)-start;hits=T.clueStarts;
+  } else if(time<T.nameStart){html=thinkScene(time);start=T.thinkStart;len=T.nameStart-T.thinkStart;hits=[T.thinkStart];}
+  else if(time<T.ctaStart){html=nameScene(time);start=T.nameStart;len=T.ctaStart-T.nameStart;hits=[T.nameStart];}
+  else {html=ctaScene(time);start=T.ctaStart;len=T.loopStart-T.ctaStart;hits=[T.ctaStart];}
+  document.getElementById('root').innerHTML='<main class="stage">'+cam(html,time,start,len)+flash(time,hits)+'</main>';
+};
+</script></body></html>`;
+const preview = (process.env.PREVIEW_TIMES ?? '').split(',').map((value) => value.trim()).filter(Boolean).map(Number).filter((value) => Number.isFinite(value));
+const times = preview.length ? preview : Array.from({length: FPS * DURATION}, (_, index) => index / FPS);
+
 const browser = await chromium.launch({headless: true});
 try {
   const page = await browser.newPage({viewport: {width: 1080, height: 1920}, deviceScaleFactor: 1});
   await page.setContent(html, {waitUntil: 'load'});
   await page.evaluate(() => document.fonts.ready);
-  for (let frame = 0; frame < totalFrames; frame++) {
-    await page.evaluate((t) => window.draw(t), frame / fps);
-    await page.screenshot({path: path.join(frames, `frame-${String(frame + 1).padStart(4, '0')}.png`)});
+  for (let index = 0; index < times.length; index++) {
+    await page.evaluate((t) => window.draw(t), times[index]);
+    const file = preview.length
+      ? `preview-${String(times[index]).replace('.', '_')}.png`
+      : `frame-${String(index + 1).padStart(4, '0')}.png`;
+    await page.screenshot({path: path.join(frames, file)});
   }
 } finally {
   await browser.close();
 }
 
-const py = process.env.PYTHON_EXE ?? 'python';
-const enc = spawnSync(py, [path.join(project, 'encode.py'), out, input], {encoding: 'utf8', stdio: 'inherit'});
+if (preview.length) {
+  console.log(`Preview frames in ${frames}`);
+  process.exit(0);
+}
+
+const speech = {
+  hook: hook.toLowerCase().replace(/\b1\b/g, 'one').replace(/\b3\b/g, 'three').replace(/\b0\b/g, 'zero').replace(/90%/g, 'ninety percent'),
+  clues: data.clues.map((clue) => clue.text),
+  answer: data.player,
+};
+await fs.writeFile(path.join(out, 'speech.json'), JSON.stringify({...speech, timeline: TIMELINE, duration: DURATION, fps: FPS}, null, 2));
+const py = process.env.PYTHON_EXE ?? (spawnSync('python', ['--version']).status === 0 ? 'python' : 'python3');
+const enc = spawnSync(py, [path.join(project, 'encode.py'), out], {encoding: 'utf8', stdio: 'inherit'});
 if (enc.status !== 0) throw Error('Video encoding failed');
-const edition = data.date ? ` — ${data.date}` : '';
-const caption = `How many clues did you need? Drop your guess before the reveal.\n\nPlay the daily mystery at PlayFactsOverFeelings.com\n\n#NBATrivia #BasketballTrivia #GuessThePlayer #NBAHistory #FactsOverFeelings`;
-await fs.writeFile(path.join(out, 'post.txt'), `TITLE\nCan You Guess This NBA Legend in 3 Clues?${edition}\n\nCAPTION\n${caption}\n`);
+await fs.writeFile(path.join(out, 'post.txt'), post.text);
+await fs.writeFile(path.join(out, 'release-notes.md'), `**Answer: ${data.player}**\n\nThe name slams in on the jersey, then the card says to play today's mystery at PlayFactsOverFeelings.com. The picture cuts back to the opening frame.\n\nTwo downloads: **with music** and **no music** (add a trending sound in TikTok).\n\n### Title\n${post.title}\n\n### Caption\n${post.caption}\n`);
 await fs.writeFile(path.join(out, 'sources.json'), JSON.stringify(data.sources ?? [], null, 2));
 console.log(path.join(out, 'mystery-player.mp4'));

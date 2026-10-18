@@ -3,6 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "scripts": {"render": "node render.mjs"},
-  "dependencies": {"playwright": "^1.55.0"}
+  "scripts": {
+    "render": "node render.mjs",
+    "select": "node select.mjs",
+    "validate": "node validate-players.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "build-players": "node tools/build-players.mjs"
+  },
+  "dependencies": {
+    "playwright": "^1.55.0"
+  }
 }

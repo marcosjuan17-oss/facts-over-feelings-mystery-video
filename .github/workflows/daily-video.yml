@@ -6,18 +6,38 @@ on:
     # One daily run around 10 AM Eastern (14:07 UTC = 10:07 AM EDT / 9:07 AM EST).
     # GitHub may start scheduled runs late; select.mjs still skips a date that already has a video.
     - cron: '7 14 * * *'
+  pull_request:
+    paths: ['players.json', 'data/**', 'lib/**', 'validate-players.mjs', 'tests/**']
 
 permissions:
   contents: write
 
 concurrency:
-  group: daily-mystery-video
+  group: daily-mystery-video-${{ github.event_name == 'pull_request' && github.ref || 'main' }}
   cancel-in-progress: false
 
 jobs:
-  create-video:
+  validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check clues (no name or nickname giveaways, hard → easy order)
+        run: node validate-players.mjs
+      - run: node --test tests/*.test.mjs
+
+  create-video:
+    needs: validate
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+      YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+      YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+      YOUTUBE_PRIVACY: ${{ vars.YOUTUBE_PRIVACY || 'public' }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -41,15 +61,19 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           VIDEO_DATE: ${{ steps.select.outputs.date }}
+        # Videos are published only as GitHub release assets. There is no Google Drive upload.
         run: |
           tag="daily-${VIDEO_DATE}"
+          dir="renders/${VIDEO_DATE}"
           if ! gh release view "$tag" >/dev/null 2>&1; then
             gh release create "$tag" \
               --title "Daily mystery player — ${VIDEO_DATE}" \
-              --notes "Finished vertical arcade video with mascot animation and sound design. The player reveal is inside the video."
+              --notes-file "$dir/release-notes.md"
           fi
           for asset in \
-            "renders/${VIDEO_DATE}/mystery-player.mp4#Download video"; do
+            "$dir/mystery-player.mp4#Download video (with music)" \
+            "$dir/mystery-player-no-music.mp4#Download video (no music)" \
+            "$dir/post.txt#Title and caption (copy and paste)"; do
             uploaded=false
             for attempt in 1 2 3; do
               if gh release upload "$tag" "$asset" --clobber; then
@@ -72,3 +96,7 @@ jobs:
           git commit -m "Record mystery player for ${{ steps.select.outputs.date }}"
           git pull --rebase
           git push
+      - name: Upload to YouTube Shorts (only when YouTube secrets are set)
+        if: steps.select.outputs.skip == 'false' && env.YT_REFRESH_TOKEN != ''
+        continue-on-error: true
+        run: node upload-youtube.mjs renders/${{ steps.select.outputs.date }}
